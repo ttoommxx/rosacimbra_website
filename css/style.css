@@ -25,3 +25,15 @@ table, tr, th, td, caption {
     border-collapse: collapse;
     padding: 0.5rem;
 }
+
+.contact-list {
+    list-style-type: none;
+}
+
+.contact-list li {
+    float: left;
+}
+
+.contact-list summary {
+    list-style: none;
+}
