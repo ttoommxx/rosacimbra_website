@@ -1,10 +1,10 @@
-html {
-    font-size: 22px
+body {
+    background-color: #e8cce4;
+    color: whitesmoke;
 }
 
-body {
-    background-color: #333;
-    color: whitesmoke;
+main {
+    clear: both;
 }
 
 a {
@@ -27,13 +27,61 @@ table, tr, th, td, caption {
 }
 
 .contact-list {
+    display: flex;
+    justify-content: center;
+}
+
+.contact-list ul{
     list-style-type: none;
 }
 
 .contact-list li {
     float: left;
+    margin-left: 10px
 }
+
+.contact-list details {
+    flex-direction: column;}
 
 .contact-list summary {
     list-style: none;
+}
+
+.images-and-text img {
+    float: left;
+    margin-top: 0;
+}
+
+.images-and-text nav {
+    float: left;
+    margin-top: 0;
+}
+
+.images-and-text h1 {
+    float: left;
+    font-family: "Eglantine";
+    font-size: 800%;
+    font-weight: 100;
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+}
+
+
+@font-face {
+    font-family: "Eglantine";
+    src: url("/font/eglantine.ttf");
+}
+
+
+/* TODO: change this into a javascript that reads the user agent and apply custom CSS style */
+
+@media only screen and (max-width: 1200px) {
+    body {
+        font-size: 20px;
+    }
+
+    .images-and-text h1 {
+        font-size: 550%;
+    }
 }
