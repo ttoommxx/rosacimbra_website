@@ -3,60 +3,70 @@
     src: url("/font/eglantine.ttf");
 }
 
-body {
+body, html {
+    margin: 0;
+    padding: 0;
     background-image: url("../img/pink_background.jpg");
-    background-color: #e8cce4;
-    color: black
 }
 
-main {
-    clear: both;
+.container {
+    display: flex;
+    min-height: 100vh;
+    overflow: visible;
 }
 
-#header-main {
+.container-left {
+    width: 10%;
+    max-width: 80px;
+    display: flex;
+    background-color: #a14343;
+    overflow-x: hidden;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.container-right {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.container-header {
     display: flex;
     justify-content: center;
-    float: center;
 }
 
-#header-main img {
+header img {
+    float: left;
+    margin-top: 5px;
     width: 23vw;
     height: 18vw;
 }
 
-#header-main h1 {
+header h1 {
+    float: left;
     font-family: "Eglantine";
     font-weight: 100;
-    margin-top: 0;
+    margin-top: 5px;
     font-size: 10vw;
 }
 
-a:hover, a:active {
-    color: green
+.container-main {
+    display: flex;
+    flex: 1;
+    margin: 5px;
 }
 
-table, tr, th, td, caption {
-    border: 1px solid #eee;
-    font-family: 'Courier New', Courier, monospace;
-    border-collapse: collapse;
-    padding: 0.5rem;
-}
-
-summary {
-    list-style: none;
-}
-
-.contact-list {
+.container-footer {
     display: flex;
     justify-content: center;
+    margin-bottom: 5px;
 }
 
-.contact-list ul{
-    padding: 0;
-    list-style: none;
-}
-
-.contact-list li {
+footer li {
     display: inline-block;
-    margin: 3px;
 }
