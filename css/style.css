@@ -1,22 +1,38 @@
+@font-face {
+    font-family: "Eglantine";
+    src: url("/font/eglantine.ttf");
+}
+
 body {
+    background-image: url("../img/pink_background.jpg");
     background-color: #e8cce4;
-    color: whitesmoke;
+    color: black
 }
 
 main {
     clear: both;
 }
 
-a {
-    color: aliceblue
+#header-main {
+    display: flex;
+    justify-content: center;
+    float: center;
 }
 
-a:visited {
-    color: lightblue
+#header-main img {
+    width: 23vw;
+    height: 18vw;
+}
+
+#header-main h1 {
+    font-family: "Eglantine";
+    font-weight: 100;
+    margin-top: 0;
+    font-size: 10vw;
 }
 
 a:hover, a:active {
-    color: #eee
+    color: green
 }
 
 table, tr, th, td, caption {
@@ -26,62 +42,21 @@ table, tr, th, td, caption {
     padding: 0.5rem;
 }
 
+summary {
+    list-style: none;
+}
+
 .contact-list {
     display: flex;
     justify-content: center;
 }
 
 .contact-list ul{
-    list-style-type: none;
-}
-
-.contact-list li {
-    float: left;
-    margin-left: 10px
-}
-
-.contact-list details {
-    flex-direction: column;}
-
-.contact-list summary {
+    padding: 0;
     list-style: none;
 }
 
-.images-and-text img {
-    float: left;
-    margin-top: 0;
-}
-
-.images-and-text nav {
-    float: left;
-    margin-top: 0;
-}
-
-.images-and-text h1 {
-    float: left;
-    font-family: "Eglantine";
-    font-size: 800%;
-    font-weight: 100;
-    display: flex;
-    justify-content: center;
-    margin-top: 0;
-}
-
-
-@font-face {
-    font-family: "Eglantine";
-    src: url("/font/eglantine.ttf");
-}
-
-
-/* TODO: change this into a javascript that reads the user agent and apply custom CSS style */
-
-@media only screen and (max-width: 1200px) {
-    body {
-        font-size: 20px;
-    }
-
-    .images-and-text h1 {
-        font-size: 550%;
-    }
+.contact-list li {
+    display: inline-block;
+    margin: 3px;
 }
