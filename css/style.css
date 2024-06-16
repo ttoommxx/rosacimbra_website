@@ -3,6 +3,11 @@
     src: url("/font/eglantine.ttf");
 }
 
+@font-face {
+    font-family: "LittleLordFontleroy";
+    src: url("/font/LittleLordFontleroy.ttf");
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -31,28 +36,18 @@ ul {
     overflow-x: visible;
 }
 
-.nav-text {
+.container-left p {
     text-align: center;
+    font-family: "LittleLordFontleroy";
+    font-size: 30px;
+    margin-bottom: 0;
+    margin-top: 10px;
 }
+
 
 @media (max-width: 800px) {
-    .nav-text {
+    .container-left p {
         display: none;
-        visibility: hidden;
-    }
-}
-
-@media (max-height: 375px) {
-    .container-left li {
-        display: none;
-        visibility: hidden;
-    }
-
-    .container-left li:last-child {
-        display: initial;
-        visibility: visible;
-        position: fixed;
-        bottom: 0;
     }
 }
 
@@ -64,7 +59,8 @@ ul {
 
 .container-left li:last-child {
     position: fixed;
-    bottom: 0;
+    bottom: 5px;
+    right: 5px;
 }
 
 .container-right {
@@ -74,13 +70,12 @@ ul {
 }
 
 .container-header {
-    margin-top: 10px;
     display: flex;
     justify-content: center;
-    margin-bottom: -10px;
 }
 
 header img {
+    margin-top: 10px;
     float: left;
     width: 18vw;
     height: 14vw;
@@ -91,7 +86,8 @@ header h1 {
     font-family: "Eglantine";
     font-weight: 100;
     margin-top: 5px;
-    font-size: 7vw;
+    font-size: 8vw;
+    margin-bottom: 0;
 }
 
 .container-main {
