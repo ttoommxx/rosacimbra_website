@@ -3,10 +3,19 @@
     src: url("/font/eglantine.ttf");
 }
 
-body, html {
+body {
     margin: 0;
     padding: 0;
     background-image: url("../img/pink_background.jpg");
+}
+
+* {
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
 }
 
 .container {
@@ -16,17 +25,46 @@ body, html {
 }
 
 .container-left {
-    width: 10%;
-    max-width: 80px;
+    width: 12vw;
+    max-width: 100px;
     display: flex;
-    background-color: #a14343;
-    overflow-x: hidden;
+    overflow-x: visible;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+.nav-text {
+    text-align: center;
+}
+
+@media (max-width: 800px) {
+    .nav-text {
+        display: none;
+        visibility: hidden;
+    }
+}
+
+@media (max-height: 375px) {
+    .container-left li {
+        display: none;
+        visibility: hidden;
+    }
+
+    .container-left li:last-child {
+        display: initial;
+        visibility: visible;
+        position: fixed;
+        bottom: 0;
+    }
+}
+
+.container-left img {
+    width: 12vw;
+    max-width: 100px;
+    margin: 5px;
+}
+
+.container-left li:last-child {
+    position: fixed;
+    bottom: 0;
 }
 
 .container-right {
@@ -36,15 +74,16 @@ ul {
 }
 
 .container-header {
+    margin-top: 10px;
     display: flex;
     justify-content: center;
+    margin-bottom: -10px;
 }
 
 header img {
     float: left;
-    margin-top: 5px;
-    width: 23vw;
-    height: 18vw;
+    width: 18vw;
+    height: 14vw;
 }
 
 header h1 {
@@ -52,21 +91,62 @@ header h1 {
     font-family: "Eglantine";
     font-weight: 100;
     margin-top: 5px;
-    font-size: 10vw;
+    font-size: 7vw;
 }
 
 .container-main {
     display: flex;
-    flex: 1;
-    margin: 5px;
+    flex: auto;
+    margin: 10px;
+    border: 5px solid black;
+}
+
+#about {
+    display: none;
+}
+
+#about:target {
+    display: block;
+}
+
+#dolls {
+    display: none;
+}
+
+#dolls:target {
+    display: block;
+}
+
+#clothes {
+    display: none;
+}
+
+#clothes:target {
+    display: block;
+}
+
+#accessories {
+    display: none;
+}
+
+#accessories:target {
+    display: block;
+}
+
+#cart {
+    display: none;
+}
+
+#cart:target {
+    display: block;
 }
 
 .container-footer {
     display: flex;
     justify-content: center;
-    margin-bottom: 5px;
+    text-align: center;
 }
 
 footer li {
-    display: inline-block;
+    display: inline;
 }

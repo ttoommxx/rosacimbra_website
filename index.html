@@ -9,7 +9,10 @@
 		/>
 		<title>RosaCimbra Shop</title>
 		<link rel="icon" href="img/website_icon.png" type="image/x-icon" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta
+			name="viewport"
+			content="width=device-width, height=device-height, initial-scale=1, user-scalable=0"
+		/>
 		<link rel="stylesheet" href="css/style.css" />
 	</head>
 
@@ -20,36 +23,32 @@
 					<ul>
 						<li>
 							<a href="#about">
-								<span title="About"
-									>About<br /><img
-										src="img/icon/woman.svg"
-										alt="About"
-										width="100%"
-								/></span>
+								<div class="nav-text">About</div>
+								<img src="img/icon/woman.svg" alt="About" />
 							</a>
 						</li>
 						<li>
-							<a href="dolls.html"
-								>Dolls<br /><img
-									src="img/icon/doll.svg"
-									alt="Doll"
-									width="100%"
+							<a href="#dolls"
+								><div class="nav-text">Dolls</div>
+								<img src="img/icon/doll.svg" alt="Doll"
 							/></a>
 						</li>
 						<li>
-							<a href="clothes.html"
-								>Clothes<br /><img
-									src="img/icon/dress.svg"
-									alt="Clothes"
-									width="100%"
+							<a href="#clothes"
+								><div class="nav-text">Clothes</div>
+								<img src="img/icon/dress.svg" alt="Clothes"
 							/></a>
 						</li>
 						<li>
-							<a href="accessories.html"
-								>Accessories<br /><img
-									src="img/icon/accessory.svg"
-									alt="Accessories"
-									width="100%"
+							<a href="#accessories"
+								><div class="nav-text">Accessories</div>
+								<img src="img/icon/accessory.svg" alt="Accessories"
+							/></a>
+						</li>
+						<li>
+							<a href="#cart"
+								><div class="nav-text">Cart</div>
+								<img src="img/icon/cart.svg" alt="Cart"
 							/></a>
 						</li>
 					</ul>
@@ -70,13 +69,58 @@
 				</div>
 				<div class="container-main">
 					<main>
-						<p>hello world</p>
+						<div id="about">
+							<p>about</p>
+						</div>
+						<div id="dolls">
+							<article id="catalogue">
+								<h2>My personal catalogue</h2>
+								<table>
+									<caption>
+										Catalogue
+									</caption>
+									<thead>
+										<tr>
+											<th>Doll</th>
+											<th scope="col">Quantity</th>
+											<th scope="col">Price</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">Emily</th>
+											<td>1</td>
+											<td>100 &euro;</td>
+										</tr>
+										<tr>
+											<th scope="row">Lina</th>
+											<td>1</td>
+											<td>50 &euro;</td>
+										</tr>
+									</tbody>
+									<tfoot>
+										<tr>
+											<td colspan="3">Custom doll 150-200&euro;</td>
+										</tr>
+									</tfoot>
+								</table>
+							</article>
+						</div>
+						<div id="clothes">
+							<p>clothes</p>
+						</div>
+						<div id="accessories">
+							<p>accessories</p>
+						</div>
+						<div id="cart">
+							<p>cart</p>
+						</div>
 					</main>
 				</div>
 				<div class="container-footer">
 					<footer>
+						<p>Copyright &copy; 2024 RosaCimbra Shop</p>
 						<ul>
-							<li>Copyright &copy; 2024 RosaCimbra Shop</li>
 							<li>
 								<a
 									href="https://www.instagram.com/rosacimbra_dolls/"
