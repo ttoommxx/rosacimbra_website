@@ -1,3 +1,5 @@
+/* border: 5px solid black; */
+
 @font-face {
     font-family: "Eglantine";
     src: url("/font/eglantine.ttf");
@@ -6,6 +8,11 @@
 @font-face {
     font-family: "LittleLordFontleroy";
     src: url("/font/LittleLordFontleroy.ttf");
+}
+
+@font-face {
+    font-family: "CooperBlack";
+    src: url("/font/CooperBlack.ttf");
 }
 
 body {
@@ -25,21 +32,25 @@ ul {
 
 .container {
     display: flex;
+    flex-direction: row;
     min-height: 100vh;
-    overflow: visible;
 }
 
 .container-left {
-    width: 12vw;
-    max-width: 100px;
     display: flex;
-    overflow-x: visible;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 14vw;
+    max-width: 110px;
+    background: rgba(162, 125, 187, 0.3);
+    border-right: 2px solid black;
 }
 
 .container-left p {
     text-align: center;
     font-family: "LittleLordFontleroy";
-    font-size: 30px;
+    font-size: 22pt;
     margin-bottom: 0;
     margin-top: 10px;
 }
@@ -93,8 +104,26 @@ header h1 {
 .container-main {
     display: flex;
     flex: auto;
-    margin: 10px;
-    border: 5px solid black;
+}
+
+main {
+    width: 100%;
+}
+
+#banner {
+    display: flex;
+    justify-content: center;
+    background-color: rgb(240, 248, 255, 0.7);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#banner p {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-family: CooperBlack;
+    font-size: 20pt;
+    color: rgb(212, 105, 121);
 }
 
 #about {
@@ -102,7 +131,19 @@ header h1 {
 }
 
 #about:target {
-    display: block;
+    display: flex;
+    flex-direction: column;
+}
+
+#slideshow {
+    display: flex;
+    justify-content: center;
+    height: 50vh;
+    min-height: 200px;
+}
+
+#slideshow-image {
+    border-radius: 10px;
 }
 
 #dolls {
@@ -110,7 +151,7 @@ header h1 {
 }
 
 #dolls:target {
-    display: block;
+    display: flex;
 }
 
 #clothes {
@@ -118,7 +159,7 @@ header h1 {
 }
 
 #clothes:target {
-    display: block;
+    display: flex;
 }
 
 #accessories {
@@ -126,7 +167,7 @@ header h1 {
 }
 
 #accessories:target {
-    display: block;
+    display: flex;
 }
 
 #cart {
@@ -134,13 +175,14 @@ header h1 {
 }
 
 #cart:target {
-    display: block;
+    display: flex;
 }
 
 .container-footer {
     display: flex;
     justify-content: center;
     text-align: center;
+    flex: none;
 }
 
 footer li {

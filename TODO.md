@@ -1,3 +1,1 @@
-- Slide show with pictures (the pictures are already there)
-- make so that the about section is open onload (via javascript)
-- make the writing on the nav nicer, bold, find a nice font
+- fix slideshow on mobile

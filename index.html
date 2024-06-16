@@ -14,6 +14,7 @@
 			content="width=device-width, height=device-height, initial-scale=1, user-scalable=0"
 		/>
 		<link rel="stylesheet" href="css/style.css" />
+		<script src="script.js"></script>
 	</head>
 
 	<body>
@@ -22,31 +23,34 @@
 				<nav>
 					<ul>
 						<li>
-							<a href="#about">
+							<a id="about_page" onclick="about_page()" href="#about">
 								<p>About</p>
 								<img src="img/icon/woman.svg" alt="About" />
 							</a>
 						</li>
 						<li>
-							<a href="#dolls"
+							<a id="dolls_page" onclick="dolls_page()" href="#dolls"
 								><p>Dolls</p>
 								<img src="img/icon/doll.svg" alt="Doll"
 							/></a>
 						</li>
 						<li>
-							<a href="#clothes"
+							<a id="clothes_page" onclick="clothes_page()" href="#clothes"
 								><p>Clothes</p>
 								<img src="img/icon/dress.svg" alt="Clothes"
 							/></a>
 						</li>
 						<li>
-							<a href="#accessories"
+							<a
+								id="accessories_page"
+								onclick="accessories_page()"
+								href="#accessories"
 								><p>Accessories</p>
 								<img src="img/icon/accessory.svg" alt="Accessories"
 							/></a>
 						</li>
 						<li>
-							<a href="#cart"
+							<a id="cart_page" onclick="cart_page()" href="#cart"
 								><p>Cart</p>
 								<img src="img/icon/cart.svg" alt="Cart"
 							/></a>
@@ -69,42 +73,33 @@
 				</div>
 				<div class="container-main">
 					<main>
+						<div id="banner">
+							<p>Next fair: Japan!</p>
+						</div>
 						<div id="about">
-							<p>about</p>
+							<div id="slideshow">
+								<img
+									src="/img/icon/left_arrow.svg"
+									alt="Left arrow"
+									width="50"
+									onclick="change_image('left')"
+								/>
+								<img
+									src="/img/pink_background.jpg"
+									alt="Background"
+									id="slideshow-image"
+								/>
+								<img
+									src="/img/icon/right_arrow.svg"
+									alt="Right arrow"
+									width="50"
+									onclick="change_image('right')"
+								/>
+							</div>
+							<div id="about_me">about me</div>
 						</div>
 						<div id="dolls">
-							<article id="catalogue">
-								<h2>My personal catalogue</h2>
-								<table>
-									<caption>
-										Catalogue
-									</caption>
-									<thead>
-										<tr>
-											<th>Doll</th>
-											<th scope="col">Quantity</th>
-											<th scope="col">Price</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<th scope="row">Emily</th>
-											<td>1</td>
-											<td>100 &euro;</td>
-										</tr>
-										<tr>
-											<th scope="row">Lina</th>
-											<td>1</td>
-											<td>50 &euro;</td>
-										</tr>
-									</tbody>
-									<tfoot>
-										<tr>
-											<td colspan="3">Custom doll 150-200&euro;</td>
-										</tr>
-									</tfoot>
-								</table>
-							</article>
+							<p>dolls</p>
 						</div>
 						<div id="clothes">
 							<p>clothes</p>

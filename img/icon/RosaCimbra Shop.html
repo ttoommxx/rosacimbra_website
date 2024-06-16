@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)http://127.0.0.1:5500/index.html#about -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<meta name="author" content="Tommaso Seneci">
+		<meta name="description" content="The official website for the original RosaCimbra Shop">
+		<title>RosaCimbra Shop</title>
+		<link rel="icon" href="http://127.0.0.1:5500/img/website_icon.png" type="image/x-icon">
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=0">
+		<link rel="stylesheet" href="./RosaCimbra Shop_files/style.css">
+		<script src="./RosaCimbra Shop_files/script.js"></script>
+	</head>
+
+	<body>
+		<div class="container">
+			<div class="container-left">
+				<nav>
+					<ul>
+						<li>
+							<a id="about_page" onclick="about_page()" href="http://127.0.0.1:5500/index.html#about">
+								<p>About</p>
+								<img src="./RosaCimbra Shop_files/woman.svg" alt="About">
+							</a>
+						</li>
+						<li>
+							<a id="dolls_page" onclick="dolls_page()" href="http://127.0.0.1:5500/index.html#dolls"><p>Dolls</p>
+								<img src="./RosaCimbra Shop_files/doll.svg" alt="Doll"></a>
+						</li>
+						<li>
+							<a id="clothes_page" onclick="clothes_page()" href="http://127.0.0.1:5500/index.html#clothes"><p>Clothes</p>
+								<img src="./RosaCimbra Shop_files/dress.svg" alt="Clothes"></a>
+						</li>
+						<li>
+							<a id="accessories_page" onclick="accessories_page()" href="http://127.0.0.1:5500/index.html#accessories"><p>Accessories</p>
+								<img src="./RosaCimbra Shop_files/accessory.svg" alt="Accessories"></a>
+						</li>
+						<li>
+							<a id="cart_page" onclick="cart_page()" href="http://127.0.0.1:5500/index.html#cart"><p>Cart</p>
+								<img src="./RosaCimbra Shop_files/cart.svg" alt="Cart"></a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<div class="container-right">
+				<div class="container-header">
+					<header>
+						<img src="./RosaCimbra Shop_files/flower.png" alt="Welcome to RosaCimbra Shop webpage!" title="A beautiful flower from RosaCimbra!" width="280" height="220">
+						<h1>RosaCimbra Dolls</h1>
+					</header>
+				</div>
+				<div class="container-main">
+					<main>
+						<div id="about">
+							<div id="slideshow">
+								<img src="./RosaCimbra Shop_files/left_arrow.svg" alt="Left arrow" width="5%" onclick="change_image(&#39;left&#39;)">
+								<img src="http://127.0.0.1:5500/index.html" alt="" id="slideshow-image">
+								<img src="./RosaCimbra Shop_files/right_arrow.svg" alt="Right arrow" width="5%" onclick="change_image(&#39;right&#39;)">
+							</div>
+							<div id="about_me">about me</div>
+						</div>
+						<div id="dolls">
+							<article id="catalogue">
+								<h2>My personal catalogue</h2>
+								<table>
+									<caption>
+										Catalogue
+									</caption>
+									<thead>
+										<tr>
+											<th>Doll</th>
+											<th scope="col">Quantity</th>
+											<th scope="col">Price</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<th scope="row">Emily</th>
+											<td>1</td>
+											<td>100 €</td>
+										</tr>
+										<tr>
+											<th scope="row">Lina</th>
+											<td>1</td>
+											<td>50 €</td>
+										</tr>
+									</tbody>
+									<tfoot>
+										<tr>
+											<td colspan="3">Custom doll 150-200€</td>
+										</tr>
+									</tfoot>
+								</table>
+							</article>
+						</div>
+						<div id="clothes">
+							<p>clothes</p>
+						</div>
+						<div id="accessories">
+							<p>accessories</p>
+						</div>
+						<div id="cart">
+							<p>cart</p>
+						</div>
+					</main>
+				</div>
+				<div class="container-footer">
+					<footer>
+						<p>Copyright © 2024 RosaCimbra Dolls</p>
+						<ul>
+							<li>
+								<a href="https://www.instagram.com/rosacimbra_dolls/" target="_blank"><img src="./RosaCimbra Shop_files/instagram.svg" alt="Instagram icon" height="30" width="30"></a>
+							</li>
+							<li>
+								<a href="mailto:RosaCimbra@gmail.com" target="_blank"><img src="./RosaCimbra Shop_files/email.svg" alt="Email icon" height="30" width="30"></a>
+							</li>
+							<li>
+								<span title="Verona, Italy">
+									<img src="./RosaCimbra Shop_files/italy_flag.svg" alt="Parcel icon" height="30" width="30">
+								</span>
+							</li>
+						</ul>
+					</footer>
+				</div>
+			</div>
+		</div>
+	<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+
+</body></html>
