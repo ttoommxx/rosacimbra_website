@@ -51,7 +51,7 @@ var Slideshow = new (function () {
 		setTimeout(() => {
 			[slideshow.src, slideshow.alt] = this.images[this.index];
 			slideshow.style.setProperty("opacity", "1");
-		}, 700);
+		}, 600);
 	};
 
 	this.move = function (num) {
@@ -65,11 +65,10 @@ var Slideshow = new (function () {
 
 window.onload = function () {
 	// click on about when first loading the webpage
-	let current_page = Cookies.get("page");
-	if (current_page == "") {
-		current_page = "about";
+	if (Cookies.get("page") == "") {
+		Cookies.set("page", "about");
 	}
-	document.getElementById(current_page + "_page").click();
+	open_page(Cookies.get("page"));
 };
 
 // functions
@@ -79,7 +78,11 @@ function open_page(page) {
 	page_element.style.setProperty("opacity", "0");
 	page_element.style.setProperty("left", "-100%");
 	setTimeout(() => {
+		let old_page = document.getElementById(Cookies.get("page"));
+		old_page.style.setProperty("display", "none");
 		Cookies.set("page", page);
+		let new_page = document.getElementById(page);
+		new_page.style.setProperty("display", "flex");
 		page_element.style.setProperty("opacity", "1");
 		page_element.style.setProperty("left", "0");
 	}, 500);
@@ -93,4 +96,25 @@ function change_image(direction) {
 	} else {
 		throw "Direction '" + direction + "' not recognized";
 	}
+}
+
+function open_about() {
+	open_page("about");
+	Slideshow.set();
+}
+
+function open_dolls() {
+	open_page("dolls");
+}
+
+function open_clothes() {
+	open_page("clothes");
+}
+
+function open_accessories() {
+	open_page("accessories");
+}
+
+function open_cart() {
+	open_page("cart");
 }

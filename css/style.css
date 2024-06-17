@@ -45,6 +45,7 @@ ul {
 	max-width: 110px;
 	background: rgba(190, 132, 229, 0.3);
 	border-right: 0.3vw solid pink;
+	z-index: 1;
 }
 
 .container-left p {
@@ -127,10 +128,6 @@ main {
 
 #about {
 	display: none;
-}
-
-#about:target {
-	display: flex;
 	flex-direction: column;
 }
 
@@ -158,32 +155,16 @@ main {
 	display: none;
 }
 
-#dolls:target {
-	display: flex;
-}
-
 #clothes {
 	display: none;
-}
-
-#clothes:target {
-	display: flex;
 }
 
 #accessories {
 	display: none;
 }
 
-#accessories:target {
-	display: flex;
-}
-
 #cart {
 	display: none;
-}
-
-#cart:target {
-	display: flex;
 }
 
 .container-footer {
@@ -198,7 +179,7 @@ footer li {
 }
 
 .animate {
-	transition: opacity 0.5s ease-in;
+	transition: opacity 0.4s ease-in;
 	transition-property: opacity;
 }
 
