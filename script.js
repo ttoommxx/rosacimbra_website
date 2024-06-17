@@ -21,11 +21,6 @@ var Cookies = new (function () {
 		this._map.set(name, value);
 		document.cookie = name + "=" + value + ";";
 	};
-
-	this.del = function (name) {
-		this._map.set(name, "");
-		document.cookie = name + "=" + ";";
-	};
 })();
 
 // operations at boot
@@ -35,8 +30,8 @@ window.onload = function () {
 	if (Cookies.get("page") == "") {
 		Cookies.set("page", "about");
 	}
-	open_page(Cookies.get("page"));
 	slideshow_fetch();
+	open_page(Cookies.get("page"));
 };
 
 // functions
@@ -57,6 +52,8 @@ function open_page(page) {
 }
 
 function open_about() {
+	// in case I want to add custom instructions per page
+	// TODO: remove these functions if no particular action per page is necessary
 	open_page("about");
 }
 
@@ -78,23 +75,23 @@ function open_cart() {
 
 function slideshow_fetch() {
 	const images = [
-		["/img/slideshow/doll_and_cart.jpg", "Doll and cart"],
-		["/img/slideshow/doll_and_teddy.jpg", "Doll and teddy"],
-		["/img/slideshow/doll_christmas_tree.jpg", "Doll christmas tree"],
-		["/img/slideshow/doll_in_jumpsuit.jpg", "Doll in jumpsuit"],
-		["/img/slideshow/doll_next_to_window.jpg", "Doll next to window"],
-		["/img/slideshow/doll_with_curly_hair.jpg", "Doll with curly hair"],
-		["/img/slideshow/doll_with_fish.jpg", "Doll with fish"],
-		["/img/slideshow/doll_with_hat_and_teddy.jpg", "Doll with hat and teddy"],
-		["/img/slideshow/doll_with_hat.jpg", "Doll with hat"],
-		["/img/slideshow/doll_with_small_doll.jpg", "Doll with small doll"],
-		["/img/slideshow/doll_with_toys.jpg", "Doll with toys"],
+		"/img/slideshow/doll_and_cart.jpg",
+		"/img/slideshow/doll_and_teddy.jpg",
+		"/img/slideshow/doll_christmas_tree.jpg",
+		"/img/slideshow/doll_in_jumpsuit.jpg",
+		"/img/slideshow/doll_next_to_window.jpg",
+		"/img/slideshow/doll_with_curly_hair.jpg",
+		"/img/slideshow/doll_with_fish.jpg",
+		"/img/slideshow/doll_with_hat_and_teddy.jpg",
+		"/img/slideshow/doll_with_hat.jpg",
+		"/img/slideshow/doll_with_small_doll.jpg",
+		"/img/slideshow/doll_with_toys.jpg",
 	];
 	let slideshow_div = document.getElementById("slideshow");
-	for (const [src, alt] of images) {
+	for (const src of images) {
 		const new_image = document.createElement("img");
 		new_image.src = src;
-		new_image.alt = alt;
+		new_image.alt = src.split("/").slice(-1)[0].split(".")[0];
 		new_image.classList.add("slideshow-image");
 		slideshow_div.appendChild(new_image);
 	}
