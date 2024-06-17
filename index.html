@@ -22,33 +22,33 @@
 			<nav>
 				<ul>
 					<li>
-						<div onclick="open_about()">
-							<p>About</p>
+						<div onclick="open_page('about')" class="menu-icons">
 							<img src="img/icon/goat.svg" alt="About" />
+							<p>About</p>
 						</div>
 					</li>
 					<li>
-						<div onclick="open_dolls()">
-							<p>Dolls</p>
+						<div onclick="open_page('dolls')" class="menu-icons">
 							<img src="img/icon/doll.svg" alt="Doll" />
+							<p>Dolls</p>
 						</div>
 					</li>
 					<li>
-						<div onclick="open_clothes()">
-							<p>Clothes</p>
+						<div onclick="open_page('clothes')" class="menu-icons">
 							<img src="img/icon/dress.svg" alt="Clothes" />
+							<p>Clothes</p>
 						</div>
 					</li>
 					<li>
-						<div onclick="open_accessories()">
-							<p>Accessories</p>
+						<div onclick="open_page('cart')" class="menu-icons">
 							<img src="img/icon/accessory.svg" alt="Accessories" />
+							<p>Accessories</p>
 						</div>
 					</li>
 					<li>
-						<div onclick="open_cart()">
-							<p>Cart</p>
+						<div onclick="open_cart()" class="menu-icons">
 							<img src="img/icon/cart.svg" alt="Cart" />
+							<p>Cart</p>
 						</div>
 					</li>
 				</ul>
@@ -58,19 +58,28 @@
 			<div id="container-header">
 				<header>
 					<img
+						src="img/icon/menu.svg"
+						alt="Menu icon"
+						id="menu_icon"
+						onclick="toggle_menu('on')"
+					/>
+					<img
+						id="title_icon"
 						src="img/flower.png"
 						alt="Welcome to RosaCimbra Shop webpage!"
 						title="A beautiful flower from RosaCimbra!"
-						width="280"
-						height="220"
 					/>
 					<h1>RosaCimbra Dolls</h1>
 				</header>
 			</div>
 			<div id="banner">
-				<p>Next fair: Japan!</p>
+				<p>Next fair: Japan! See you there on August 8th.</p>
 			</div>
-			<div id="container-main" class="animate_slide">
+			<div
+				id="container-main"
+				class="animate_slide"
+				onclick="toggle_menu('off')"
+			>
 				<main>
 					<div id="about">
 						<div id="slideshow"></div>

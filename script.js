@@ -26,12 +26,19 @@ var Cookies = new (function () {
 // operations at boot
 
 window.onload = function () {
-	// click on about when first loading the webpage
+	slideshow_fetch();
+
 	if (Cookies.get("page") == "") {
 		Cookies.set("page", "about");
 	}
-	slideshow_fetch();
 	open_page(Cookies.get("page"));
+
+	if (Cookies.get("display") == "flex") {
+		let container_left = document.getElementById("container-left");
+		container_left.style.setProperty("display", "flex");
+	} else {
+		Cookies.set("display", "none");
+	}
 };
 
 // functions
@@ -49,28 +56,6 @@ function open_page(page) {
 		page_element.style.setProperty("opacity", "1");
 		page_element.style.setProperty("left", "0");
 	}, 500);
-}
-
-function open_about() {
-	// in case I want to add custom instructions per page
-	// TODO: remove these functions if no particular action per page is necessary
-	open_page("about");
-}
-
-function open_dolls() {
-	open_page("dolls");
-}
-
-function open_clothes() {
-	open_page("clothes");
-}
-
-function open_accessories() {
-	open_page("accessories");
-}
-
-function open_cart() {
-	open_page("cart");
 }
 
 function slideshow_fetch() {
@@ -91,8 +76,19 @@ function slideshow_fetch() {
 	for (const src of images) {
 		const new_image = document.createElement("img");
 		new_image.src = src;
-		new_image.alt = src.split("/").slice(-1)[0].split(".")[0];
+		new_image.alt = src.split("/").at(-1).split(".")[0];
 		new_image.classList.add("slideshow-image");
 		slideshow_div.appendChild(new_image);
+	}
+}
+
+function toggle_menu(state) {
+	let menu_div = document.getElementById("container-left");
+	if (state == "on") {
+		Cookies.set("display", "flex");
+		menu_div.style.setProperty("display", "flex");
+	} else {
+		Cookies.set("display", "none");
+		menu_div.style.setProperty("display", "none");
 	}
 }
