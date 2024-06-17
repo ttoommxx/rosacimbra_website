@@ -1,1 +1,0 @@
-- fix slideshow on mobile

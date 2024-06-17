@@ -18,116 +18,114 @@
 	</head>
 
 	<body>
-		<div class="container">
-			<div class="container-left">
-				<nav>
+		<div id="container-left">
+			<nav>
+				<ul>
+					<li>
+						<div id="about_page" onclick="open_about()">
+							<p>About</p>
+							<img src="img/icon/woman.svg" alt="About" />
+						</div>
+					</li>
+					<li>
+						<div id="dolls_page" onclick="open_dolls()">
+							<p>Dolls</p>
+							<img src="img/icon/doll.svg" alt="Doll" />
+						</div>
+					</li>
+					<li>
+						<div id="clothes_page" onclick="open_clothes()">
+							<p>Clothes</p>
+							<img src="img/icon/dress.svg" alt="Clothes" />
+						</div>
+					</li>
+					<li>
+						<div id="accessories_page" onclick="open_accessories()">
+							<p>Accessories</p>
+							<img src="img/icon/accessory.svg" alt="Accessories" />
+						</div>
+					</li>
+					<li>
+						<div id="cart_page" onclick="open_cart()">
+							<p>Cart</p>
+							<img src="img/icon/cart.svg" alt="Cart" />
+						</div>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<div id="container-right">
+			<div id="container-header">
+				<header>
+					<img
+						src="img/flower.png"
+						alt="Welcome to RosaCimbra Shop webpage!"
+						title="A beautiful flower from RosaCimbra!"
+						width="280"
+						height="220"
+					/>
+					<h1>RosaCimbra Dolls</h1>
+				</header>
+			</div>
+			<div id="banner">
+				<p>Next fair: Japan!</p>
+			</div>
+			<div id="container-main" class="animate_slide">
+				<main>
+					<div id="about">
+						<div id="slideshow"></div>
+						<p>About me</p>
+					</div>
+					<div id="dolls">
+						<p>dolls</p>
+					</div>
+					<div id="clothes">
+						<p>clothes</p>
+					</div>
+					<div id="accessories">
+						<p>accessories</p>
+					</div>
+					<div id="cart">
+						<p>cart</p>
+					</div>
+				</main>
+			</div>
+			<div id="container-footer">
+				<footer>
+					<p>Copyright &copy; 2024 RosaCimbra Dolls</p>
 					<ul>
 						<li>
-							<div id="about_page" onclick="open_about()">
-								<p>About</p>
-								<img src="img/icon/woman.svg" alt="About" />
-							</div>
+							<a
+								href="https://www.instagram.com/rosacimbra_dolls/"
+								target="_blank"
+								><img
+									src="img/icon/instagram.svg"
+									alt="Instagram icon"
+									height="30"
+									width="30"
+							/></a>
 						</li>
 						<li>
-							<div id="dolls_page" onclick="open_dolls()">
-								<p>Dolls</p>
-								<img src="img/icon/doll.svg" alt="Doll" />
-							</div>
+							<a href="mailto:RosaCimbra@gmail.com" target="_blank"
+								><img
+									src="img/icon/email.svg"
+									alt="Email icon"
+									height="30"
+									width="30"
+							/></a>
 						</li>
 						<li>
-							<div id="clothes_page" onclick="open_clothes()">
-								<p>Clothes</p>
-								<img src="img/icon/dress.svg" alt="Clothes" />
-							</div>
-						</li>
-						<li>
-							<div id="accessories_page" onclick="open_accessories()">
-								<p>Accessories</p>
-								<img src="img/icon/accessory.svg" alt="Accessories" />
-							</div>
-						</li>
-						<li>
-							<div id="cart_page" onclick="open_cart()">
-								<p>Cart</p>
-								<img src="img/icon/cart.svg" alt="Cart" />
-							</div>
+							<span title="Verona, Italy">
+								<img
+									src="img/icon/italy_flag.svg"
+									alt="Parcel icon"
+									height="30"
+									width="30"
+								/>
+							</span>
 						</li>
 					</ul>
-				</nav>
-			</div>
-			<div class="container-right">
-				<div class="container-header">
-					<header>
-						<img
-							src="img/flower.png"
-							alt="Welcome to RosaCimbra Shop webpage!"
-							title="A beautiful flower from RosaCimbra!"
-							width="280"
-							height="220"
-						/>
-						<h1>RosaCimbra Dolls</h1>
-					</header>
-				</div>
-				<div id="banner">
-					<p>Next fair: Japan!</p>
-				</div>
-				<div id="main-container" class="container-main animate_slide">
-					<main>
-						<div id="about">
-							<div id="slideshow"></div>
-							<div id="about_me">about me</div>
-						</div>
-						<div id="dolls">
-							<p>dolls</p>
-						</div>
-						<div id="clothes">
-							<p>clothes</p>
-						</div>
-						<div id="accessories">
-							<p>accessories</p>
-						</div>
-						<div id="cart">
-							<p>cart</p>
-						</div>
-					</main>
-				</div>
-				<div class="container-footer">
-					<footer>
-						<p>Copyright &copy; 2024 RosaCimbra Dolls</p>
-						<ul>
-							<li>
-								<a
-									href="https://www.instagram.com/rosacimbra_dolls/"
-									target="_blank"
-									><img
-										src="img/icon/instagram.svg"
-										alt="Instagram icon"
-										height="30"
-										width="30"
-								/></a>
-							</li>
-							<li>
-								<a href="mailto:RosaCimbra@gmail.com" target="_blank"
-									><img
-										src="img/icon/email.svg"
-										alt="Email icon"
-										height="30"
-										width="30"
-								/></a>
-							</li>
-							<li>
-								<span title="Verona, Italy">
-									<img
-										src="img/icon/italy_flag.svg"
-										alt="Parcel icon"
-										height="30"
-										width="30"
-									/>
-								</span>
-							</li>
-						</ul>
-					</footer>
-				</div>
+				</footer>
 			</div>
 		</div>
 	</body>

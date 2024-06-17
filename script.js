@@ -42,7 +42,7 @@ window.onload = function () {
 // functions
 
 function open_page(page) {
-	let page_element = document.getElementById("main-container");
+	let page_element = document.getElementById("container-main");
 	page_element.style.setProperty("opacity", "0");
 	page_element.style.setProperty("left", "-100%");
 	setTimeout(() => {

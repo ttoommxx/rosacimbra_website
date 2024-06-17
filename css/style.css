@@ -15,14 +15,17 @@
 	src: url("/font/CooperBlack.ttf");
 }
 
+* {
+	scrollbar-color: rgba(27, 17, 29, 0.2) transparent;
+}
+
 body {
 	margin: 0;
 	padding: 0;
 	background-image: url("../img/pink_background.jpg");
-}
-
-* {
-	text-decoration: none;
+	display: flex;
+	flex-direction: row;
+	min-height: 100vh;
 }
 
 ul {
@@ -30,13 +33,7 @@ ul {
 	padding: 0;
 }
 
-.container {
-	display: flex;
-	flex-direction: row;
-	min-height: 100vh;
-}
-
-.container-left {
+#container-left {
 	display: flex;
 	position: sticky;
 	top: 0;
@@ -48,7 +45,7 @@ ul {
 	z-index: 1;
 }
 
-.container-left p {
+#container-left p {
 	text-align: center;
 	font-family: "LittleLordFontleroy";
 	font-size: 22pt;
@@ -57,42 +54,46 @@ ul {
 }
 
 @media (max-width: 800px) {
-	.container-left p {
+	#container-left p {
 		display: none;
 	}
 }
 
-.container-left img {
+#container-left img {
 	width: 12vw;
 	max-width: 100px;
 	margin: 5px;
 }
 
-.container-left li:last-child {
+#container-left ul {
+	position: fixed;
+}
+
+#container-left li:last-child {
 	position: fixed;
 	bottom: 5px;
 	right: 5px;
 }
 
-.container-right {
+#container-right {
 	display: flex;
 	flex: 1;
 	flex-direction: column;
 }
 
-.container-header {
+#container-header {
 	display: flex;
 	justify-content: center;
 }
 
-.container-header header img {
+#container-header img {
 	margin-top: 10px;
 	float: left;
 	width: 16vw;
 	height: 13vw;
 }
 
-.container-header header h1 {
+#container-header h1 {
 	float: left;
 	font-family: "Eglantine";
 	font-weight: 100;
@@ -101,13 +102,13 @@ ul {
 	margin-bottom: 0;
 }
 
-.container-main {
+#container-main {
 	display: flex;
 	flex: auto;
 }
 
 main {
-	width: 100%;
+	width: fit-content;
 }
 
 #banner {
@@ -133,17 +134,16 @@ main {
 
 #slideshow {
 	display: flex;
-	align-items: center;
-	height: 50hv;
-	min-height: 200px;
-	overflow: scroll;
-	scrollbar-color: rgba(27, 17, 29, 0.2) transparent;
+	overflow-x: scroll;
+	width: fit-content;
 }
 
 .slideshow-image {
-	height: auto;
+	height: 50vw;
 	max-height: 400px;
 	max-width: 100%;
+	margin-right: 5px;
+	margin-left: 5px;
 }
 
 #dolls {
@@ -162,7 +162,7 @@ main {
 	display: none;
 }
 
-.container-footer {
+#container-footer {
 	display: flex;
 	justify-content: center;
 	text-align: center;
