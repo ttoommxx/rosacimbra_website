@@ -23,7 +23,7 @@
 				<nav>
 					<ul>
 						<li>
-							<a id="about_page" onclick="about_page()" href="#about">
+							<a id="about_page" onclick="open_page('about')" href="#about">
 								<div>
 									<p>About</p>
 									<img src="img/icon/woman.svg" alt="About" />
@@ -31,7 +31,7 @@
 							</a>
 						</li>
 						<li>
-							<a id="dolls_page" onclick="dolls_page()" href="#dolls"
+							<a id="dolls_page" onclick="open_page('dolls')" href="#dolls"
 								><div>
 									<p>Dolls</p>
 									<img src="img/icon/doll.svg" alt="Doll" />
@@ -39,7 +39,10 @@
 							</a>
 						</li>
 						<li>
-							<a id="clothes_page" onclick="clothes_page()" href="#clothes"
+							<a
+								id="clothes_page"
+								onclick="open_page('clothes')"
+								href="#clothes"
 								><div>
 									<p>Clothes</p>
 									<img src="img/icon/dress.svg" alt="Clothes" />
@@ -49,7 +52,7 @@
 						<li>
 							<a
 								id="accessories_page"
-								onclick="accessories_page()"
+								onclick="open_page('accessories')"
 								href="#accessories"
 								><div>
 									<p>Accessories</p>
@@ -58,7 +61,7 @@
 							</a>
 						</li>
 						<li>
-							<a id="cart_page" onclick="cart_page()" href="#cart"></a>
+							<a id="cart_page" onclick="open_page('cart')" href="#cart">
 								<div>
 									<p>Cart</p>
 									<img src="img/icon/cart.svg" alt="Cart" />
@@ -81,11 +84,11 @@
 						<h1>RosaCimbra Dolls</h1>
 					</header>
 				</div>
-				<div class="container-main">
+				<div id="banner">
+					<p>Next fair: Japan!</p>
+				</div>
+				<div id="main-container" class="container-main animate_slide">
 					<main>
-						<div id="banner">
-							<p>Next fair: Japan!</p>
-						</div>
 						<div id="about">
 							<div class="slideshow">
 								<img

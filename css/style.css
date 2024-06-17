@@ -198,6 +198,13 @@ footer li {
 }
 
 .animate {
-	transition: opacity 0.4s ease-in;
-	transition-property: opacity, transform;
+	transition: opacity 0.5s ease-in;
+	transition-property: opacity;
+}
+
+.animate_slide {
+	position: relative;
+	left: -100vw;
+	transition: all 0.5s ease-in-out;
+	opacity: 0;
 }

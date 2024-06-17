@@ -51,7 +51,7 @@ var Slideshow = new (function () {
 		setTimeout(() => {
 			[slideshow.src, slideshow.alt] = this.images[this.index];
 			slideshow.style.setProperty("opacity", "1");
-		}, 400);
+		}, 700);
 	};
 
 	this.move = function (num) {
@@ -67,32 +67,22 @@ window.onload = function () {
 	// click on about when first loading the webpage
 	let current_page = Cookies.get("page");
 	if (current_page == "") {
-		current_page = "about_page";
+		current_page = "about";
 	}
-	document.getElementById(current_page).click();
+	document.getElementById(current_page + "_page").click();
 };
 
 // functions
 
-function about_page() {
-	Cookies.set("page", "about_page");
-	Slideshow.set();
-}
-
-function dolls_page() {
-	Cookies.set("page", "dolls_page");
-}
-
-function clothes_page() {
-	Cookies.set("page", "clothes_page");
-}
-
-function accessories_page() {
-	Cookies.set("page", "accessories_page");
-}
-
-function cart_page() {
-	Cookies.set("page", "cart_page");
+function open_page(page) {
+	let page_element = document.getElementById("main-container");
+	page_element.style.setProperty("opacity", "0");
+	page_element.style.setProperty("left", "-100%");
+	setTimeout(() => {
+		Cookies.set("page", page);
+		page_element.style.setProperty("opacity", "1");
+		page_element.style.setProperty("left", "0");
+	}, 500);
 }
 
 function change_image(direction) {
