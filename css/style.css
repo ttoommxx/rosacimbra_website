@@ -84,19 +84,19 @@ ul {
 	justify-content: center;
 }
 
-header img {
+.container-header header img {
 	margin-top: 10px;
 	float: left;
-	width: 18vw;
-	height: 14vw;
+	width: 16vw;
+	height: 13vw;
 }
 
-header h1 {
+.container-header header h1 {
 	float: left;
 	font-family: "Eglantine";
 	font-weight: 100;
 	margin-top: 5px;
-	font-size: 8vw;
+	font-size: 7vw;
 	margin-bottom: 0;
 }
 
@@ -143,12 +143,12 @@ main {
 }
 
 .slideshow-image-block {
-	border-radius: 15px;
 	max-width: 100%;
 	max-height: 100%;
 }
 
 #slideshow-image {
+	border-radius: 15px;
 	height: auto;
 	max-height: 400px;
 	max-width: 100%;
@@ -195,4 +195,9 @@ main {
 
 footer li {
 	display: inline;
+}
+
+.animate {
+	transition: opacity 0.4s ease-in;
+	transition-property: opacity, transform;
 }

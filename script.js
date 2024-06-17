@@ -45,25 +45,19 @@ var Slideshow = new (function () {
 
 	this.index = 0;
 
-	this.next = function () {
-		if (this.index == this.images.length - 1) {
-			this.index = 0;
-		} else {
-			this.index++;
-		}
-	};
-
-	this.prev = function () {
-		if (this.index == 0) {
-			this.index = this.images.length - 1;
-		} else {
-			this.index--;
-		}
-	};
-
 	this.set = function () {
 		let slideshow = document.getElementById("slideshow-image");
-		[slideshow.src, slideshow.alt] = this.images[this.index];
+		slideshow.style.setProperty("opacity", "0");
+		setTimeout(() => {
+			[slideshow.src, slideshow.alt] = this.images[this.index];
+			slideshow.style.setProperty("opacity", "1");
+		}, 400);
+	};
+
+	this.move = function (num) {
+		let len = this.images.length;
+		this.index = (((this.index + num) % len) + len) % len;
+		this.set();
 	};
 })();
 
@@ -103,11 +97,9 @@ function cart_page() {
 
 function change_image(direction) {
 	if (direction == "right") {
-		Slideshow.next();
-		Slideshow.set();
+		Slideshow.move(1);
 	} else if (direction == "left") {
-		Slideshow.prev();
-		Slideshow.set();
+		Slideshow.move(-1);
 	} else {
 		throw "Direction '" + direction + "' not recognized";
 	}
