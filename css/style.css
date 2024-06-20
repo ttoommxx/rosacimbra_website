@@ -37,22 +37,23 @@ ul {
 
 #container-left {
 	display: none;
-	z-index: 1;
+	z-index: 2;
 	opacity: 1;
 }
 
 #container-left p {
 	text-align: center;
 	font-family: "LittleLordFontleroy";
-	font-size: 25pt;
+	font-size: 30pt;
 	margin-right: 5px;
 	margin-top: 0;
 	margin-bottom: 0;
 }
 
 #container-left img {
-	width: 5vh;
+	width: 6vh;
 	max-width: 100px;
+	margin-left: 5px;
 	margin-right: 5px;
 	margin-top: 0;
 	margin-bottom: 0;
@@ -75,9 +76,28 @@ ul {
 .menu-icons {
 	display: flex;
 	align-items: center;
-	margin: 10px;
-	background-color: rgb(245, 245, 220, 0.5);
-	border: 0.3vw solid rgb(220, 151, 163);
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background-color: rgb(220, 151, 163, 0.5);
+}
+
+/* MENU CONTAINER */
+
+#container-menu {
+	left: 0;
+	top: 0;
+	max-height: calc(12vw + 15px);
+	z-index: 1;
+	max-width: 15%;
+}
+
+#menu_icon {
+	position: relative;
+	top: 50%;
+	transform: translate(0, -50%);
+	max-height: 25%;
+	margin-left: 3vw;
+	min-height: 45px;
 }
 
 /* CONTAINER RIGHT */
@@ -100,16 +120,6 @@ ul {
 	background-color: rgb(240, 248, 255, 0.5);
 }
 
-#menu_icon {
-	position: absolute;
-	left: 0;
-	top: 50%;
-	transform: translate(0, -50%);
-	height: 30%;
-	margin-left: 3vw;
-	min-height: 45px;
-}
-
 #title_icon {
 	margin-top: 10px;
 	float: left;
@@ -123,9 +133,9 @@ ul {
 	float: left;
 	font-family: "Eglantine";
 	font-weight: 100;
-	margin-top: 5px;
+	margin-top: 0px;
 	font-size: 7vw;
-	margin-bottom: 5px;
+	margin-bottom: 0px;
 }
 
 /* MAIN */

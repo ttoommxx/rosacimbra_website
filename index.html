@@ -54,15 +54,17 @@
 				</ul>
 			</nav>
 		</div>
-		<div id="container-right">
+		<div id="container-menu">
+			<img
+				src="img/icon/menu.svg"
+				alt="Menu icon"
+				id="menu_icon"
+				onclick="toggle_menu('on')"
+			/>
+		</div>
+		<div id="container-right" onclick="toggle_menu('off')">
 			<div id="container-header">
 				<header>
-					<img
-						src="img/icon/menu.svg"
-						alt="Menu icon"
-						id="menu_icon"
-						onclick="toggle_menu('on')"
-					/>
 					<img
 						id="title_icon"
 						src="img/flower.png"
@@ -75,11 +77,7 @@
 			<div id="banner">
 				<p>Next fair: Japan! See you there on August 8th.</p>
 			</div>
-			<div
-				id="container-main"
-				class="animate_slide"
-				onclick="toggle_menu('off')"
-			>
+			<div id="container-main" class="animate_slide">
 				<main>
 					<div id="about">
 						<div id="slideshow"></div>
