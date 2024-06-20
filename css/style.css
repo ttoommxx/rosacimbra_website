@@ -36,9 +36,9 @@ ul {
 /* CONTAINER LEFT */
 
 #container-left {
-	display: none;
+	display: flex;
+	left: -100%;
 	z-index: 2;
-	opacity: 1;
 }
 
 #container-left p {
@@ -211,7 +211,6 @@ footer li {
 	position: relative;
 	left: -100vw;
 	transition: all 0.5s ease-in-out;
-	opacity: 0;
 }
 
 /* MOBILE SETTINGS */
