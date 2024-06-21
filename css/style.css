@@ -70,6 +70,7 @@ ul {
 #cart_menu {
 	position: fixed;
 	bottom: 10px;
+	border-radius: 10px;
 }
 
 .menu-icons {
