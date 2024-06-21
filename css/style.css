@@ -25,7 +25,7 @@ body {
 	background-image: url("../img/pink_background.jpg");
 	display: flex;
 	flex-direction: row;
-	min-height: 100vh;
+	min-height: 100%;
 }
 
 ul {
@@ -62,7 +62,7 @@ ul {
 #container-left ul {
 	margin-top: 0;
 	background: rgba(225, 192, 247, 0.9);
-	border-right: 0.3vw solid rgb(220, 151, 163);
+	border-right: 0.2vw solid rgb(220, 151, 163);
 	height: 100vh;
 	position: fixed;
 }
@@ -78,7 +78,7 @@ ul {
 	align-items: center;
 	margin-top: 15px;
 	margin-bottom: 15px;
-	background-color: rgb(220, 151, 163, 0.5);
+	background-color: rgb(220, 151, 163, 0.9);
 }
 
 /* MENU CONTAINER */
@@ -96,7 +96,7 @@ ul {
 	top: 50%;
 	transform: translate(0, -50%);
 	max-height: 25%;
-	margin-left: 3vw;
+	margin-left: 2vw;
 	min-height: 45px;
 }
 
@@ -121,7 +121,7 @@ ul {
 }
 
 #title_icon {
-	margin-top: 10px;
+	margin-top: 5px;
 	float: left;
 	width: 15vw;
 	height: 12vw;
@@ -215,7 +215,10 @@ ul {
 
 footer li {
 	display: inline;
+	margin: 5px;
 }
+
+/* ANIMATION */
 
 .animate_slide {
 	position: relative;
