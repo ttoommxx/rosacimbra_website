@@ -26,12 +26,6 @@ var Cookies = new (function () {
 // operations at boot
 
 window.onload = function () {
-	// set the copyright year
-	let current_year = new Date().getFullYear();
-	let year = document.getElementById("copyright_year");
-	year.setAttribute("datetime", current_year);
-	year.innerHTML = current_year;
-
 	// load pictures
 	slideshow_fetch();
 
