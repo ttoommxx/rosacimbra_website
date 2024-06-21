@@ -26,6 +26,12 @@ var Cookies = new (function () {
 // operations at boot
 
 window.onload = function () {
+	// set the copyright year
+	let current_year = new Date().getFullYear();
+	let year = document.getElementById("copyright_year");
+	year.setAttribute("datetime", current_year);
+	year.innerHTML = current_year;
+
 	// load pictures
 	slideshow_fetch();
 
@@ -37,10 +43,9 @@ window.onload = function () {
 
 	// load previous sidebar state
 	if (Cookies.get("left_bar") == "") {
-		Cookies.set("left_bar", "-100%");
+		Cookies.set("left_bar", "off");
 	}
-	let container_left = document.getElementById("container-left");
-	container_left.style.setProperty("left", Cookies.get("left_bar"));
+	toggle_menu(Cookies.get("left_bar"));
 };
 
 // functions
@@ -85,8 +90,13 @@ function slideshow_fetch() {
 }
 
 function toggle_menu(state) {
+	Cookies.set("left_bar", state);
+
 	let menu_div = document.getElementById("container-left");
 	let left_position = state == "on" ? "0" : "-100%";
-	Cookies.set("left_bar", left_position);
 	menu_div.style.setProperty("left", left_position);
+
+	let cart_div = document.getElementById("cart_menu");
+	let right_position = state == "on" ? "10px" : "-100%";
+	cart_div.style.setProperty("right", right_position);
 }

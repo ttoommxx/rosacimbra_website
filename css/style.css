@@ -45,7 +45,7 @@ ul {
 	text-align: center;
 	font-family: "LittleLordFontleroy";
 	font-size: 30pt;
-	margin-right: 5px;
+	margin-right: 10px;
 	margin-top: 0;
 	margin-bottom: 0;
 }
@@ -53,10 +53,10 @@ ul {
 #container-left img {
 	width: 6vh;
 	max-width: 100px;
-	margin-left: 5px;
-	margin-right: 5px;
-	margin-top: 0;
-	margin-bottom: 0;
+	margin-right: 10px;
+	margin-left: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 #container-left ul {
@@ -67,17 +67,16 @@ ul {
 	position: fixed;
 }
 
-#container-left li:last-child {
+#cart_menu {
 	position: fixed;
-	bottom: 5px;
-	right: 5px;
+	bottom: 10px;
 }
 
 .menu-icons {
 	display: flex;
 	align-items: center;
-	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-top: 15px;
+	margin-bottom: 15px;
 	background-color: rgb(220, 151, 163, 0.5);
 }
 
@@ -143,11 +142,22 @@ ul {
 #container-main {
 	display: flex;
 	flex: auto;
+	margin: 5px;
 }
 
 #banner {
 	background-color: rgba(222, 174, 230, 0.5);
-	margin-bottom: 20px;
+	animation: pulse 5s infinite;
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		background-color: rgba(222, 174, 230, 0.5);
+	}
+	50% {
+		background-color: rgba(121, 72, 233, 0.5);
+	}
 }
 
 #banner p {
@@ -156,7 +166,7 @@ ul {
 	font-family: CooperBlack;
 	font-size: 20pt;
 	text-align: center;
-	color: rgb(164, 78, 91);
+	color: rgb(84, 48, 53);
 }
 
 #about {
@@ -174,8 +184,7 @@ ul {
 	height: 50vw;
 	max-height: 400px;
 	max-width: 100%;
-	margin-right: 5px;
-	margin-left: 5px;
+	margin: 5px;
 }
 
 #dolls {
@@ -209,8 +218,7 @@ footer li {
 
 .animate_slide {
 	position: relative;
-	left: -100vw;
-	transition: all 0.5s ease-in-out;
+	transition: all 0.4s ease-in-out;
 }
 
 /* MOBILE SETTINGS */

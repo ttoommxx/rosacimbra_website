@@ -40,13 +40,17 @@
 						</div>
 					</li>
 					<li>
-						<div onclick="open_page('cart')" class="menu-icons">
+						<div onclick="open_page('accessories')" class="menu-icons">
 							<img src="img/icon/accessory.svg" alt="Accessories" />
 							<p>Accessories</p>
 						</div>
 					</li>
 					<li>
-						<div onclick="open_cart()" class="menu-icons">
+						<div
+							id="cart_menu"
+							onclick="open_page('cart')"
+							class="menu-icons animate_slide"
+						>
 							<img src="img/icon/cart.svg" alt="Cart" />
 							<p>Cart</p>
 						</div>
@@ -104,7 +108,11 @@
 			</div>
 			<div id="container-footer">
 				<footer>
-					<p>Copyright &copy; 2024 RosaCimbra Dolls</p>
+					<p>
+						Copyright &copy;
+						<time id="copyright_year" datetime="2024">2024</time>
+						RosaCimbra Dolls
+					</p>
 					<ul>
 						<li>
 							<a

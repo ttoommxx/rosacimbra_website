@@ -1,0 +1,1 @@
+- don't make the page move when the right bar appears
