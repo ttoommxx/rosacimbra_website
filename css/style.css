@@ -61,8 +61,8 @@ ul {
 
 #container-left ul {
 	margin-top: 0;
-	background: rgba(225, 192, 247, 0.9);
-	border-right: 0.2vw solid rgb(220, 151, 163);
+	background: rgba(243, 192, 247, 0.9);
+	border-right: max(0.2vw, 2px) solid rgb(220, 151, 163);
 	height: 100vh;
 	position: fixed;
 }
@@ -165,7 +165,7 @@ ul {
 	margin-top: 15px;
 	margin-bottom: 15px;
 	font-family: CooperBlack;
-	font-size: 20pt;
+	font-size: min(5vw, 3vh);
 	text-align: center;
 	color: rgb(84, 48, 53);
 }
@@ -227,8 +227,8 @@ footer li {
 
 /* MOBILE SETTINGS */
 
-@media (max-width: 800px) {
+/* @media (max-width: 800px) {
 	#banner p {
 		font-size: 12pt;
 	}
-}
+} */

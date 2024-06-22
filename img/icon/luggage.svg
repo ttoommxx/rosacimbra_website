@@ -1,23 +1,7 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 512 512" xml:space="preserve">
-<path style="fill:#EDEDED;" d="M492.8,396.8H19.2C8.64,396.8,0,405.44,0,416l0,0c0,10.56,8.64,19.2,19.2,19.2h473.6
-	c10.56,0,19.2-8.64,19.2-19.2l0,0C512,405.44,503.36,396.8,492.8,396.8z"/>
-<path style="fill:#D8D8DA;" d="M492.8,396.8h-51.2c10.56,0,19.2,8.64,19.2,19.2s-8.64,19.2-19.2,19.2h51.2
-	c10.56,0,19.2-8.64,19.2-19.2S503.36,396.8,492.8,396.8z"/>
-<circle style="fill:#797781;" cx="89.6" cy="460.8" r="25.6"/>
-<circle style="fill:#58575D;" cx="422.4" cy="460.8" r="25.6"/>
-<path style="fill:#BFA993;" d="M435.2,115.2H76.8c-21.208,0-38.4,17.192-38.4,38.4v204.8c0,21.208,17.192,38.4,38.4,38.4h358.4
-	c21.208,0,38.4-17.192,38.4-38.4V153.6C473.6,132.392,456.408,115.2,435.2,115.2z"/>
-<path style="fill:#B29A7E;" d="M435.2,115.2h-64c21.208,0,38.4,17.192,38.4,38.4v204.8c0,21.208-17.192,38.4-38.4,38.4h64
-	c21.208,0,38.4-17.192,38.4-38.4V153.6C473.6,132.392,456.408,115.2,435.2,115.2z"/>
-<g>
-	<rect x="102.4" y="115.2" style="fill:#D8D8DA;" width="38.4" height="281.6"/>
-	<rect x="371.2" y="115.2" style="fill:#D8D8DA;" width="38.4" height="281.6"/>
-</g>
-<path style="fill:#B29A7E;" d="M204.8,115.2V64h102.4v51.2h38.4V64c0-21.208-17.192-38.4-38.4-38.4H204.8
-	c-21.208,0-38.4,17.192-38.4,38.4v51.2H204.8z"/>
-<path style="fill:#A58868;" d="M307.2,25.6h-38.4c21.208,0,38.4,17.192,38.4,38.4v51.2h38.4V64
-	C345.6,42.792,328.408,25.6,307.2,25.6z"/>
-</svg>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" width="800px" height="800px" fill="#000000" stroke="#000000" stroke-width="7.168000000000001">
+<g id="SVGRepo_bgCarrier" stroke-width="0"/>
+<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="SVGRepo_iconCarrier"> <path style="fill:#EDEDED;" d="M492.8,396.8H19.2C8.64,396.8,0,405.44,0,416l0,0c0,10.56,8.64,19.2,19.2,19.2h473.6 c10.56,0,19.2-8.64,19.2-19.2l0,0C512,405.44,503.36,396.8,492.8,396.8z"/> <path style="fill:#D8D8DA;" d="M492.8,396.8h-51.2c10.56,0,19.2,8.64,19.2,19.2s-8.64,19.2-19.2,19.2h51.2 c10.56,0,19.2-8.64,19.2-19.2S503.36,396.8,492.8,396.8z"/> <circle style="fill:#797781;" cx="89.6" cy="460.8" r="25.6"/> <circle style="fill:#58575D;" cx="422.4" cy="460.8" r="25.6"/> <path style="fill:#BFA993;" d="M435.2,115.2H76.8c-21.208,0-38.4,17.192-38.4,38.4v204.8c0,21.208,17.192,38.4,38.4,38.4h358.4 c21.208,0,38.4-17.192,38.4-38.4V153.6C473.6,132.392,456.408,115.2,435.2,115.2z"/> <path style="fill:#B29A7E;" d="M435.2,115.2h-64c21.208,0,38.4,17.192,38.4,38.4v204.8c0,21.208-17.192,38.4-38.4,38.4h64 c21.208,0,38.4-17.192,38.4-38.4V153.6C473.6,132.392,456.408,115.2,435.2,115.2z"/> <g> <rect x="102.4" y="115.2" style="fill:#D8D8DA;" width="38.4" height="281.6"/> <rect x="371.2" y="115.2" style="fill:#D8D8DA;" width="38.4" height="281.6"/> </g> <path style="fill:#B29A7E;" d="M204.8,115.2V64h102.4v51.2h38.4V64c0-21.208-17.192-38.4-38.4-38.4H204.8 c-21.208,0-38.4,17.192-38.4,38.4v51.2H204.8z"/> <path style="fill:#A58868;" d="M307.2,25.6h-38.4c21.208,0,38.4,17.192,38.4,38.4v51.2h38.4V64 C345.6,42.792,328.408,25.6,307.2,25.6z"/> </g>
+</svg>
