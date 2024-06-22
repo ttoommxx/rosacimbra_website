@@ -130,7 +130,6 @@ function dolls_fetch() {
 
 function toggle_menu(state) {
 	Cookies.set("left_bar", state);
-
 	let menu_div = document.getElementById("container-left");
 	let left_position = state == "on" ? "0" : "-100%";
 	menu_div.style.setProperty("left", left_position);
