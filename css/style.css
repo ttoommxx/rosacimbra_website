@@ -15,8 +15,13 @@
 	src: url("/font/CooperBlack.ttf");
 }
 
+@font-face {
+	font-family: "GreatVibes";
+	src: url("/font/GreatVibes-Regular.ttf");
+}
+
 * {
-	scrollbar-color: rgba(27, 17, 29, 0.2) transparent;
+	scrollbar-color: rgba(27, 17, 29, 0.5) transparent;
 }
 
 body {
@@ -84,6 +89,7 @@ ul {
 /* MENU CONTAINER */
 
 #container-menu {
+	position: sticky;
 	left: 0;
 	top: 0;
 	max-height: calc(12vw + 15px);
@@ -140,35 +146,55 @@ ul {
 
 /* MAIN */
 
-#container-main {
+#special {
+	position: relative;
 	display: flex;
 	flex: auto;
-	margin: 5px;
+	flex-direction: column;
 }
 
-#banner {
-	background-color: rgba(222, 174, 230, 0.5);
+#container-main {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	flex: auto;
+}
+
+/* BANNER */
+
+#container-banner {
+	justify-content: center;
+	display: flex;
+	margin: 0;
 	animation: pulse 5s infinite;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 1;
+	height: fit-content;
 }
 
 @keyframes pulse {
 	0%,
 	100% {
-		background-color: rgba(222, 174, 230, 0.5);
+		background-color: rgba(222, 174, 230, 0.9);
 	}
 	50% {
-		background-color: rgba(121, 72, 233, 0.5);
+		background-color: rgba(121, 72, 233, 0.9);
 	}
 }
 
-#banner p {
+#container-banner p {
 	margin-top: 15px;
 	margin-bottom: 15px;
 	font-family: CooperBlack;
 	font-size: min(5vw, 3vh);
 	text-align: center;
 	color: rgb(84, 48, 53);
+	margin: 10px;
 }
+
+/* ABOUT */
 
 #about {
 	display: none;
@@ -188,9 +214,59 @@ ul {
 	margin: 5px;
 }
 
+#about blockquote {
+	text-align: center;
+	font-size: larger;
+}
+
+/* DOLLS */
+
 #dolls {
 	display: none;
+	flex-wrap: wrap;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 }
+
+.dolls_img {
+	margin: 4%;
+	flex-basis: 40%;
+	aspect-ratio: 1;
+	position: relative;
+	align-items: center;
+	justify-content: center;
+}
+
+.dolls_img img {
+	max-width: 100%;
+	max-height: 100%;
+	aspect-ratio: 1;
+	opacity: 1;
+	transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+	object-fit: cover;
+}
+
+.dolls_img caption {
+	width: 95%;
+	visibility: hidden;
+	position: absolute;
+	top: 50%;
+	transform: translate(0, -50%);
+	pointer-events: none;
+	font-size: larger;
+}
+
+.dolls_img img:hover {
+	transform: scale(0.8);
+	opacity: 0.2;
+}
+
+.dolls_img:hover caption {
+	visibility: visible;
+}
+
+/* CLOTHES */
 
 #clothes {
 	display: none;
@@ -207,10 +283,8 @@ ul {
 /* FOOTER */
 
 #container-footer {
-	display: flex;
 	justify-content: center;
 	text-align: center;
-	flex: none;
 }
 
 footer li {
@@ -225,10 +299,11 @@ footer li {
 	transition: all 0.4s ease-in-out;
 }
 
-/* MOBILE SETTINGS */
-
-/* @media (max-width: 800px) {
-	#banner p {
-		font-size: 12pt;
+/* DARK THEME */
+/* 
+@media (prefers-color-scheme: dark) {
+	body {
+		background-image: url("../img/dark_pink_background.jpg");
+		color: white;
 	}
 } */

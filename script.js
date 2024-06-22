@@ -1,6 +1,6 @@
-// cookies and flobal variables
+// cookies and global variables
 
-var Cookies = new (function () {
+const Cookies = new (function () {
 	this._map = new Map();
 	if (document.cookie != "") {
 		const cookies = document.cookie.split(";");
@@ -23,11 +23,12 @@ var Cookies = new (function () {
 	};
 })();
 
-// operations at boot
+// operations at runtime
 
 window.onload = function () {
 	// load pictures
 	slideshow_fetch();
+	dolls_fetch();
 
 	// open previous page
 	if (Cookies.get("page") == "") {
@@ -40,6 +41,24 @@ window.onload = function () {
 		Cookies.set("left_bar", "off");
 	}
 	toggle_menu(Cookies.get("left_bar"));
+
+	// move the main to accomodate for the banner
+	update_main_height();
+};
+
+window.onscroll = function () {
+	const banner = document.getElementById("container-banner");
+	const banner_position = banner.getBoundingClientRect();
+	if (banner_position.top < 0) {
+		banner.style.setProperty("position", "fixed");
+	} else {
+		const header_position = document
+			.getElementById("container-header")
+			.getBoundingClientRect();
+		if (header_position.bottom > 0) {
+			banner.style.setProperty("position", "relative");
+		}
+	}
 };
 
 // functions
@@ -79,7 +98,33 @@ function slideshow_fetch() {
 		new_image.src = src;
 		new_image.alt = src.split("/").at(-1).split(".")[0];
 		new_image.classList.add("slideshow-image");
+
 		slideshow_div.appendChild(new_image);
+	}
+}
+
+function dolls_fetch() {
+	const images = [
+		["/img/dolls/doll_in_balcony.jpg", ["Name: x", "Surname: y"]],
+		["/img/dolls/doll_with_chair.jpg", ["Name: x", "Surname: y"]],
+		["/img/dolls/doll_with_deer.jpg", ["Name: x", "Surname: y"]],
+		["/img/dolls/doll_with_hat.jpg", ["Name: x", "Surname: y"]],
+		["/img/dolls/doll_with_egg.jpg", ["Name: x", "Surname: y"]],
+		["/img/dolls/doll_with_toys.jpg", ["Name: x", "Surname: y"]],
+	];
+	let dolls_div = document.getElementById("dolls");
+	for (const [src, cap] of images) {
+		const doll_div = document.createElement("div");
+		doll_div.classList.add("dolls_img");
+		const new_image = document.createElement("img");
+		new_image.src = src;
+		new_image.alt = src.split("/").at(-1).split(".")[0];
+		const new_caption = document.createElement("caption");
+		new_caption.innerHTML = cap.join("<br />");
+
+		doll_div.appendChild(new_image);
+		doll_div.appendChild(new_caption);
+		dolls_div.appendChild(doll_div);
 	}
 }
 
@@ -93,4 +138,10 @@ function toggle_menu(state) {
 	let cart_div = document.getElementById("cart_menu");
 	let right_position = state == "on" ? "10px" : "-100%";
 	cart_div.style.setProperty("right", right_position);
+}
+
+function update_main_height() {
+	let banner_height = document.getElementById("container-banner").offsetHeight;
+	let container_main = document.getElementById("container-main");
+	container_main.style.setProperty("top", banner_height + "px");
 }

@@ -1,2 +1,3 @@
 - don't make the page move when the right bar appears
 - after selecting element, fill in a form to send to your private email
+- write disclaimer about cookies
