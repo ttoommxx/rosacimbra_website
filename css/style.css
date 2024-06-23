@@ -86,24 +86,29 @@ ul {
 	background-color: rgb(220, 151, 163, 0.9);
 }
 
+.menu-icons:hover {
+	cursor: pointer;
+}
+
 /* MENU CONTAINER */
 
 #container-menu {
-	position: sticky;
-	left: 0;
-	top: 0;
-	max-height: calc(12vw + 15px);
+	display: flex;
+	margin-left: 3vw;
+	height: calc(12vw + 15px);
 	z-index: 1;
-	max-width: 15%;
+	width: fit-content;
+	justify-content: center;
+	align-items: center;
 }
 
 #menu_icon {
-	position: relative;
-	top: 50%;
-	transform: translate(0, -50%);
 	max-height: 25%;
-	margin-left: 2vw;
 	min-height: 45px;
+}
+
+#menu_icon:hover {
+	cursor: pointer;
 }
 
 /* CONTAINER RIGHT */
@@ -144,35 +149,27 @@ ul {
 	margin-bottom: 0px;
 }
 
-/* MAIN */
+/* MAIN PARENT */
 
-#special {
+#container-main-parent {
 	position: relative;
 	display: flex;
-	flex: auto;
+	flex: 1;
 	flex-direction: column;
-}
-
-#container-main {
-	position: absolute;
-	display: flex;
-	flex-direction: column;
-	flex: auto;
-	width: 100%;
 }
 
 /* BANNER */
 
 #container-banner {
+	position: absolute;
 	justify-content: center;
-	display: flex;
 	margin: 0;
 	animation: pulse 5s infinite;
-	position: absolute;
 	top: 0;
 	width: 100%;
 	z-index: 1;
-	height: fit-content;
+	flex: none;
+	display: flex;
 }
 
 @keyframes pulse {
@@ -190,9 +187,22 @@ ul {
 	margin-bottom: 15px;
 	font-family: CooperBlack;
 	font-size: min(5vw, 3vh);
-	text-align: center;
 	color: rgb(84, 48, 53);
 	margin: 10px;
+}
+
+/* MAIN */
+
+#container-main {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+}
+
+main {
+	margin: 10px;
+	height: 100%;
 }
 
 /* ABOUT */
@@ -237,6 +247,7 @@ ul {
 	position: relative;
 	align-items: center;
 	justify-content: center;
+	display: flex;
 }
 
 .dolls_img img {
@@ -249,11 +260,9 @@ ul {
 }
 
 .dolls_img caption {
-	width: 95%;
+	width: 120%;
 	visibility: hidden;
 	position: absolute;
-	top: 50%;
-	transform: translate(0, -50%);
 	pointer-events: none;
 	font-size: larger;
 }
@@ -271,11 +280,66 @@ ul {
 
 #clothes {
 	display: none;
+	flex-direction: column;
 }
 
-#accessories {
+.list-labels {
+	font-size: 35pt;
+	font-family: "LittleLordFontleroy";
+	list-style-type: none;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+}
+
+.toggle {
 	display: none;
 }
+
+.toggle ~ .details {
+	max-height: 0;
+	opacity: 0;
+	overflow: hidden;
+	transition: max-height 0.5s, opacity 0.5s;
+}
+
+.toggle:checked ~ .details {
+	max-height: 500vh;
+	opacity: 1;
+}
+
+.toggle:checked ~ label .arrow-image {
+	visibility: hidden;
+}
+
+.arrow-image {
+	width: 25pt;
+	height: 25pt;
+	margin-top: 6pt;
+	margin-right: 8pt;
+	display: block;
+	animation: linear infinite alternate;
+	animation-name: run;
+	animation-duration: 0.7s;
+}
+
+@-webkit-keyframes run {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-50%);
+	}
+}
+
+/* ACCESSORIES */
+
+#accessories {
+	flex-direction: column;
+	display: none;
+}
+
+/* CART */
 
 #cart {
 	display: none;
@@ -284,7 +348,6 @@ ul {
 /* FOOTER */
 
 #container-footer {
-	justify-content: center;
 	text-align: center;
 	flex: none;
 }

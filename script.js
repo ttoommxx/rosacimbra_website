@@ -19,7 +19,7 @@ const Cookies = new (function () {
 
 	this.set = function (name, value) {
 		this._map.set(name, value);
-		document.cookie = name + "=" + value + ";";
+		document.cookie = `${name}=${value}`;
 	};
 })();
 
@@ -56,9 +56,13 @@ window.onscroll = function () {
 			.getElementById("container-header")
 			.getBoundingClientRect();
 		if (header_position.bottom > 0) {
-			banner.style.setProperty("position", "relative");
+			banner.style.setProperty("position", "absolute");
 		}
 	}
+};
+
+window.onresize = function () {
+	update_main_height();
 };
 
 // functions
@@ -105,10 +109,43 @@ function slideshow_fetch() {
 
 function dolls_fetch() {
 	const images = [
-		["/img/dolls/doll_in_balcony.jpg", ["Name: x", "Surname: y"]],
-		["/img/dolls/doll_with_chair.jpg", ["Name: x", "Surname: y"]],
-		["/img/dolls/doll_with_deer.jpg", ["Name: x", "Surname: y"]],
-		["/img/dolls/doll_with_hat.jpg", ["Name: x", "Surname: y"]],
+		[
+			"/img/dolls/doll_in_balcony.jpg",
+			[
+				"Name: Vicky",
+				"Type: Original Blythe Very Vicky",
+				"Body: Azone S",
+				"Date: August 2010",
+				"Custom: Paola Crespi",
+			],
+		],
+		[
+			"/img/dolls/doll_with_chair.jpg",
+			[
+				"Name: Wendy",
+				"Type: Little Keiko Original Doll",
+				"Body: Obitsu22",
+				"Custom: Paola Crestpi",
+			],
+		],
+		[
+			"/img/dolls/doll_with_deer.jpg",
+			[
+				"Name: Dorothy",
+				"Type: Blythe fake",
+				"Body: Obitsu24",
+				"Custom: Elvira Rosolia",
+			],
+		],
+		[
+			"/img/dolls/doll_with_hat.jpg",
+			[
+				"Name: Gemma",
+				"Type: Blythe dactory",
+				"Body: Azone S",
+				"Custom: Paola Crespi",
+			],
+		],
 		["/img/dolls/doll_with_egg.jpg", ["Name: x", "Surname: y"]],
 		["/img/dolls/doll_with_toys.jpg", ["Name: x", "Surname: y"]],
 	];
@@ -142,5 +179,5 @@ function toggle_menu(state) {
 function update_main_height() {
 	let banner_height = document.getElementById("container-banner").offsetHeight;
 	let container_main = document.getElementById("container-main");
-	container_main.style.setProperty("top", banner_height + "px");
+	container_main.style.setProperty("margin-top", `${banner_height}px`);
 }
