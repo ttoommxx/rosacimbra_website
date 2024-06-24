@@ -300,12 +300,24 @@ main {
 }
 
 .list-images img {
-	width: 25%;
+	width: 20%;
 	max-height: 40vh;
 	aspect-ratio: 1;
 	object-fit: cover;
 	margin: 2%;
-	opacity: 0.3;
+	animation: pulse2 2s infinite;
+}
+
+@keyframes pulse2 {
+	0%,
+	100% {
+		opacity: 0.4;
+		transform: scale(1); /* Optional: Start slightly bigger */
+	}
+	50% {
+		opacity: 0.3;
+		transform: scale(0.9); /* Shrink to disappear */
+	}
 }
 
 .list-labels {
