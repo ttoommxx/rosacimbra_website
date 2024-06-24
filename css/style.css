@@ -300,24 +300,32 @@ main {
 }
 
 .list-images img {
-	width: 20%;
+	cursor: pointer;
+	width: min(max(22%, 13vh), 31%);
 	max-height: 40vh;
 	aspect-ratio: 1;
 	object-fit: cover;
 	margin: 2%;
 	animation: pulse2 2s infinite;
+	transition: max-height 1s, margin-top 0.5s;
+	margin-top: 0;
 }
 
 @keyframes pulse2 {
 	0%,
 	100% {
-		opacity: 0.4;
-		transform: scale(1); /* Optional: Start slightly bigger */
+		opacity: 0.35;
+		transform: scale(1);
 	}
 	50% {
-		opacity: 0.3;
-		transform: scale(0.9); /* Shrink to disappear */
+		opacity: 0.2;
+		transform: scale(0.9);
 	}
+}
+
+.toggle:checked ~ .list-lables-container .list-images img {
+	max-height: 0;
+	margin-top: max(6vw, 6vh);
 }
 
 .list-labels {
@@ -334,7 +342,7 @@ main {
 	display: none;
 }
 
-.toggle ~ .details {
+.details {
 	display: flex;
 	max-height: 0;
 	opacity: 0;
@@ -347,28 +355,6 @@ main {
 	max-height: 100vh;
 	opacity: 1;
 	overflow-y: auto;
-}
-
-.toggle:checked ~ label .arrow-image {
-	opacity: 0;
-}
-
-.arrow-image {
-	width: max(5vw, 5vh);
-	animation: linear infinite alternate;
-	animation-name: run;
-	animation-duration: 0.7s;
-	transition: opacity 0.7s;
-	opacity: 1;
-}
-
-@-webkit-keyframes run {
-	0% {
-		transform: translateX(0);
-	}
-	100% {
-		transform: translateX(-50%);
-	}
 }
 
 /**/
