@@ -79,7 +79,7 @@ function open_page(page) {
 		new_page.style.setProperty("display", "flex");
 		page_element.style.setProperty("opacity", "1");
 		page_element.style.setProperty("left", "0");
-	}, 500);
+	}, 650);
 }
 
 function slideshow_fetch() {
