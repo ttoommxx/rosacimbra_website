@@ -148,6 +148,33 @@ function dolls_fetch() {
 		],
 		["/img/dolls/doll_with_egg.jpg", ["Name: x", "Surname: y"]],
 		["/img/dolls/doll_with_toys.jpg", ["Name: x", "Surname: y"]],
+		[
+			"/img/dolls/doll_with_teddy.jpg",
+			[
+				"Name: Rosa",
+				"Type: Blythe fake",
+				"Body: jointed AliExpress",
+				"Custom: amber dolls",
+			],
+		],
+		[
+			"/img/dolls/doll_with_plants.jpg",
+			[
+				"Name: Marianna",
+				"Type: Jacoosun fake",
+				"Body: AliExpress",
+				"Custom: made by myself",
+			],
+		],
+		[
+			"/img/dolls/doll_with_dress.jpg",
+			[
+				"Name: Licy",
+				"Type: Sahras a la Mode Lycee/Sweet home (2020)",
+				"Body: Azone S",
+				"Custom: N/A",
+			],
+		],
 	];
 	let dolls_div = document.getElementById("dolls");
 	for (const [src, cap] of images) {

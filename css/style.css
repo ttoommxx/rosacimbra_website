@@ -156,6 +156,7 @@ ul {
 	display: flex;
 	flex: 1;
 	flex-direction: column;
+	align-items: center;
 }
 
 /* BANNER */
@@ -163,8 +164,8 @@ ul {
 #container-banner {
 	position: absolute;
 	justify-content: center;
+	animation: pulse 3.5s infinite;
 	margin: 0;
-	animation: pulse 4s infinite;
 	top: 0;
 	width: 100%;
 	z-index: 1;
@@ -175,11 +176,12 @@ ul {
 @keyframes pulse {
 	0%,
 	100% {
-		background-color: rgba(222, 174, 230, 0.9);
+		background-color: rgba(222, 174, 230, 0.85);
 	}
 	50% {
-		background-color: rgba(121, 72, 233, 0.9);
-		margin-top: 3px;
+		background-color: rgba(148, 115, 225, 0.85);
+		margin-top: 5px;
+		width: calc(100% - 10px);
 	}
 }
 
@@ -188,7 +190,7 @@ ul {
 	margin-bottom: 15px;
 	font-family: CooperBlack;
 	font-size: min(5vw, 3vh);
-	color: rgb(84, 48, 53);
+	color: rgb(42, 28, 30);
 	margin: 10px;
 }
 
@@ -278,6 +280,7 @@ main {
 }
 
 /* CLOTHES */
+/* ACCESSORIES */
 
 #clothes {
 	display: none;
@@ -337,7 +340,7 @@ main {
 	}
 }
 
-/* ACCESSORIES */
+/**/
 
 #accessories {
 	flex-direction: column;
@@ -359,7 +362,7 @@ main {
 
 footer li {
 	display: inline;
-	margin: 5px;
+	margin: 10px;
 }
 
 /* ANIMATION */
