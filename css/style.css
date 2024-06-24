@@ -285,13 +285,36 @@ main {
 	flex-direction: column;
 }
 
+.list-lables-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	position: relative;
+}
+
+.list-images {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.list-images img {
+	width: 25%;
+	max-height: 40vh;
+	aspect-ratio: 1;
+	object-fit: cover;
+	margin: 2%;
+	opacity: 0.3;
+}
+
 .list-labels {
-	font-size: 35pt;
+	position: absolute;
+	font-size: max(6vw, 6vh);
 	font-family: "LittleLordFontleroy";
 	list-style-type: none;
 	cursor: pointer;
 	display: flex;
-	justify-content: center;
 	margin-bottom: 2vh;
 }
 
@@ -300,13 +323,15 @@ main {
 }
 
 .toggle ~ .details {
+	display: flex;
 	max-height: 0;
 	opacity: 0;
-	overflow: hidden;
+	overflow-y: hidden;
 	transition: max-height 1s, opacity 0.7s;
 }
 
 .toggle:checked ~ .details {
+	display: flex;
 	max-height: 100vh;
 	opacity: 1;
 	overflow-y: auto;
@@ -317,11 +342,7 @@ main {
 }
 
 .arrow-image {
-	width: 27.5pt;
-	height: 27.5pt;
-	margin-top: 3pt;
-	margin-right: 8pt;
-	display: block;
+	width: max(5vw, 5vh);
 	animation: linear infinite alternate;
 	animation-name: run;
 	animation-duration: 0.7s;
