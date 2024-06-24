@@ -180,8 +180,6 @@ ul {
 	}
 	50% {
 		background-color: rgba(148, 115, 225, 0.85);
-		margin-top: 5px;
-		width: calc(100% - 10px);
 	}
 }
 
@@ -230,7 +228,6 @@ main {
 
 #about blockquote {
 	text-align: center;
-	font-size: larger;
 }
 
 /* DOLLS */
@@ -241,6 +238,7 @@ main {
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
+	width: 100%;
 }
 
 .dolls_img {
@@ -319,9 +317,9 @@ main {
 }
 
 .arrow-image {
-	width: 25pt;
-	height: 25pt;
-	margin-top: 6pt;
+	width: 27.5pt;
+	height: 27.5pt;
+	margin-top: 3pt;
 	margin-right: 8pt;
 	display: block;
 	animation: linear infinite alternate;
