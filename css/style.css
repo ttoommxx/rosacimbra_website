@@ -212,8 +212,8 @@ main {
 #about blockquote {
 	text-align: center;
 	font-family: "Kaylani";
-	font-size: min(max(2vw, 15pt), 25pt);
-	line-height: calc(2 * min(max(2vw, 15pt), 25pt));
+	font-size: min(max(2vw, 12pt), 18pt);
+	line-height: calc(2 * min(max(2vw, 12pt), 18pt));
 	margin: 0;
 }
 
@@ -329,6 +329,7 @@ main {
 	max-height: 0;
 	opacity: 0;
 	transition: max-height 1s, opacity 0.5s;
+	flex-direction: column;
 }
 
 .toggle:checked ~ label .sale-thumbnails img {
