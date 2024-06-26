@@ -364,7 +364,6 @@ main {
 .sale-item img:hover {
 	max-width: min(70vw, 70vh);
 	margin-left: 5vw;
-	display: flex;
 }
 
 .sale-item img:hover ~ p {

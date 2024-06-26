@@ -2,6 +2,8 @@
 
 - system to add things to the cart and at checkout assembles a form and send an email directly, with clear instructions
 
+- simplify the css for clothes and accessories
+
 # menu entries
 
 Menu vestiti:
