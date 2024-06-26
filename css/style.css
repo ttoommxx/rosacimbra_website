@@ -286,7 +286,7 @@ main {
 
 .label-name {
 	position: absolute;
-	font-size: min(8vh, 45pt);
+	font-size: min(8vh, 50pt);
 	font-family: "LittleLordFontleroy";
 	z-index: 1;
 	cursor: pointer;
@@ -301,7 +301,7 @@ main {
 }
 
 .sale-thumbnails img {
-	height: min(max(20vw, 12vh), 31vw);
+	height: min(max(20vw, 13vh), 31vw);
 	aspect-ratio: 1;
 	object-fit: cover;
 	margin: 2%;
