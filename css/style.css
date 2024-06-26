@@ -352,7 +352,7 @@ main {
 	margin-bottom: 0px;
 	margin-left: 5vw;
 	display: flex;
-	transition: max-height 1.5s, margin-button 2s;
+	transition: max-height 1.5s, margin-bottom 2s;
 }
 
 .sale-item img {
