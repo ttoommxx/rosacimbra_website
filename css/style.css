@@ -351,6 +351,7 @@ main {
 	margin-left: 5vw;
 	display: flex;
 	transition: max-height 1s, opacity 0.5s, margin-button 0.5s;
+	margin-bottom: 0px;
 }
 
 .sale-item img {
