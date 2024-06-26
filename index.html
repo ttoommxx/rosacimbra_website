@@ -22,7 +22,7 @@
 			<nav>
 				<ul>
 					<li>
-						<div onclick="open_page('about')" class="menu-class">
+						<div onclick="open_page('about')" class="menu-class clickable">
 							<img
 								src="img/icon/woman_with_heart.svg"
 								alt="About"
@@ -32,19 +32,22 @@
 						</div>
 					</li>
 					<li>
-						<div onclick="open_page('dolls')" class="menu-class">
+						<div onclick="open_page('dolls')" class="menu-class clickable">
 							<img src="img/icon/doll.svg" alt="Doll" class="menu-icon" />
 							<p>My Dolls</p>
 						</div>
 					</li>
 					<li>
-						<div onclick="open_page('clothes')" class="menu-class">
+						<div onclick="open_page('clothes')" class="menu-class clickable">
 							<img src="img/icon/dress.svg" alt="Clothes" class="menu-icon" />
 							<p>Clothes</p>
 						</div>
 					</li>
 					<li>
-						<div onclick="open_page('accessories')" class="menu-class">
+						<div
+							onclick="open_page('accessories')"
+							class="menu-class clickable"
+						>
 							<img
 								src="img/icon/teddy.svg"
 								alt="Accessories"
@@ -66,25 +69,23 @@
 				</ul>
 			</nav>
 		</div>
-		<div id="container-menu">
+		<div id="container-menu" class="clickable">
 			<img
 				src="img/icon/menu.svg"
 				alt="Menu icon"
-				id="menu_icon"
+				id="open-menu"
 				onclick="toggle_menu('on')"
 			/>
 		</div>
 		<div id="container-right" onclick="toggle_menu('off')">
-			<div id="container-header">
-				<header>
-					<img
-						id="title_icon"
-						src="img/flower.png"
-						alt="Welcome to RosaCimbra Shop webpage!"
-						title="A beautiful flower from RosaCimbra!"
-					/>
-					<h1>RosaCimbra Dolls</h1>
-				</header>
+			<div id="container-title">
+				<img
+					id="title_icon"
+					src="img/flower.png"
+					alt="Welcome to RosaCimbra Shop webpage!"
+					title="A beautiful flower from RosaCimbra!"
+				/>
+				<h1>RosaCimbra Dolls</h1>
 			</div>
 			<div id="container-main-parent">
 				<div id="container-banner">
@@ -111,7 +112,7 @@
 						<div id="clothes">
 							<div>
 								<input id="clothes-dresses" class="toggle" type="checkbox" />
-								<label for="clothes-dresses" class="sale-container">
+								<label for="clothes-dresses" class="sale-container clickable">
 									<span class="label-name">Dresses</span>
 									<span class="sale-thumbnails">
 										<img
@@ -145,7 +146,7 @@
 							</div>
 							<div>
 								<input id="clothes-overalls" class="toggle" type="checkbox" />
-								<label for="clothes-overalls" class="sale-container">
+								<label for="clothes-overalls" class="sale-container clickable">
 									<span class="label-name">Overalls</span>
 									<span class="sale-thumbnails">
 										<img

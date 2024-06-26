@@ -47,6 +47,17 @@ ul {
 	padding: 0;
 }
 
+.clickable {
+	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
+	transition: background-color 0.5s;
+}
+
+.animate_slide {
+	position: relative;
+	transition: all 0.55s ease-in-out;
+}
+
 /* CONTAINER LEFT */
 
 #container-left {
@@ -74,8 +85,6 @@ ul {
 	margin-top: 10px;
 	border-radius: 10px;
 	background-color: rgba(219, 163, 173, 0.9);
-	cursor: pointer;
-	transition: background-color 0.5s;
 }
 
 .menu-class:hover {
@@ -104,15 +113,13 @@ ul {
 	align-items: center;
 }
 
-#menu_icon {
+#open-menu {
 	max-height: 25%;
 	min-height: 45px;
-	cursor: pointer;
-	transition: background-color 0.5s;
 	border-radius: 15px;
 }
 
-#menu_icon:hover {
+#open-menu:hover {
 	background-color: rgba(21, 15, 17, 0.1);
 }
 
@@ -128,15 +135,10 @@ ul {
 
 /* HEADER */
 
-#container-header {
+#container-title {
 	display: flex;
 	justify-content: center;
 	background-color: rgb(240, 248, 255, 0.5);
-}
-
-header {
-	display: flex;
-	justify-content: space-between;
 }
 
 #title_icon {
@@ -144,7 +146,7 @@ header {
 	margin: 5px;
 }
 
-#container-header h1 {
+#container-title h1 {
 	font-family: "Eglantine";
 	font-weight: 100;
 	margin-top: 0px;
@@ -295,10 +297,6 @@ main {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	flex-direction: column;
-	position: relative;
-	cursor: pointer;
-	transition: background-color 0.5s;
 }
 
 .sale-container:hover {
@@ -355,17 +353,16 @@ main {
 
 .toggle:checked ~ .sale-item {
 	max-height: 100vh;
-	margin-bottom: 20px;
+	margin: 10px;
 }
 
 /* selling items */
 
 .sale-item {
-	margin-left: 5vw;
 	max-height: 0;
+	margin: 0px;
 	display: flex;
-	margin-bottom: 0px;
-	transition: max-height 1.5s, margin-bottom 1s;
+	transition: max-height 1.5s, margin 1s;
 	overflow-y: hidden;
 }
 
@@ -376,6 +373,12 @@ main {
 	transition: max-width 0.5s;
 }
 
+.sale-item p {
+	opacity: 1;
+	margin-left: 20px;
+	transition: font-size 2s, opacity 0.5s;
+}
+
 .sale-item img:hover {
 	max-width: min(70vw, 70vh);
 }
@@ -383,12 +386,6 @@ main {
 .sale-item img:hover ~ p {
 	font-size: 0;
 	opacity: 0;
-}
-
-.sale-item p {
-	opacity: 1;
-	margin-left: 20px;
-	transition: font-size 1s, opacity 0.5s;
 }
 
 /* CART */
@@ -407,13 +404,6 @@ main {
 footer li {
 	display: inline;
 	margin: 10px;
-}
-
-/* ANIMATION */
-
-.animate_slide {
-	position: relative;
-	transition: all 0.55s ease-in-out;
 }
 
 /* DARK THEME */

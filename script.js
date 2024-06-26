@@ -53,7 +53,7 @@ window.onscroll = function () {
 		banner.style.setProperty("position", "fixed");
 	} else {
 		const header_position = document
-			.getElementById("container-header")
+			.getElementById("container-title")
 			.getBoundingClientRect();
 		if (header_position.bottom > 0) {
 			banner.style.setProperty("position", "absolute");
