@@ -75,6 +75,11 @@ ul {
 	border-radius: 10px;
 	background-color: rgba(219, 163, 173, 0.9);
 	cursor: pointer;
+	transition: background-color 0.5s;
+}
+
+.menu-class:hover {
+	background-color: rgba(21, 15, 17, 0.1);
 }
 
 .menu-class p {
@@ -103,6 +108,12 @@ ul {
 	max-height: 25%;
 	min-height: 45px;
 	cursor: pointer;
+	transition: background-color 0.5s;
+	border-radius: 15px;
+}
+
+#menu_icon:hover {
+	background-color: rgba(21, 15, 17, 0.1);
 }
 
 /* CONTAINER RIGHT */
@@ -286,6 +297,12 @@ main {
 	align-items: center;
 	flex-direction: column;
 	position: relative;
+	cursor: pointer;
+	transition: background-color 0.5s;
+}
+
+.sale-container:hover {
+	background-color: rgba(21, 15, 17, 0.1);
 }
 
 .label-name {
@@ -293,7 +310,6 @@ main {
 	font-size: min(8vh, 50pt);
 	font-family: "LittleLordFontleroy";
 	z-index: 1;
-	cursor: pointer;
 }
 
 .sale-thumbnails {
@@ -305,7 +321,7 @@ main {
 }
 
 .sale-thumbnails img {
-	height: min(max(20vw, 13vh), 31vw);
+	height: min(max(18vw, 12vh), 31vw);
 	aspect-ratio: 1;
 	object-fit: cover;
 	margin: 2%;
