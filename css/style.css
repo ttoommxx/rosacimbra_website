@@ -339,32 +339,29 @@ main {
 
 .toggle:checked ~ .sale-item {
 	max-height: 100vh;
-	overflow-y: auto;
 	margin-bottom: 20px;
-	font-size: medium;
 }
 
 /* selling items */
 
 .sale-item {
-	font-size: 0;
-	max-height: 0;
-	margin-bottom: 0px;
 	margin-left: 5vw;
+	max-height: 0;
 	display: flex;
-	transition: max-height 1.5s, margin-bottom 2s;
+	margin-bottom: 0px;
+	transition: max-height 1.5s, margin-bottom 1s;
+	overflow-y: hidden;
 }
 
 .sale-item img {
 	max-width: min(max(15vw, 15vh), 25vw, 25vh);
 	aspect-ratio: 1;
 	object-fit: cover;
-	transition: max-width 1s, margin-left 1s;
+	transition: max-width 0.5s;
 }
 
 .sale-item img:hover {
 	max-width: min(70vw, 70vh);
-	margin-left: 5vw;
 }
 
 .sale-item img:hover ~ p {
