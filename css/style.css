@@ -276,7 +276,7 @@ main {
 	display: none;
 }
 
-.list-lables-container {
+.sale-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -284,61 +284,63 @@ main {
 	position: relative;
 }
 
-.list-images {
+.sale-container label {
+	position: absolute;
+	font-size: min(8vh, 45pt);
+	font-family: "LittleLordFontleroy";
+	z-index: 1;
+	cursor: pointer;
+}
+
+.sale-thumbnails {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	cursor: pointer;
+	opacity: 1;
+	transition: opacity 1s;
 }
 
-.list-images img {
-	width: min(max(22%, 13vh), 31%);
-	max-height: 40vh;
+.sale-thumbnails img {
+	height: min(max(20vw, 12vh), 31vw);
+	aspect-ratio: 1;
 	object-fit: cover;
 	margin: 2%;
-	animation: pulse2 2s infinite;
-	transition: max-height 1s, margin-top 0.5s;
-	cursor: pointer;
+	animation: pulse2 1s infinite alternate;
+	transition: height 1s;
 }
 
 @keyframes pulse2 {
-	0%,
-	100% {
-		opacity: 0.35;
+	0% {
+		opacity: 0.4;
 		transform: scale(1);
 	}
-	50% {
+	100% {
 		opacity: 0.2;
 		transform: scale(0.9);
 	}
-}
-
-.toggle:checked ~ .list-lables-container .list-images img {
-	max-height: 0;
-	margin-top: calc(max(6vw, 35pt) + 10px);
-}
-
-.list-labels {
-	position: absolute;
-	font-size: max(6vw, 35pt);
-	font-family: "LittleLordFontleroy";
-	display: flex;
-	cursor: pointer;
 }
 
 .toggle {
 	display: none;
 }
 
-.details {
+.sale-details {
 	display: flex;
 	max-height: 0;
 	opacity: 0;
-	overflow-y: hidden;
-	transition: max-height 1s, opacity 0.7s;
+	transition: max-height 1s, opacity 0.5s;
 }
 
-.toggle:checked ~ .details {
+.toggle:checked ~ .sale-thumbnails img {
+	height: 0;
+}
+
+.toggle:checked ~ .sale-thumbnails {
+	opacity: 0;
+}
+
+.toggle:checked ~ .sale-details {
+	margin-top: 9vh;
 	max-height: 100vh;
 	opacity: 1;
 	overflow-y: auto;
