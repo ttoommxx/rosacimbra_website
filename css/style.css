@@ -20,6 +20,16 @@
 	src: url("/font/GreatVibes-Regular.ttf");
 }
 
+@font-face {
+	font-family: "Sorai";
+	src: url("/font/sorai_regular.ttf");
+}
+
+@font-face {
+	font-family: "Kaylani";
+	src: url("/font/Kaylani.ttf");
+}
+
 * {
 	scrollbar-color: rgba(27, 17, 29, 0.5) transparent;
 }
@@ -43,31 +53,13 @@ ul {
 #container-left {
 	display: flex;
 	left: -100%;
-	z-index: 2;
-}
-
-#container-left p {
-	text-align: center;
-	font-family: "LittleLordFontleroy";
-	font-size: 30pt;
-	margin-right: 10px;
-	margin-top: 0;
-	margin-bottom: 0;
-}
-
-#container-left img {
-	width: 6vh;
-	max-width: 100px;
-	margin-right: 10px;
-	margin-left: 10px;
-	margin-top: 5px;
-	margin-bottom: 5px;
+	z-index: 3;
 }
 
 #container-left ul {
 	margin-top: 0;
 	background: rgba(243, 192, 247, 0.9);
-	border-right: max(0.2vw, 2px) solid rgb(220, 151, 163);
+	/* border-right: max(0.2vw, 2px) solid rgb(220, 151, 163); */
 	height: 100vh;
 	position: fixed;
 }
@@ -78,16 +70,33 @@ ul {
 	border-radius: 10px;
 }
 
-.menu-icons {
+.menu-class {
+	position: relative;
 	display: flex;
 	align-items: center;
-	margin-top: 15px;
-	margin-bottom: 15px;
-	background-color: rgb(220, 151, 163, 0.9);
+	margin: 4px;
+	margin-top: 10px;
+	border-radius: 10px;
+	background-color: rgba(219, 163, 173, 0.9);
+	cursor: pointer;
 }
 
-.menu-icons:hover {
-	cursor: pointer;
+.menu-class p {
+	text-align: center;
+	font-family: "LittleLordFontleroy";
+	font-size: 30pt;
+	margin-right: 10px;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.menu-icon {
+	width: 6vh;
+	max-width: 100px;
+	margin-right: 10px;
+	margin-left: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 /* MENU CONTAINER */
@@ -105,9 +114,6 @@ ul {
 #menu_icon {
 	max-height: 25%;
 	min-height: 45px;
-}
-
-#menu_icon:hover {
 	cursor: pointer;
 }
 
@@ -187,7 +193,7 @@ ul {
 	margin-top: 15px;
 	margin-bottom: 15px;
 	font-family: CooperBlack;
-	font-size: min(5vw, 3vh);
+	font-size: max(1.8vw, 15pt);
 	color: rgb(42, 28, 30);
 	margin: 10px;
 }
@@ -217,6 +223,7 @@ main {
 	display: flex;
 	overflow-x: scroll;
 	width: fit-content;
+	margin-bottom: 20px;
 }
 
 .slideshow-image {
@@ -228,6 +235,10 @@ main {
 
 #about blockquote {
 	text-align: center;
+	font-family: "Kaylani";
+	font-size: min(max(2vw, 15pt), 25pt);
+	line-height: calc(2 * min(max(2vw, 15pt), 25pt));
+	margin: 0;
 }
 
 /* DOLLS */
@@ -265,16 +276,17 @@ main {
 	visibility: hidden;
 	position: absolute;
 	pointer-events: none;
-	font-size: larger;
+	font-size: min(4.5vw, 20pt);
 }
 
 .dolls_img img:hover {
 	transform: scale(0.8);
-	opacity: 0.2;
+	opacity: 0.15;
 }
 
 .dolls_img:hover caption {
 	visibility: visible;
+	z-index: 2;
 }
 
 /* CLOTHES */
@@ -325,17 +337,16 @@ main {
 
 .toggle:checked ~ .list-lables-container .list-images img {
 	max-height: 0;
-	margin-top: max(6vw, 6vh);
+	margin-top: calc(max(6vw, 35pt) + 10px);
 }
 
 .list-labels {
 	position: absolute;
-	font-size: max(6vw, 6vh);
+	font-size: max(6vw, 35pt);
 	font-family: "LittleLordFontleroy";
 	list-style-type: none;
 	cursor: pointer;
 	display: flex;
-	margin-bottom: 2vh;
 }
 
 .toggle {
@@ -386,7 +397,7 @@ footer li {
 
 .animate_slide {
 	position: relative;
-	transition: all 0.6s ease-in-out;
+	transition: all 0.55s ease-in-out;
 }
 
 /* DARK THEME */

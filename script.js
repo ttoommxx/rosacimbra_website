@@ -199,7 +199,7 @@ function toggle_menu(state) {
 	menu_div.style.setProperty("left", left_position);
 
 	let cart_div = document.getElementById("cart_menu");
-	let right_position = state == "on" ? "10px" : "-100%";
+	let right_position = state == "on" ? "4px" : "-100%";
 	cart_div.style.setProperty("right", right_position);
 }
 
