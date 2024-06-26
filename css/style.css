@@ -284,7 +284,7 @@ main {
 	position: relative;
 }
 
-.sale-container label {
+.label-name {
 	position: absolute;
 	font-size: min(8vh, 45pt);
 	font-family: "LittleLordFontleroy";
@@ -331,16 +331,15 @@ main {
 	transition: max-height 1s, opacity 0.5s;
 }
 
-.toggle:checked ~ .sale-thumbnails img {
-	height: 0;
+.toggle:checked ~ label .sale-thumbnails img {
+	height: min(8vh, 45pt);
 }
 
-.toggle:checked ~ .sale-thumbnails {
+.toggle:checked ~ label .sale-thumbnails {
 	opacity: 0;
 }
 
 .toggle:checked ~ .sale-details {
-	margin-top: 9vh;
 	max-height: 100vh;
 	opacity: 1;
 	overflow-y: auto;
