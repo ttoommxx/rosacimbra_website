@@ -123,13 +123,17 @@ ul {
 	background-color: rgb(240, 248, 255, 0.5);
 }
 
+header {
+	display: flex;
+	justify-content: space-between;
+}
+
 #title_icon {
 	height: 12.5vw;
 	margin: 5px;
 }
 
 #container-header h1 {
-	float: right;
 	font-family: "Eglantine";
 	font-weight: 100;
 	margin-top: 0px;
@@ -324,14 +328,6 @@ main {
 	display: none;
 }
 
-.sale-details {
-	display: flex;
-	max-height: 0;
-	opacity: 0;
-	transition: max-height 1s, opacity 0.5s;
-	flex-direction: column;
-}
-
 .toggle:checked ~ label .sale-thumbnails img {
 	height: min(8vh, 45pt);
 }
@@ -341,9 +337,50 @@ main {
 }
 
 .toggle:checked ~ .sale-details {
-	max-height: 100vh;
+	max-height: 200vh;
 	opacity: 1;
 	overflow-y: auto;
+}
+
+/* selling items */
+
+.sale-details {
+	display: flex;
+	max-height: 0;
+	opacity: 0;
+	transition: max-height 1s, opacity 0.5s;
+	flex-direction: column;
+	overflow-y: visible;
+}
+
+.sale-item {
+	margin-left: 5vw;
+	display: flex;
+	justify-content: baseline;
+	margin-bottom: 20px;
+}
+
+.sale-item img {
+	max-width: min(max(25vw, 25vh), 40vw, 40vh);
+	aspect-ratio: 1;
+	object-fit: cover;
+	transition: max-width 1s, margin-left 1s;
+}
+
+.sale-item img:hover {
+	max-width: min(70vw, 70vh);
+	margin-left: 5vw;
+	display: flex;
+}
+
+.sale-item img:hover ~ p {
+	font-size: 0;
+	opacity: 0;
+}
+
+.sale-item p {
+	margin-left: 20px;
+	transition: font-size 1s, opacity 0.5s;
 }
 
 /* CART */

@@ -2,6 +2,8 @@
 
 - after selecting element, fill in a form to send to your private email
 
+- resize items instead of the whole div
+
 - system to add things to the cart and at checkout assembles a form and send an email directly, with clear instructions
 
 # menu entries
