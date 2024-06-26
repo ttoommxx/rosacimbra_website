@@ -266,11 +266,14 @@ main {
 /* CLOTHES */
 /* ACCESSORIES */
 
-/* TODO: clean up from here */
-
 #clothes {
 	display: none;
 	flex-direction: column;
+}
+
+#accessories {
+	flex-direction: column;
+	display: none;
 }
 
 .list-lables-container {
@@ -285,18 +288,17 @@ main {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	cursor: pointer;
 }
 
 .list-images img {
-	cursor: pointer;
 	width: min(max(22%, 13vh), 31%);
 	max-height: 40vh;
-	aspect-ratio: 1;
 	object-fit: cover;
 	margin: 2%;
 	animation: pulse2 2s infinite;
 	transition: max-height 1s, margin-top 0.5s;
-	margin-top: 0;
+	cursor: pointer;
 }
 
 @keyframes pulse2 {
@@ -320,9 +322,8 @@ main {
 	position: absolute;
 	font-size: max(6vw, 35pt);
 	font-family: "LittleLordFontleroy";
-	list-style-type: none;
-	cursor: pointer;
 	display: flex;
+	cursor: pointer;
 }
 
 .toggle {
@@ -338,17 +339,9 @@ main {
 }
 
 .toggle:checked ~ .details {
-	display: flex;
 	max-height: 100vh;
 	opacity: 1;
 	overflow-y: auto;
-}
-
-/**/
-
-#accessories {
-	flex-direction: column;
-	display: none;
 }
 
 /* CART */
