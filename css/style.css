@@ -81,8 +81,7 @@ ul {
 
 .menu-class {
 	display: flex;
-	margin: 4px;
-	margin-top: 10px;
+	margin: 6px;
 	border-radius: 10px;
 	background-color: rgba(219, 163, 173, 0.9);
 }
@@ -219,11 +218,11 @@ main {
 	display: flex;
 	overflow-x: scroll;
 	margin-bottom: 20px;
+	gap: 10px;
 }
 
 .slideshow-image {
 	height: min(50vh, 80vw);
-	margin: 5px;
 }
 
 #about blockquote {
@@ -286,11 +285,13 @@ main {
 #clothes {
 	display: none;
 	flex-direction: column;
+	gap: 10px;
 }
 
 #accessories {
 	flex-direction: column;
 	display: none;
+	gap: 10px;
 }
 
 .sale-container {
@@ -305,13 +306,14 @@ main {
 
 .label-name {
 	position: absolute;
-	font-size: min(8vh, 50pt);
+	font-size: max(9vh, 8vw);
 	font-family: "LittleLordFontleroy";
 	z-index: 1;
 }
 
 .sale-thumbnails {
 	display: flex;
+	gap: 2vw;
 	flex-direction: row;
 	justify-content: center;
 	opacity: 1;
@@ -319,10 +321,9 @@ main {
 }
 
 .sale-thumbnails img {
-	height: min(max(18vw, 12vh), 31vw);
+	height: min(30vh, 30vw);
 	aspect-ratio: 1;
 	object-fit: cover;
-	margin: 2%;
 	animation: pulse2 1s infinite alternate;
 	transition: height 1s;
 }
@@ -343,7 +344,7 @@ main {
 }
 
 .toggle:checked ~ label .sale-thumbnails img {
-	height: min(8vh, 45pt);
+	height: max(9vh, 8vw);
 	animation: pulse2 1s forwards;
 }
 
@@ -376,15 +377,15 @@ main {
 .sale-item p {
 	opacity: 1;
 	margin-left: 20px;
-	transition: font-size 2s, opacity 0.5s;
+	transition: opacity 1s;
 }
 
 .sale-item img:hover {
 	max-width: min(70vw, 70vh);
+	overflow: hidden;
 }
 
 .sale-item img:hover ~ p {
-	font-size: 0;
 	opacity: 0;
 }
 
