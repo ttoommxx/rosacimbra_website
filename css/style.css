@@ -67,8 +67,7 @@ ul {
 
 #img-preview {
 	max-width: 0%;
-	max-height: 75%;
-	aspect-ratio: 1;
+	max-height: 85%;
 	object-fit: contain;
 	transition: max-width 0.25s ease-in-out;
 }

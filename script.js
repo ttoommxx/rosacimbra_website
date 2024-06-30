@@ -215,14 +215,13 @@ function generate_preview(page) {
 	const preview_img = document.createElement("img");
 	preview_img.id = "img-preview";
 	preview_img.src = page.src;
-	document.getElementById("container-left").style.opacity = 0.3;
-	document.getElementById("container-menu").style.opacity = 0.3;
-	document.getElementById("container-right").style.opacity = 0.3;
+	document.getElementById("container-menu").style.opacity = 0.2;
+	document.getElementById("container-right").style.opacity = 0.2;
 	preview_div.appendChild(preview_img);
 	document.body.appendChild(preview_div);
 
 	setTimeout(() => {
-		preview_img.style.setProperty("max-width", "75%");
+		preview_img.style.setProperty("max-width", "85%");
 	}, 100);
 
 	preview_div.onclick = destroy_preview;
