@@ -58,8 +58,10 @@ ul {
 /* CONTAINER PREVIEW */
 
 #container-preview {
+	visibility: hidden;
 	display: flex;
 	position: fixed;
+	top: 0;
 	justify-content: center;
 	align-items: center;
 	width: 100%;

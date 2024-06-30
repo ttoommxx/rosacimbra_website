@@ -194,21 +194,16 @@ function update_main_height() {
 }
 
 function generate_preview(img_element) {
-	const preview_div = document.createElement("div");
-	preview_div.id = "container-preview";
-	const preview_img = document.createElement("img");
-	preview_img.id = "img-preview";
+	const preview_div = $("container-preview");
+	const preview_img = $("img-preview");
 	preview_img.src = img_element.src;
+	preview_div.alt = img_element.alt;
 	$("container-menu").style.opacity = 0.2;
 	$("container-right").style.opacity = 0.2;
-	preview_div.appendChild(preview_img);
-	document.body.appendChild(preview_div);
-
+	preview_div.style.setProperty("visibility", "visible");
 	setTimeout(() => {
 		preview_img.style.setProperty("max-width", "95%");
 	}, 1);
-
-	preview_div.onclick = destroy_preview;
 }
 
 function destroy_preview() {
@@ -220,8 +215,8 @@ function destroy_preview() {
 	$("container-right").style.opacity = 1;
 
 	setTimeout(() => {
-		preview_div.remove();
-	}, 300);
+		preview_div.style.setProperty("visibility", "hidden");
+	}, 250);
 }
 
 function add_cart(elem) {
