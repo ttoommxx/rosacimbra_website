@@ -172,16 +172,6 @@ ul {
 	margin: 5px;
 }
 
-/* MAIN PARENT */
-
-#container-main-parent {
-	position: relative;
-	display: flex;
-	flex: 1;
-	flex-direction: column;
-	align-items: center;
-}
-
 /* BANNER */
 
 #container-banner {
