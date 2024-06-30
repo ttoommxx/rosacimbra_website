@@ -23,6 +23,8 @@ const Cookies = new (function () {
 	};
 })();
 
+var CartItems = new Map();
+
 // operations at runtime
 
 window.onload = function () {
@@ -41,28 +43,6 @@ window.onload = function () {
 		Cookies.set("left_bar", "off");
 	}
 	toggle_menu(Cookies.get("left_bar"));
-
-	// move the main to accomodate for the banner
-	update_main_height();
-};
-
-window.onscroll = function () {
-	const banner = $("container-banner");
-	const banner_position = banner.getBoundingClientRect();
-	if (banner_position.top < 0) {
-		banner.style.setProperty("position", "fixed");
-	} else {
-		const header_position = document
-			.getElementById("container-title")
-			.getBoundingClientRect();
-		if (header_position.bottom > 0) {
-			banner.style.setProperty("position", "absolute");
-		}
-	}
-};
-
-window.onresize = function () {
-	update_main_height();
 };
 
 // functions
@@ -222,7 +202,7 @@ function generate_preview(img_element) {
 
 	setTimeout(() => {
 		preview_img.style.setProperty("max-width", "85%");
-	}, 100);
+	}, 1);
 
 	preview_div.onclick = destroy_preview;
 }
@@ -245,9 +225,33 @@ function $(name) {
 }
 
 function add_cart(elem) {
-	throw new Error("not implemented");
+	const alt_item = elem.parentElement.getElementsByTagName("img")[0].alt;
+	CartItems.set(alt_item, (CartItems.get(alt_item) | 0) + 1);
+
+	elem.style.setProperty("animation", "none");
+	setTimeout(() => {
+		elem.style.setProperty("animation", "scale_up 0.2s");
+	}, 1);
+
+	update_cart();
 }
 
 function remove_cart(elem) {
-	throw new Error("not implemented");
+	const alt_item = elem.parentElement.getElementsByTagName("img")[0].alt;
+	if (CartItems.get(alt_item) > 0) {
+		CartItems.set(alt_item, CartItems.get(alt_item) - 1);
+		elem.style.setProperty("animation", "none");
+		setTimeout(() => {
+			elem.style.setProperty("animation", "scale_down 0.2s");
+		}, 1);
+		if (CartItems.get(alt_item) == 0) {
+			CartItems.delete(alt_item);
+		}
+	}
+
+	update_cart();
+}
+
+function update_cart() {
+	Cookies.set("cart", JSON.stringify(Array.from(CartItems.entries())));
 }

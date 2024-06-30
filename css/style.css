@@ -184,7 +184,7 @@ ul {
 /* BANNER */
 
 #container-banner {
-	position: absolute;
+	position: sticky;
 	justify-content: center;
 	animation: pulse 3.5s infinite;
 	margin: 0;
@@ -388,9 +388,10 @@ main {
 .sale-item {
 	max-height: 0;
 	margin: 0px;
+	padding-right: 10px;
 	display: flex;
 	transition: max-height 1.5s, margin 1s;
-	overflow-y: hidden;
+	overflow: hidden;
 }
 
 .sale-picture {
@@ -402,12 +403,33 @@ main {
 
 .sale-item p {
 	opacity: 1;
-	margin-left: 20px;
+	padding-left: 10px;
 	transition: opacity 1s;
+	max-width: 250px;
 }
 
 .buy_icon {
 	width: min(max(3vw, 3vh), 5vw, 5vh);
+}
+
+@keyframes scale_up {
+	0%,
+	100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.5);
+	}
+}
+
+@keyframes scale_down {
+	0%,
+	100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(0.5);
+	}
 }
 
 /* CART */
