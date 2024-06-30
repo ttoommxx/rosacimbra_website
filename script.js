@@ -82,14 +82,16 @@ const CartItems = new (function () {
 
 	this.reg = function (elem, num) {
 		elem.style.setProperty("animation", "none");
-		setTimeout(() => {
-			elem.style.setProperty(
-				"animation",
-				`scale_${num > 0 ? "up" : "down"} 0.2s`
-			);
-		}, 1);
 		const alt_text = elem.parentElement.getElementsByTagName("img")[0].alt;
 		this._map.set(alt_text, (this._map.get(alt_text) ?? 0) + num);
+		if (this._map.get(alt_text) >= 0) {
+			setTimeout(() => {
+				elem.style.setProperty(
+					"animation",
+					`scale_${num > 0 ? "up" : "down"} 0.2s`
+				);
+			}, 1);
+		}
 		if (this._map.get(alt_text) <= 0) {
 			this._map.delete(alt_text);
 		}
