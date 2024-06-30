@@ -205,7 +205,7 @@ function generate_preview(img_element) {
 	document.body.appendChild(preview_div);
 
 	setTimeout(() => {
-		preview_img.style.setProperty("max-width", "85%");
+		preview_img.style.setProperty("max-width", "95%");
 	}, 1);
 
 	preview_div.onclick = destroy_preview;
@@ -227,19 +227,22 @@ function destroy_preview() {
 function add_cart(elem) {
 	const alt_item = elem.parentElement.getElementsByTagName("img")[0].alt;
 	CartItems.set(alt_item, (CartItems.get(alt_item) | 0) + 1);
+	update_counter(elem);
+	update_cart();
 
 	elem.style.setProperty("animation", "none");
 	setTimeout(() => {
 		elem.style.setProperty("animation", "scale_up 0.2s");
 	}, 1);
-
-	update_cart();
 }
 
 function remove_cart(elem) {
 	const alt_item = elem.parentElement.getElementsByTagName("img")[0].alt;
 	if (CartItems.get(alt_item) > 0) {
 		CartItems.set(alt_item, CartItems.get(alt_item) - 1);
+		update_counter(elem);
+		update_cart();
+
 		elem.style.setProperty("animation", "none");
 		setTimeout(() => {
 			elem.style.setProperty("animation", "scale_down 0.2s");
@@ -248,10 +251,20 @@ function remove_cart(elem) {
 			CartItems.delete(alt_item);
 		}
 	}
-
-	update_cart();
 }
 
 function update_cart() {
 	Cookies.set("cart", JSON.stringify(Array.from(CartItems.entries())));
+}
+
+function update_counter(elem) {
+	const alt_item = elem.parentElement.getElementsByTagName("img")[0].alt;
+	const counter = elem.parentElement.getElementsByClassName("counter")[0];
+	const num = CartItems.get(alt_item);
+	if (num == 0) {
+		counter.style.setProperty("visibility", "hidden");
+	} else {
+		counter.innerHTML = num;
+		counter.style.setProperty("visibility", "visible");
+	}
 }

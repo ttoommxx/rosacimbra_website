@@ -1,12 +1,6 @@
-- figure out why the hover is not smooth on menu class
-
-- simplify main-container
-
-- make the shopping entries span horizontally, with text on the right and an icon to add the element
-
 - after selecting element, fill in a form to send to your private email
 
-- simplify the css for clothes and accessories
+- simplify css
 
 - set up items entries
 
