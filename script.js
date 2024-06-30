@@ -47,7 +47,7 @@ window.onload = function () {
 };
 
 window.onscroll = function () {
-	const banner = document.getElementById("container-banner");
+	const banner = $("container-banner");
 	const banner_position = banner.getBoundingClientRect();
 	if (banner_position.top < 0) {
 		banner.style.setProperty("position", "fixed");
@@ -68,14 +68,14 @@ window.onresize = function () {
 // functions
 
 function open_page(page) {
-	let page_element = document.getElementById("container-main");
+	let page_element = $("container-main");
 	page_element.style.setProperty("opacity", "0");
 	page_element.style.setProperty("left", "-100%");
 	setTimeout(() => {
-		let old_page = document.getElementById(Cookies.get("page"));
+		let old_page = $(Cookies.get("page"));
 		old_page.style.setProperty("display", "none");
 		Cookies.set("page", page);
-		let new_page = document.getElementById(page);
+		let new_page = $(page);
 		new_page.style.setProperty("display", "flex");
 		page_element.style.setProperty("opacity", "1");
 		page_element.style.setProperty("left", "0");
@@ -96,7 +96,7 @@ function slideshow_fetch() {
 		"/img/slideshow/doll_with_small_doll.jpg",
 		"/img/slideshow/doll_with_toys.jpg",
 	];
-	let slideshow_div = document.getElementById("slideshow");
+	let slideshow_div = $("slideshow");
 	for (const src of images) {
 		const new_image = document.createElement("img");
 		new_image.src = src;
@@ -176,7 +176,7 @@ function dolls_fetch() {
 			],
 		],
 	];
-	let dolls_div = document.getElementById("dolls");
+	let dolls_div = $("dolls");
 	for (const [src, cap] of images) {
 		const doll_div = document.createElement("div");
 		doll_div.classList.add("dolls_img");
@@ -194,29 +194,29 @@ function dolls_fetch() {
 
 function toggle_menu(state) {
 	Cookies.set("left_bar", state);
-	let menu_div = document.getElementById("container-left");
+	let menu_div = $("container-left");
 	let left_position = state == "on" ? "0" : "-100%";
 	menu_div.style.setProperty("left", left_position);
 
-	let cart_div = document.getElementById("cart_menu");
+	let cart_div = $("cart_menu");
 	let right_position = state == "on" ? "4px" : "-100%";
 	cart_div.style.setProperty("right", right_position);
 }
 
 function update_main_height() {
-	let banner_height = document.getElementById("container-banner").offsetHeight;
-	let container_main = document.getElementById("container-main");
+	let banner_height = $("container-banner").offsetHeight;
+	let container_main = $("container-main");
 	container_main.style.setProperty("margin-top", `${banner_height}px`);
 }
 
-function generate_preview(page) {
+function generate_preview(img_element) {
 	const preview_div = document.createElement("div");
 	preview_div.id = "container-preview";
 	const preview_img = document.createElement("img");
 	preview_img.id = "img-preview";
-	preview_img.src = page.src;
-	document.getElementById("container-menu").style.opacity = 0.2;
-	document.getElementById("container-right").style.opacity = 0.2;
+	preview_img.src = img_element.src;
+	$("container-menu").style.opacity = 0.2;
+	$("container-right").style.opacity = 0.2;
 	preview_div.appendChild(preview_img);
 	document.body.appendChild(preview_div);
 
@@ -228,14 +228,26 @@ function generate_preview(page) {
 }
 
 function destroy_preview() {
-	const preview_img = document.getElementById("img-preview");
+	const preview_img = $("img-preview");
 	preview_img.style.setProperty("max-width", "0%");
-	const preview_div = document.getElementById("container-preview");
-	document.getElementById("container-left").style.opacity = 1;
-	document.getElementById("container-menu").style.opacity = 1;
-	document.getElementById("container-right").style.opacity = 1;
+	const preview_div = $("container-preview");
+	$("container-left").style.opacity = 1;
+	$("container-menu").style.opacity = 1;
+	$("container-right").style.opacity = 1;
 
 	setTimeout(() => {
 		preview_div.remove();
 	}, 300);
+}
+
+function $(name) {
+	return document.getElementById(name);
+}
+
+function add_cart(elem) {
+	throw new Error("not implemented");
+}
+
+function remove_cart(elem) {
+	throw new Error("not implemented");
 }
