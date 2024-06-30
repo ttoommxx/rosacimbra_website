@@ -69,6 +69,7 @@
 							onclick="open_page('cart')"
 							class="menu-class clickable"
 						>
+							<div id="counter_menu">0</div>
 							<img src="img/icon/luggage.svg" alt="Cart" class="menu-icon" />
 							<p>Enquire items</p>
 						</div>
@@ -150,13 +151,13 @@
 										src="img/icon/minus.svg"
 										alt="Minus"
 										class="buy_icon clickable"
-										onclick="remove_cart(this)"
+										onclick="CartItems.reg(this, -1)"
 									/>
 									<img
 										src="img/icon/plus.svg"
 										alt="Plus"
 										class="buy_icon clickable"
-										onclick="add_cart(this)"
+										onclick="CartItems.reg(this, 1)"
 									/>
 								</div>
 								<div class="sale-item">
@@ -177,13 +178,13 @@
 										src="img/icon/minus.svg"
 										alt="Minus"
 										class="buy_icon clickable"
-										onclick="remove_cart(this)"
+										onclick="CartItems.reg(this, -1)"
 									/>
 									<img
 										src="img/icon/plus.svg"
 										alt="Plus"
 										class="buy_icon clickable"
-										onclick="add_cart(this)"
+										onclick="CartItems.reg(this, 1)"
 									/>
 								</div>
 							</div>
@@ -221,13 +222,13 @@
 										src="img/icon/minus.svg"
 										alt="Minus"
 										class="buy_icon clickable"
-										onclick="remove_cart(this)"
+										onclick="CartItems.reg(this, -1)"
 									/>
 									<img
 										src="img/icon/plus.svg"
 										alt="Plus"
 										class="buy_icon clickable"
-										onclick="add_cart(this)"
+										onclick="CartItems.reg(this, 1)"
 									/>
 								</div>
 								<div class="sale-item">
@@ -248,13 +249,13 @@
 										src="img/icon/minus.svg"
 										alt="Minus"
 										class="buy_icon clickable"
-										onclick="remove_cart(this)"
+										onclick="CartItems.reg(this, -1)"
 									/>
 									<img
 										src="img/icon/plus.svg"
 										alt="Plus"
 										class="buy_icon clickable"
-										onclick="add_cart(this)"
+										onclick="CartItems.reg(this, 1)"
 									/>
 								</div>
 							</div>

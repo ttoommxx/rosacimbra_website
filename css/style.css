@@ -96,12 +96,22 @@ ul {
 #cart_menu {
 	position: fixed;
 	bottom: 10px;
-	border-radius: 10px;
+	right: -100%;
+}
+
+#counter_menu {
+	position: absolute;
+	font-size: 10pt;
+	font-family: "CooperBlack";
+	background-color: rgb(236, 201, 207, 0.8);
+	overflow: hidden;
+	border: 1px black solid;
+	margin: 2px;
+	padding: 1px;
 }
 
 .menu-class {
 	display: flex;
-	position: relative;
 	margin: 6px;
 	border-radius: 10px;
 	background-color: rgba(219, 163, 173, 0.9);
