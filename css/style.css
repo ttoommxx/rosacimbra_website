@@ -71,7 +71,7 @@ ul {
 
 #img-preview {
 	max-width: 0%;
-	max-height: 95%;
+	max-height: 90%;
 	object-fit: contain;
 	transition: max-width 0.25s ease-in-out;
 }
@@ -373,6 +373,13 @@ main {
 	margin: 10px;
 }
 
+.toggle:checked ~ .sale-items .sale-item .counter {
+	max-height: 200px;
+	padding: 3px;
+	margin: 5px;
+	border: 3px black solid;
+}
+
 /* selling items */
 
 .sale-items {
@@ -393,13 +400,19 @@ main {
 .counter {
 	visibility: hidden;
 	position: absolute;
-	font-size: 25pt;
+	font-size: 20pt;
+	font-family: "CooperBlack";
 	background-color: rgb(236, 201, 207, 0.8);
-	border: 2px black solid;
+	overflow: hidden;
+	border: 0px black solid;
+	max-height: 0;
+	margin: 0;
+	padding: 0;
+	transition: all 0.5s;
 }
 
 .sale-picture {
-	max-height: max(20vw, 20vh);
+	max-height: max(17.5vw, 17.5vh);
 	aspect-ratio: 1;
 	object-fit: cover;
 	transition: max-width 0.5s;
@@ -408,6 +421,8 @@ main {
 .sale-item p {
 	margin: 5px;
 	flex: 1;
+	max-height: max(17.5vw, 17.5vh);
+	overflow: auto;
 }
 
 .buy_icon {

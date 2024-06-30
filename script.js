@@ -202,7 +202,7 @@ function generate_preview(img_element) {
 	$("container-right").style.opacity = 0.2;
 	preview_div.style.setProperty("visibility", "visible");
 	setTimeout(() => {
-		preview_img.style.setProperty("max-width", "95%");
+		preview_img.style.setProperty("max-width", "90%");
 	}, 1);
 }
 
