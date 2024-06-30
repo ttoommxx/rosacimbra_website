@@ -208,3 +208,35 @@ function update_main_height() {
 	let container_main = document.getElementById("container-main");
 	container_main.style.setProperty("margin-top", `${banner_height}px`);
 }
+
+function generate_preview(page) {
+	const preview_div = document.createElement("div");
+	preview_div.id = "container-preview";
+	const preview_img = document.createElement("img");
+	preview_img.id = "img-preview";
+	preview_img.src = page.src;
+	document.getElementById("container-left").style.opacity = 0.3;
+	document.getElementById("container-menu").style.opacity = 0.3;
+	document.getElementById("container-right").style.opacity = 0.3;
+	preview_div.appendChild(preview_img);
+	document.body.appendChild(preview_div);
+
+	setTimeout(() => {
+		preview_img.style.setProperty("max-width", "75%");
+	}, 100);
+
+	preview_div.onclick = destroy_preview;
+}
+
+function destroy_preview() {
+	const preview_img = document.getElementById("img-preview");
+	preview_img.style.setProperty("max-width", "0%");
+	const preview_div = document.getElementById("container-preview");
+	document.getElementById("container-left").style.opacity = 1;
+	document.getElementById("container-menu").style.opacity = 1;
+	document.getElementById("container-right").style.opacity = 1;
+
+	setTimeout(() => {
+		preview_div.remove();
+	}, 300);
+}

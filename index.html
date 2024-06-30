@@ -18,7 +18,7 @@
 	</head>
 
 	<body>
-		<div id="container-left" class="animate_slide">
+		<div id="container-left">
 			<nav>
 				<ul>
 					<li>
@@ -60,7 +60,7 @@
 						<div
 							id="cart_menu"
 							onclick="open_page('cart')"
-							class="menu-class animate_slide clickable"
+							class="menu-class clickable"
 						>
 							<img src="img/icon/luggage.svg" alt="Cart" class="menu-icon" />
 							<p>Enquire items</p>
@@ -92,7 +92,7 @@
 				<div id="container-banner">
 					<p>Next fair: Japan! See you there on August 8th.</p>
 				</div>
-				<div id="container-main" class="animate_slide">
+				<div id="container-main">
 					<main>
 						<div id="about">
 							<div id="slideshow"></div>
@@ -130,19 +130,25 @@
 										/>
 									</span>
 								</label>
-								<div class="sale-item">
-									<img
-										src="img/clothes/dresses/onsale/blue_dress.jpg"
-										alt="Blue dress"
-									/>
-									<p>description here</p>
-								</div>
-								<div class="sale-item">
-									<img
-										src="img/clothes/dresses/onsale/dress_omg.jpg"
-										alt="OMG dress"
-									/>
-									<p>description here</p>
+								<div class="sale-items">
+									<div class="sale-item">
+										<img
+											src="img/clothes/dresses/onsale/blue_dress.jpg"
+											alt="Blue dress"
+											onclick="generate_preview(this)"
+											class="clickable"
+										/>
+										<p>description here</p>
+									</div>
+									<div class="sale-item">
+										<img
+											src="img/clothes/dresses/onsale/dress_omg.jpg"
+											alt="OMG dress"
+											onclick="generate_preview(this)"
+											class="clickable"
+										/>
+										<p>description here</p>
+									</div>
 								</div>
 							</div>
 							<div>
@@ -164,19 +170,25 @@
 										/>
 									</span>
 								</label>
-								<div class="sale-item">
-									<img
-										src="img/clothes/overalls/onsale/overalls_blue.jpg"
-										alt="Blue overalls"
-									/>
-									<p>description here</p>
-								</div>
-								<div class="sale-item">
-									<img
-										src="img/clothes/overalls/onsale/overalls_grey.jpg"
-										alt="Grey overalls"
-									/>
-									<p>description here</p>
+								<div class="sale-items">
+									<div class="sale-item">
+										<img
+											src="img/clothes/overalls/onsale/overalls_blue.jpg"
+											alt="Blue overalls"
+											onclick="generate_preview(this)"
+											class="clickable"
+										/>
+										<p>description here</p>
+									</div>
+									<div class="sale-item">
+										<img
+											src="img/clothes/overalls/onsale/overalls_grey.jpg"
+											alt="Grey overalls"
+											onclick="generate_preview(this)"
+											class="clickable"
+										/>
+										<p>test</p>
+									</div>
 								</div>
 							</div>
 						</div>
