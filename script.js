@@ -47,6 +47,10 @@ window.onload = function () {
 
 // functions
 
+function $(name) {
+	return document.getElementById(name);
+}
+
 function open_page(page) {
 	let page_element = $("container-main");
 	page_element.style.setProperty("opacity", "0");
@@ -218,10 +222,6 @@ function destroy_preview() {
 	setTimeout(() => {
 		preview_div.remove();
 	}, 300);
-}
-
-function $(name) {
-	return document.getElementById(name);
 }
 
 function add_cart(elem) {

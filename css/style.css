@@ -97,6 +97,7 @@ ul {
 
 .menu-class {
 	display: flex;
+	position: relative;
 	margin: 6px;
 	border-radius: 10px;
 	background-color: rgba(219, 163, 173, 0.9);
