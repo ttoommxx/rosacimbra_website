@@ -4,12 +4,6 @@ function $(name) {
 	return document.getElementById(name);
 }
 
-function generate_error_p(err) {
-	const error_p = document.createElement("p");
-	error_p.innerHTML = err;
-	return error_p;
-}
-
 // cookies and global variables
 
 const GitHubDB = function (user, repo, root_db) {
