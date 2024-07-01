@@ -7,12 +7,13 @@ function $(name) {
 // cookies and global variables
 
 const GitHubDB = function (user, repo, root_db) {
-	this.db_url = new URL(
-		root_db ?? "",
-		`https://api.github.com/repos/${user}/${repo}/contents/`
-	);
+	this.db_url = `https://api.github.com/repos/${user}/${repo}/contents/${
+		root_db === undefined
+			? ""
+			: root_db.replace(/(^\/)/, "").replace(/(\/?$)/, "/")
+	}`;
 
-	this.get_response = (path) => axios.get(new URL(path, this.db_url));
+	this.get_response = (path) => axios.get(new URL(path, this.db_url).href);
 
 	this.cd = async function (path, type) {
 		const response = await this.get_response(path);
@@ -22,7 +23,7 @@ const GitHubDB = function (user, repo, root_db) {
 	};
 };
 
-const DB = new GitHubDB("ttoommxx", "rosacimbra_website");
+const DB = new GitHubDB("ttoommxx", "rosacimbra_website", "db");
 
 const Cookies = new (function () {
 	this._map = new Map();
@@ -171,7 +172,7 @@ function open_page(page) {
 }
 
 async function slideshow_fetch() {
-	const list_slideshow = await DB.cd("img/slideshow", "file");
+	const list_slideshow = await DB.cd("slideshow", "file");
 	for (img_data of list_slideshow.filter((elem) =>
 		elem.name.endsWith(".jpg")
 	)) {
