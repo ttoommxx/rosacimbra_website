@@ -1,4 +1,28 @@
+// micro functions
+
+function $(name) {
+	return document.getElementById(name);
+}
+
 // cookies and global variables
+
+const GitHubDB = function (user, repo, root_db) {
+	this.db_url = new URL(
+		root_db ?? "",
+		`https://api.github.com/repos/${user}/${repo}/contents/`
+	);
+
+	this.get_response = (path) => axios.get(new URL(path, this.db_url));
+
+	this.cd = async function (path, type) {
+		const response = await this.get_response(path);
+		return type === undefined
+			? response.data
+			: response.data.filter((elem) => elem.type == type);
+	};
+};
+
+const DB = new GitHubDB("ttoommxx", "rosacimbra_website");
 
 const Cookies = new (function () {
 	this._map = new Map();
@@ -133,10 +157,6 @@ window.onload = function () {
 
 // functions
 
-function $(name) {
-	return document.getElementById(name);
-}
-
 function open_page(page) {
 	let page_element = $("container-main");
 	page_element.style.setProperty("opacity", "0");
@@ -151,11 +171,10 @@ function open_page(page) {
 }
 
 async function slideshow_fetch() {
-	const url = `https://api.github.com/repos/ttoommxx/rosacimbra_website/contents/img/slideshow`;
-	const response = await axios.get(url);
-	const filter_elem = (elem) =>
-		elem.type == "file" && elem.name.endsWith(".jpg");
-	for (img_data of response.data.filter(filter_elem)) {
+	const list_slideshow = await DB.cd("img/slideshow", "file");
+	for (img_data of list_slideshow.filter((elem) =>
+		elem.name.endsWith(".jpg")
+	)) {
 		const new_image = Template.get("slideshow");
 		new_image.src = img_data.download_url;
 		new_image.alt = img_data.name
