@@ -6,15 +6,17 @@
 
 - set up items entries
 
-Menu vestiti:
-Abiti
-Saloppette e pantaloni
-Maglioni e maglie
-Completi
-Varie
+  Menu vestiti:
+  Abiti
+  Saloppette e pantaloni
+  Maglioni e maglie
+  Completi
+  Varie
 
-Menu accessori
-Borse
-Spille
-Cappelli.
-Varie
+  Menu accessori
+  Borse
+  Spille
+  Cappelli.
+  Varie
+
+- add ads
