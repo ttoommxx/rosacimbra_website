@@ -1,3 +1,11 @@
+# FRONT END
+
+- template + axios apis:
+
+  - about (done)
+  - mydolls
+  - clothes
+
 - after selecting element, fill in a form to send to your private email
 
 - add flush option in cart
@@ -20,3 +28,7 @@
   Varie
 
 - add ads
+
+# SERVER SIDE
+
+- UI interface to upload and resize + make images lighter

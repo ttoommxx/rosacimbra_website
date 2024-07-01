@@ -14,10 +14,14 @@
 			content="width=device-width, height=device-height, initial-scale=1, user-scalable=0"
 		/>
 		<link rel="stylesheet" href="css/style.css" />
+		<script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
 		<script src="script.js"></script>
 	</head>
 
 	<body>
+		<template id="template.slideshow">
+			<img class="slideshow-image" src="" alt="" />
+		</template>
 		<div id="container-preview" class="clickable" onclick="destroy_preview()">
 			<img
 				id="img-preview"

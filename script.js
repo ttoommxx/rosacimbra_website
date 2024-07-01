@@ -10,20 +10,10 @@ const Cookies = new (function () {
 		}
 	}
 
-	/**
-	 * return a string represent the cookie set of name; return empty string if none
-	 * @param {String} name
-	 * @returns {String}
-	 */
 	this.get = function (name) {
 		return this._map.get(name) ?? "";
 	};
 
-	/**
-	 * set cookie as a string
-	 * @param {String} name
-	 * @param {String} value
-	 */
 	this.set = function (name, value) {
 		this._map.set(name, value);
 		document.cookie = `${name}=${value}`;
@@ -102,10 +92,29 @@ const CartItems = new (function () {
 	};
 })();
 
+const Template = new (function () {
+	this._map = new Map();
+
+	this._generate_map = function () {
+		const templates = document.body.getElementsByTagName("template");
+		for (const template of templates) {
+			const name = template.id.split(".").slice(1).join(".");
+			this._map.set(name, template.content);
+		}
+	};
+
+	this.get = function (name) {
+		return this._map.get(name).firstElementChild.cloneNode(true);
+	};
+})();
+
 // operations at runtime
 
 window.onload = function () {
-	// load pictures
+	// generate templates
+	Template._generate_map();
+
+	// load content
 	slideshow_fetch();
 	dolls_fetch();
 
@@ -141,25 +150,18 @@ function open_page(page) {
 	}, 650);
 }
 
-function slideshow_fetch() {
-	const images = [
-		"/img/slideshow/doll_and_cart.jpg",
-		"/img/slideshow/doll_and_teddy.jpg",
-		"/img/slideshow/doll_christmas_tree.jpg",
-		"/img/slideshow/doll_in_jumpsuit.jpg",
-		"/img/slideshow/doll_next_to_window.jpg",
-		"/img/slideshow/doll_with_curly_hair.jpg",
-		"/img/slideshow/doll_with_fish.jpg",
-		"/img/slideshow/doll_with_hat_and_teddy.jpg",
-		"/img/slideshow/doll_with_hat.jpg",
-		"/img/slideshow/doll_with_small_doll.jpg",
-		"/img/slideshow/doll_with_toys.jpg",
-	];
-	for (const src of images) {
-		const new_image = document.createElement("img");
-		new_image.src = src;
-		new_image.alt = src.split("/").at(-1).split(".")[0];
-		new_image.classList.add("slideshow-image");
+async function slideshow_fetch() {
+	const url = `https://api.github.com/repos/ttoommxx/rosacimbra_website/contents/img/slideshow`;
+	const response = await axios.get(url);
+	const filter_elem = (elem) =>
+		elem.type == "file" && elem.name.endsWith(".jpg");
+	for (img_data of response.data.filter(filter_elem)) {
+		const new_image = Template.get("slideshow");
+		new_image.src = img_data.download_url;
+		new_image.alt = img_data.name
+			.split(".")
+			.slice(0, this.length - 1)
+			.join(".");
 		$("slideshow").appendChild(new_image);
 	}
 }
@@ -249,14 +251,24 @@ function dolls_fetch() {
 }
 
 function toggle_menu(state) {
+	const position = $("container-left").style.left || "-100%";
+	if (state == "on" && position == "-100%") {
+		$("container-left").style.left = "0px";
+		$("container-right").style.opacity = 0.5;
+		$("container-menu").style.opacity = 0.5;
+	} else if (state == "off" && position == "0px") {
+		$("container-left").style.left = "-100%";
+		$("container-right").style.opacity = 1;
+		$("container-menu").style.opacity = 1;
+	}
+
 	Cookies.set("left_bar", state);
-	$("container-left").style.setProperty("left", state == "on" ? "0" : "-100%");
 }
 
 function generate_preview(img_element) {
 	$("container-menu").style.opacity = 0.2;
 	$("container-right").style.opacity = 0.2;
-	$("container-preview").style.setProperty("visibility", "visible");
+	$("container-preview").style.visibility = "visible";
 	const preview_img = $("img-preview");
 	preview_img.src = img_element.src;
 	preview_img.alt = img_element.alt;
@@ -272,6 +284,6 @@ function destroy_preview() {
 	$("container-right").style.opacity = 1;
 
 	setTimeout(() => {
-		$("container-preview").style.setProperty("visibility", "hidden");
+		$("container-preview").style.visibility = "hidden";
 	}, 250);
 }
