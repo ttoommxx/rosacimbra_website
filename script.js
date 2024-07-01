@@ -4,13 +4,17 @@ function $(name) {
 	return document.getElementById(name);
 }
 
+function generate_error_p(err) {
+	const error_p = document.createElement("p");
+	error_p.innerHTML = err;
+	return error_p;
+}
+
 // cookies and global variables
 
 const GitHubDB = function (user, repo, root_db) {
 	this.db_url = `https://api.github.com/repos/${user}/${repo}/contents/${
-		root_db === undefined
-			? ""
-			: root_db.replace(/(^\/)/, "").replace(/(\/?$)/, "/")
+		root_db === undefined ? "" : root_db + "/"
 	}`;
 
 	this.get_response = (path) => axios.get(new URL(path, this.db_url).href);
@@ -135,12 +139,12 @@ const Template = new (function () {
 
 // operations at runtime
 
-window.onload = function () {
+window.onload = async function () {
 	// generate templates
 	Template._generate_map();
 
 	// load content
-	slideshow_fetch();
+	download_slideshow();
 	dolls_fetch();
 
 	// open previous page
@@ -171,7 +175,7 @@ function open_page(page) {
 	}, 650);
 }
 
-async function slideshow_fetch() {
+async function download_slideshow() {
 	const list_slideshow = await DB.cd("slideshow", "file");
 	for (img_data of list_slideshow.filter((elem) =>
 		elem.name.endsWith(".jpg")
