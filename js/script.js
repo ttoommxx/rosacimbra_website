@@ -7,21 +7,28 @@ function $(name) {
 // cookies and global variables
 
 const GitHubDB = function (user, repo, root_db) {
-	this.db_url = `https://api.github.com/repos/${user}/${repo}/contents/${
+	this._db_url = `https://api.github.com/repos/${user}/${repo}/contents/${
 		root_db === undefined ? "" : root_db + "/"
 	}`;
+	this._lambda_api =
+		"https://73p5suv6mmzz2ksflzrxtipdpi0iqygf.lambda-url.eu-north-1.on.aws/";
 
-	this.get_response = (path) => axios.get(new URL(path, this.db_url).href);
+	this.get_response = function (path) {
+		const url = `${this._lambda_api}?url=${
+			this._db_url + path
+		}&token_type=GITHUB`;
+		return fetch(url).then((res) => res.json());
+	};
 
 	this.cd = async function (path, type) {
 		const response = await this.get_response(path);
 		return type === undefined
-			? response.data
-			: response.data.filter((elem) => elem.type == type);
+			? response
+			: response.filter((elem) => elem.type == type);
 	};
 };
 
-const DB = new GitHubDB("ttoommxx", "rosacimbra_website", "db");
+const DB = new GitHubDB("ttoommxxDB", "rosacimbra_website", "db");
 
 const Cookies = new (function () {
 	this._map = new Map();
@@ -139,7 +146,7 @@ window.onload = async function () {
 
 	// load content
 	download_slideshow();
-	dolls_fetch();
+	download_mydolls();
 
 	// open previous page
 	if (Cookies.get("page") == "" || Cookies.get("page") == "cart") {
@@ -184,7 +191,9 @@ async function download_slideshow() {
 	}
 }
 
-function dolls_fetch() {
+async function download_mydolls() {
+	const list_mydolls = await DB.cd("mydolls", "file");
+	console.log(list_mydolls);
 	const images = [
 		[
 			"/img/dolls/doll_in_balcony.jpg",
