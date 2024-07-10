@@ -17,14 +17,31 @@ const GitHubDB = function (user, repo, root_db) {
 		const url = `${this._lambda_api}?url=${
 			this._db_url + path
 		}&token_type=GITHUB`;
-		return fetch(url).then((res) => res.json());
+		return fetch(url)
+			.then((res) => res.json())
+			.catch((err) => console.log(err));
 	};
 
-	this.ls = async function (path, type) {
-		const response = await this.get_response(path);
-		return type === undefined
-			? response
-			: response.filter((elem) => elem.type == type);
+	this.ls = async function (config) {
+		let response = await this.get_response(config.path);
+		if (config.type !== undefined) {
+			response = response.filter((elem) => elem.type == config.type);
+		}
+		response.sort((a, b) => {
+			if (a.type != b.type) {
+				return a.type.localeCompare(b.type);
+			}
+			let [name_a, format_a] = a.name.split(".");
+			let [name_b, format_b] = b.name.split(".");
+			format_a = format_a.toLowerCase();
+			format_b = format_b.toLowerCase();
+			if (format_a != format_b) {
+				return format_a.localeCompare(format_b);
+			} else {
+				return name_a.localeCompare(name_b);
+			}
+		});
+		return response;
 	};
 };
 
@@ -177,7 +194,7 @@ function open_page(page) {
 }
 
 async function download_slideshow() {
-	const list_slideshow = await DB.ls("slideshow", "file");
+	const list_slideshow = await DB.ls({ path: "slideshow", type: "file" });
 	for (img_data of list_slideshow.filter((elem) =>
 		elem.name.endsWith(".jpg")
 	)) {
@@ -192,19 +209,9 @@ async function download_slideshow() {
 }
 
 async function download_mydolls() {
-	const list_mydolls = await DB.ls("mydolls", "file");
+	const list_mydolls = await DB.ls({ path: "mydolls", type: "file" });
 	console.log(list_mydolls);
 	const images = [
-		[
-			"/img/dolls/doll_in_balcony.jpg",
-			[
-				"Name: Vicky",
-				"Type: Original Blythe Very Vicky",
-				"Body: Azone S",
-				"Date: August 2010",
-				"Custom: Paola Crespi",
-			],
-		],
 		[
 			"/img/dolls/doll_with_chair.jpg",
 			[
