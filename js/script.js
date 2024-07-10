@@ -226,7 +226,7 @@ async function download_mydolls() {
 	for (const entry of list_mydolls.filter((elem) => elem._extension == "jpg")) {
 		const doll_div = document.createElement("div");
 		doll_div.classList.add("dolls_img");
-		$("dolls").appendChild(doll_div);
+		$("mydolls").appendChild(doll_div);
 
 		const new_image = document.createElement("img");
 		new_image.src = entry.download_url;

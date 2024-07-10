@@ -260,7 +260,7 @@ main {
 
 /* DOLLS */
 
-#dolls {
+#mydolls {
 	display: none;
 	flex-wrap: wrap;
 	flex-direction: row;
