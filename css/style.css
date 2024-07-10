@@ -215,6 +215,7 @@ ul {
 	font-size: max(1.8vw, 15pt);
 	color: rgb(42, 28, 30);
 	margin: 10px;
+	text-wrap: wrap;
 }
 
 /* MAIN */

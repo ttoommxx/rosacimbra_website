@@ -17,7 +17,7 @@ const GitHubDB = function (user, repo, root_db) {
 		const url = `${this._lambda_api}?url=${
 			this._db_url + path
 		}&token_type=GITHUB`;
-		return fetch(url)
+		return fetch(url, { cache: "no-cache" })
 			.then((res) => res.json())
 			.catch((err) => console.log(err));
 	};
@@ -218,7 +218,7 @@ async function download_mydolls() {
 
 	const text_map = new Map();
 	for (const entry of list_mydolls.filter((elem) => elem._extension == "txt")) {
-		await fetch(entry.download_url)
+		await fetch(entry.download_url, { cache: "no-cache" })
 			.then((data) => data.text())
 			.then((text) => text_map.set(entry._name, text));
 	}
@@ -278,15 +278,15 @@ function destroy_preview() {
 }
 
 async function read_banner() {
-	const download_url = await DB.read("banner.txt").then(
-		(response) => response.download_url
-	);
-	const banner_text = await fetch(download_url, { cache: "no-store" })
+	const banner_text = await fetch(
+		"https://raw.githubusercontent.com/ttoommxxDB/rosacimbra_website/main/db/banner.txt",
+		{ cache: "no-cache" }
+	)
 		.then((data) => data.text())
 		.then((text) => text.trim());
 	if (banner_text) {
 		const banner_anchor = banner_text.replaceAll(
-			/@\{\s*(.*?)\s*,\s*(.*?)\s*\}/g,
+			/@\{\s*(.*?)\s*\}\{\s*(.*?)\s*\}/g,
 			'<a href="$2" target="_blank">$1</a>'
 		);
 		$("container-banner").innerHTML = "<pre>" + banner_anchor + "</pre>";
