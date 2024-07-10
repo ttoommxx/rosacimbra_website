@@ -20,7 +20,7 @@ const GitHubDB = function (user, repo, root_db) {
 		return fetch(url).then((res) => res.json());
 	};
 
-	this.cd = async function (path, type) {
+	this.ls = async function (path, type) {
 		const response = await this.get_response(path);
 		return type === undefined
 			? response
@@ -177,7 +177,7 @@ function open_page(page) {
 }
 
 async function download_slideshow() {
-	const list_slideshow = await DB.cd("slideshow", "file");
+	const list_slideshow = await DB.ls("slideshow", "file");
 	for (img_data of list_slideshow.filter((elem) =>
 		elem.name.endsWith(".jpg")
 	)) {
@@ -192,7 +192,7 @@ async function download_slideshow() {
 }
 
 async function download_mydolls() {
-	const list_mydolls = await DB.cd("mydolls", "file");
+	const list_mydolls = await DB.ls("mydolls", "file");
 	console.log(list_mydolls);
 	const images = [
 		[

@@ -1,6 +1,8 @@
 # FRONT END
 
-- template + axios apis:
+- add box-shadow when hover and see what it looks like
+
+- template:
 
   - about (done)
   - mydolls

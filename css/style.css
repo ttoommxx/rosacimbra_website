@@ -55,6 +55,11 @@ ul {
 	transition: all 0.5s;
 }
 
+.clickable:hover {
+	box-shadow: 3px 3px;
+	background-color: rgba(21, 15, 17, 0.2);
+}
+
 /* CONTAINER PREVIEW */
 
 #container-preview {
@@ -73,7 +78,6 @@ ul {
 	max-width: 0%;
 	max-height: 90%;
 	object-fit: contain;
-	transition: max-width 0.25s ease-in-out;
 }
 
 /* CONTAINER LEFT */
@@ -115,10 +119,6 @@ ul {
 	margin: 6px;
 	border-radius: 10px;
 	background-color: rgba(219, 163, 173, 0.9);
-}
-
-.menu-class:hover {
-	background-color: rgba(21, 15, 17, 0.1);
 }
 
 .menu-class p {
@@ -326,10 +326,6 @@ main {
 	align-items: center;
 }
 
-.sale-container:hover {
-	background-color: rgba(21, 15, 17, 0.1);
-}
-
 .label-name {
 	position: absolute;
 	font-size: max(9vh, 8vw);
@@ -426,7 +422,6 @@ main {
 	max-height: max(17.5vw, 17.5vh);
 	aspect-ratio: 1;
 	object-fit: cover;
-	transition: max-width 0.5s;
 }
 
 .sale-item p {
