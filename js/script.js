@@ -13,7 +13,7 @@ const GitHubDB = function (user, repo, root_db) {
 	this._lambda_api =
 		"https://73p5suv6mmzz2ksflzrxtipdpi0iqygf.lambda-url.eu-north-1.on.aws/";
 
-	this.get_response = function (path) {
+	this.read = function (path) {
 		const url = `${this._lambda_api}?url=${
 			this._db_url + path
 		}&token_type=GITHUB`;
@@ -23,13 +23,13 @@ const GitHubDB = function (user, repo, root_db) {
 	};
 
 	this.ls = async function (config) {
-		let response = await this.get_response(config.path);
+		let response = await this.read(config.path);
 
-		if (config.type !== undefined) {
+		if (config.type) {
 			response = response.filter((elem) => elem.type == config.type);
 		}
 
-		if (config.sort !== undefined) {
+		if (config.sort) {
 			response.sort(
 				(() => {
 					if (config.sort == "name") {
@@ -84,8 +84,10 @@ const CartItems = new (function () {
 	this._map = new Map();
 
 	this.read_cookies = function () {
-		for (const [key, val] of JSON.parse(Cookies.get("cart"))) {
-			this._map.set(key, val);
+		if (Cookies.get("cart")) {
+			for (const [key, val] of JSON.parse(Cookies.get("cart"))) {
+				this._map.set(key, val);
+			}
 		}
 
 		this.update_cart_menu();
@@ -107,7 +109,7 @@ const CartItems = new (function () {
 		const alt_item = elem.getElementsByTagName("img")[0].alt;
 		const counter = elem.getElementsByClassName("counter")[0];
 		const num = this._map.get(alt_item);
-		if (num == undefined) {
+		if (num === undefined) {
 			counter.style.setProperty("visibility", "hidden");
 		} else {
 			counter.innerHTML = num;
@@ -158,6 +160,7 @@ window.onload = async function () {
 	// load content
 	download_slideshow();
 	download_mydolls();
+	read_banner();
 
 	// open previous page
 	if (Cookies.get("page") == "" || Cookies.get("page") == "cart") {
@@ -274,4 +277,18 @@ function destroy_preview() {
 	}, 250);
 }
 
-// function generate_cart
+async function read_banner() {
+	const download_url = await DB.read("banner.txt").then(
+		(response) => response.download_url
+	);
+	const banner_text = await fetch(download_url, { cache: "no-store" })
+		.then((data) => data.text())
+		.then((text) => text.trim());
+	if (banner_text) {
+		const banner_anchor = banner_text.replaceAll(
+			/@\{\s*(.*?)\s*,\s*(.*?)\s*\}/g,
+			'<a href="$2" target="_blank">$1</a>'
+		);
+		$("container-banner").innerHTML = "<pre>" + banner_anchor + "</pre>";
+	}
+}

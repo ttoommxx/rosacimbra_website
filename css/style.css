@@ -210,7 +210,7 @@ ul {
 	}
 }
 
-#container-banner p {
+#container-banner pre {
 	font-family: "CooperBlack";
 	font-size: max(1.8vw, 15pt);
 	color: rgb(42, 28, 30);
@@ -459,6 +459,7 @@ main {
 
 #cart {
 	display: none;
+	flex-direction: row;
 }
 
 /* FOOTER */
