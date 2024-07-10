@@ -22,25 +22,38 @@ const GitHubDB = function (user, repo, root_db) {
 			.catch((err) => console.log(err));
 	};
 
-	this.ls = async function (path, type) {
-		let response = await this.get_response(path);
-		if (type !== undefined) {
-			response = response.filter((elem) => elem.type == type);
+	this.ls = async function (config) {
+		let response = await this.get_response(config.path);
+
+		if (config.type !== undefined) {
+			response = response.filter((elem) => elem.type == config.type);
 		}
-		response.sort((a, b) => {
-			if (a.type != b.type) {
-				return a.type.localeCompare(b.type);
-			}
-			let [name_a, format_a] = a.name.split(".");
-			let [name_b, format_b] = b.name.split(".");
-			format_a = format_a.toLowerCase();
-			format_b = format_b.toLowerCase();
-			if (format_a != format_b) {
-				return format_a.localeCompare(format_b);
-			} else {
-				return name_a.localeCompare(name_b);
-			}
-		});
+
+		if (config.sort !== undefined) {
+			response.sort(
+				(() => {
+					if (config.sort == "name") {
+						return (a, b) => a.name.localeCompare(b.name);
+					} else if (config.sort == "type") {
+						return (a, b) => {
+							if (a.type != b.type) {
+								return a.type.localeCompare(b.type);
+							}
+							let [name_a, format_a] = a.name.split(".");
+							let [name_b, format_b] = b.name.split(".");
+							format_a = format_a.toLowerCase();
+							format_b = format_b.toLowerCase();
+							if (format_a != format_b) {
+								return format_a.localeCompare(format_b);
+							} else {
+								return name_a.localeCompare(name_b);
+							}
+						};
+					}
+				})()
+			);
+		}
+
 		return response;
 	};
 };
@@ -194,93 +207,50 @@ function open_page(page) {
 }
 
 async function download_slideshow() {
-	const list_slideshow = await DB.ls("slideshow", "file");
-	for (img_data of list_slideshow.filter((elem) =>
+	const list_slideshow = await DB.ls({
+		path: "slideshow",
+		type: "file",
+	});
+	for (const entry of list_slideshow.filter((elem) =>
 		elem.name.endsWith(".jpg")
 	)) {
 		const new_image = Template.get("slideshow");
-		new_image.src = img_data.download_url;
-		new_image.alt = img_data.name
-			.split(".")
-			.slice(0, this.length - 1)
-			.join(".");
+		new_image.src = entry.download_url;
+		new_image.alt = entry.name.split(".")[0];
 		$("slideshow").appendChild(new_image);
 	}
 }
 
 async function download_mydolls() {
-	const list_mydolls = await DB.ls("mydolls", "file");
-	console.log(list_mydolls);
-	const images = [
-		[
-			"/img/dolls/doll_with_chair.jpg",
-			[
-				"Name: Wendy",
-				"Type: Little Keiko Original Doll",
-				"Body: Obitsu22",
-				"Custom: Paola Crestpi",
-			],
-		],
-		[
-			"/img/dolls/doll_with_deer.jpg",
-			[
-				"Name: Dorothy",
-				"Type: Blythe fake",
-				"Body: Obitsu24",
-				"Custom: Elvira Rosolia",
-			],
-		],
-		[
-			"/img/dolls/doll_with_hat.jpg",
-			[
-				"Name: Gemma",
-				"Type: Blythe dactory",
-				"Body: Azone S",
-				"Custom: Paola Crespi",
-			],
-		],
-		["/img/dolls/doll_with_egg.jpg", ["Name: x", "Surname: y"]],
-		["/img/dolls/doll_with_toys.jpg", ["Name: x", "Surname: y"]],
-		[
-			"/img/dolls/doll_with_teddy.jpg",
-			[
-				"Name: Rosa",
-				"Type: Blythe fake",
-				"Body: jointed AliExpress",
-				"Custom: amber dolls",
-			],
-		],
-		[
-			"/img/dolls/doll_with_plants.jpg",
-			[
-				"Name: Marianna",
-				"Type: Jacoosun fake",
-				"Body: AliExpress",
-				"Custom: made by myself",
-			],
-		],
-		[
-			"/img/dolls/doll_with_dress.jpg",
-			[
-				"Name: Licy",
-				"Type: Sahras a la Mode Lycee/Sweet home (2020)",
-				"Body: Azone S",
-				"Custom: N/A",
-			],
-		],
-	];
-	for (const [src, cap] of images) {
-		const new_image = document.createElement("img");
-		new_image.src = src;
-		new_image.alt = src.split("/").at(-1).split(".")[0];
-		const new_caption = document.createElement("caption");
-		new_caption.innerHTML = cap.join("<br />");
+	const list_mydolls = await DB.ls({
+		path: "mydolls",
+		type: "file",
+	});
 
+	for (const entry of list_mydolls) {
+		[entry._name, entry._extension] = entry.name.split(".");
+	}
+
+	const text_map = new Map();
+	for (const entry of list_mydolls.filter((elem) => elem._extension == "txt")) {
+		await fetch(entry.download_url)
+			.then((data) => data.text())
+			.then((text) => text_map.set(entry._name, text));
+	}
+
+	for (const entry of list_mydolls.filter((elem) => elem._extension == "jpg")) {
 		const doll_div = document.createElement("div");
 		doll_div.classList.add("dolls_img");
-		doll_div.appendChild(new_image);
-		doll_div.appendChild(new_caption);
 		$("dolls").appendChild(doll_div);
+
+		const new_image = document.createElement("img");
+		new_image.src = entry.download_url;
+		new_image.alt = entry._name;
+		doll_div.appendChild(new_image);
+
+		const new_caption = document.createElement("pre");
+		new_caption.innerHTML = text_map.get(entry._name);
+		doll_div.appendChild(new_caption);
 	}
 }
 

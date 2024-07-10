@@ -3,7 +3,7 @@
 - template:
 
   - about (done)
-  - mydolls
+  - mydolls (done)
   - clothes
 
 - after selecting element, fill in a form to send to your private email

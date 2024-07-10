@@ -288,12 +288,13 @@ main {
 	object-fit: cover;
 }
 
-.dolls_img caption {
+.dolls_img pre {
 	width: 100%;
 	opacity: 0;
 	position: absolute;
 	font-size: min(max(4vw, 12pt), 20pt);
 	transition: opacity 0.5s;
+	text-wrap: wrap;
 }
 
 .dolls_img:hover img {
@@ -301,7 +302,7 @@ main {
 	opacity: 0.15;
 }
 
-.dolls_img:hover caption {
+.dolls_img:hover pre {
 	opacity: 1;
 }
 
