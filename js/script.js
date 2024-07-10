@@ -152,28 +152,9 @@ const CartItems = new (function () {
 	};
 })();
 
-const Template = new (function () {
-	this._map = new Map();
-
-	this._generate_map = function () {
-		const templates = document.body.getElementsByTagName("template");
-		for (const template of templates) {
-			const name = template.id.split(".").slice(1).join(".");
-			this._map.set(name, template.content);
-		}
-	};
-
-	this.get = function (name) {
-		return this._map.get(name).firstElementChild.cloneNode(true);
-	};
-})();
-
 // operations at runtime
 
 window.onload = async function () {
-	// generate templates
-	Template._generate_map();
-
 	// load content
 	download_slideshow();
 	download_mydolls();
@@ -214,7 +195,8 @@ async function download_slideshow() {
 	for (const entry of list_slideshow.filter((elem) =>
 		elem.name.endsWith(".jpg")
 	)) {
-		const new_image = Template.get("slideshow");
+		const new_image = document.createElement("img");
+		new_image.classList.add("slideshow-image");
 		new_image.src = entry.download_url;
 		new_image.alt = entry.name.split(".")[0];
 		$("slideshow").appendChild(new_image);
@@ -291,3 +273,5 @@ function destroy_preview() {
 		$("container-preview").style.visibility = "hidden";
 	}, 250);
 }
+
+// function generate_cart

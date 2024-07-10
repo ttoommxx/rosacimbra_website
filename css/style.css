@@ -52,7 +52,7 @@ ul {
 .clickable {
 	cursor: pointer;
 	-webkit-tap-highlight-color: transparent;
-	transition: all 0.5s;
+	transition: all 0.3s;
 }
 
 .clickable:hover {
@@ -117,7 +117,6 @@ ul {
 .menu-class {
 	display: flex;
 	margin: 6px;
-	border-radius: 10px;
 	background-color: rgba(219, 163, 173, 0.9);
 }
 
@@ -148,7 +147,6 @@ ul {
 #open-menu {
 	max-height: 25%;
 	min-height: 45px;
-	border-radius: 15px;
 }
 
 #open-menu:hover {
@@ -443,7 +441,7 @@ main {
 		transform: scale(1);
 	}
 	50% {
-		transform: scale(1.5);
+		transform: scale(1.25);
 	}
 }
 
@@ -453,7 +451,7 @@ main {
 		transform: scale(1);
 	}
 	50% {
-		transform: scale(0.5);
+		transform: scale(0.75);
 	}
 }
 
