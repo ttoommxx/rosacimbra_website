@@ -22,10 +22,10 @@ const GitHubDB = function (user, repo, root_db) {
 			.catch((err) => console.log(err));
 	};
 
-	this.ls = async function (config) {
-		let response = await this.get_response(config.path);
-		if (config.type !== undefined) {
-			response = response.filter((elem) => elem.type == config.type);
+	this.ls = async function (path, type) {
+		let response = await this.get_response(path);
+		if (type !== undefined) {
+			response = response.filter((elem) => elem.type == type);
 		}
 		response.sort((a, b) => {
 			if (a.type != b.type) {
@@ -194,7 +194,7 @@ function open_page(page) {
 }
 
 async function download_slideshow() {
-	const list_slideshow = await DB.ls({ path: "slideshow", type: "file" });
+	const list_slideshow = await DB.ls("slideshow", "file");
 	for (img_data of list_slideshow.filter((elem) =>
 		elem.name.endsWith(".jpg")
 	)) {
@@ -209,7 +209,7 @@ async function download_slideshow() {
 }
 
 async function download_mydolls() {
-	const list_mydolls = await DB.ls({ path: "mydolls", type: "file" });
+	const list_mydolls = await DB.ls("mydolls", "file");
 	console.log(list_mydolls);
 	const images = [
 		[
