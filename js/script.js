@@ -156,7 +156,7 @@ const CartItems = new (function () {
 
 // operations at runtime
 
-window.onload = async function () {
+window.onload = function () {
 	// load content
 	download_slideshow();
 	download_mydolls();
@@ -172,7 +172,7 @@ window.onload = async function () {
 	toggle_menu(Cookies.get("left_bar") || "off");
 
 	// load previous cart
-	CartItems.read_cookies();
+	CartItems.read_cookies(); // TODO: when automating the selling section, remember to wait for that promise to finish before running this one
 };
 
 // functions
@@ -278,10 +278,8 @@ function destroy_preview() {
 }
 
 async function read_banner() {
-	const banner_text = await fetch(
-		"https://raw.githubusercontent.com/ttoommxxDB/rosacimbra_website/main/db/banner.txt",
-		{ cache: "no-cache" }
-	)
+	const response = await DB.read("banner.txt");
+	const banner_text = await fetch(response.download_url, { cache: "no-cache" })
 		.then((data) => data.text())
 		.then((text) => text.trim());
 	if (banner_text) {
