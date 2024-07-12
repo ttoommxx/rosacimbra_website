@@ -6,61 +6,97 @@ function $(name) {
 
 // cookies and global variables
 
-const GitHubDB = function (user, repo, root_db) {
-	this._db_url = `https://api.github.com/repos/${user}/${repo}/contents/${
+const GitHubDB = async function (user, repo, root_db) {
+	const db_url = `https://api.github.com/repos/${user}/${repo}/contents/${
 		root_db === undefined ? "" : root_db + "/"
 	}`;
-	this._lambda_api =
+	const lambda_api =
 		"https://73p5suv6mmzz2ksflzrxtipdpi0iqygf.lambda-url.eu-north-1.on.aws/";
+	const lambda_url = `${lambda_api}?url=${db_url}&token_type=GITHUB`;
+	const folder = await fetch(lambda_url, { cache: "no-cache" })
+		.then((res) => res.json())
+		.catch((err) => console.log(err));
 
-	this.read = function (path) {
-		const url = `${this._lambda_api}?url=${
-			this._db_url + path
-		}&token_type=GITHUB`;
-		return fetch(url, { cache: "no-cache" })
-			.then((res) => res.json())
-			.catch((err) => console.log(err));
-	};
+	// generate the db object to return
+	const DB = new (function () {
+		this._map = {};
 
-	this.ls = async function (config) {
-		let response = await this.read(config.path);
+		this.read = function (path) {
+			let temp_map = this._map;
+			for (const p of path.split("/")) {
+				temp_map = temp_map[p];
+			}
+			return temp_map;
+		};
 
-		if (config.type) {
-			response = response.filter((elem) => elem.type == config.type);
+		this.ls = function (config) {
+			let temp_map = this._map;
+			for (const p of config.path.split("/")) {
+				temp_map = temp_map[p];
+			}
+			let array = []; // folder
+			for (const [key, val] of Object.entries(temp_map)) {
+				if (typeof val == "string") {
+					array.push({
+						name: key,
+						type: "file",
+						download_url: val,
+					});
+				} else {
+					array.push({
+						name: key,
+						type: "folder",
+					});
+				}
+			}
+			if (config.type) {
+				array = array.filter((elem) => elem.type == config.type);
+			}
+			if (config.sort) {
+				array.sort(
+					(() => {
+						if (config.sort == "name") {
+							return (a, b) => a.name.localeCompare(b.name);
+						} else if (config.sort == "type") {
+							return (a, b) => {
+								if (a.type != b.type) {
+									return a.type.localeCompare(b.type);
+								}
+								let [name_a, format_a] = a.name.split(".");
+								let [name_b, format_b] = b.name.split(".");
+								format_a = format_a.toLowerCase();
+								format_b = format_b.toLowerCase();
+								if (format_a != format_b) {
+									return format_a.localeCompare(format_b);
+								} else {
+									return name_a.localeCompare(name_b);
+								}
+							};
+						}
+					})()
+				);
+			}
+			return array;
+		};
+	})();
+
+	for (const entry of folder) {
+		const full_path = entry.name.split("..");
+
+		let temp_map = DB._map;
+		for (const path of full_path.slice(0, -1)) {
+			if (!temp_map[path]) {
+				temp_map[path] = {};
+			}
+			temp_map = temp_map[path];
 		}
+		temp_map[full_path.at(-1)] = entry.download_url;
+	}
 
-		if (config.sort) {
-			response.sort(
-				(() => {
-					if (config.sort == "name") {
-						return (a, b) => a.name.localeCompare(b.name);
-					} else if (config.sort == "type") {
-						return (a, b) => {
-							if (a.type != b.type) {
-								return a.type.localeCompare(b.type);
-							}
-							let [name_a, format_a] = a.name.split(".");
-							let [name_b, format_b] = b.name.split(".");
-							format_a = format_a.toLowerCase();
-							format_b = format_b.toLowerCase();
-							if (format_a != format_b) {
-								return format_a.localeCompare(format_b);
-							} else {
-								return name_a.localeCompare(name_b);
-							}
-						};
-					}
-				})()
-			);
-		}
-
-		return response;
-	};
+	return DB;
 };
 
-const DB = new GitHubDB("ttoommxxDB", "rosacimbra_website", "db");
-
-const Cookies = new (function () {
+function cookies_util() {
 	this._map = new Map();
 	if (document.cookie != "") {
 		const cookies = document.cookie.split(";");
@@ -78,14 +114,14 @@ const Cookies = new (function () {
 		this._map.set(name, value);
 		document.cookie = `${name}=${value}`;
 	};
-})();
+}
 
-const CartItems = new (function () {
+function cart_item() {
 	this._map = new Map();
 
 	this.read_cookies = function () {
-		if (Cookies.get("cart")) {
-			for (const [key, val] of JSON.parse(Cookies.get("cart"))) {
+		if (ENV.cookies.get("cart")) {
+			for (const [key, val] of JSON.parse(ENV.cookies.get("cart"))) {
 				this._map.set(key, val);
 			}
 		}
@@ -102,7 +138,7 @@ const CartItems = new (function () {
 	};
 
 	this.update_cookies = function () {
-		Cookies.set("cart", JSON.stringify(Array.from(CartItems._map.entries())));
+		ENV.cookies.set("cart", JSON.stringify(Array.from(this._map.entries())));
 	};
 
 	this.update_counter_div = function (elem) {
@@ -152,27 +188,38 @@ const CartItems = new (function () {
 		this.update_cart_menu();
 		this.update_cookies();
 	};
-})();
+}
+
+const ENV = {
+	cookies: new cookies_util(),
+	db: null,
+	cart: new cart_item(),
+};
 
 // operations at runtime
 
-window.onload = function () {
-	// load content
+async function async_onload() {
+	ENV.db = await GitHubDB("ttoommxxDB", "rosacimbra_website", "db");
 	download_slideshow();
 	download_mydolls();
 	read_banner();
+}
+
+window.onload = function () {
+	// async loading
+	async_onload();
 
 	// open previous page
-	if (Cookies.get("page") == "" || Cookies.get("page") == "cart") {
-		Cookies.set("page", "about");
+	if (ENV.cookies.get("page") == "" || ENV.cookies.get("page") == "cart") {
+		ENV.cookies.set("page", "about");
 	}
-	open_page(Cookies.get("page"));
+	open_page(ENV.cookies.get("page"));
 
 	// load previous sidebar state
-	toggle_menu(Cookies.get("left_bar") || "off");
+	toggle_menu(ENV.cookies.get("left_bar") || "off");
 
 	// load previous cart
-	CartItems.read_cookies(); // TODO: when automating the selling section, remember to wait for that promise to finish before running this one
+	ENV.cart.read_cookies(); // TODO: when automating the selling section, remember to wait for that promise to finish before running this one
 };
 
 // functions
@@ -182,8 +229,8 @@ function open_page(page) {
 	page_element.style.setProperty("opacity", "0");
 	page_element.style.setProperty("left", "-100%");
 	setTimeout(() => {
-		$(Cookies.get("page")).style.setProperty("display", "none");
-		Cookies.set("page", page);
+		$(ENV.cookies.get("page")).style.setProperty("display", "none");
+		ENV.cookies.set("page", page);
 		$(page).style.setProperty("display", "flex");
 		page_element.style.setProperty("opacity", "1");
 		page_element.style.setProperty("left", "0");
@@ -191,7 +238,7 @@ function open_page(page) {
 }
 
 async function download_slideshow() {
-	const list_slideshow = await DB.ls({
+	const list_slideshow = ENV.db.ls({
 		path: "slideshow",
 		type: "file",
 	});
@@ -207,11 +254,10 @@ async function download_slideshow() {
 }
 
 async function download_mydolls() {
-	const list_mydolls = await DB.ls({
+	const list_mydolls = ENV.db.ls({
 		path: "mydolls",
 		type: "file",
 	});
-
 	for (const entry of list_mydolls) {
 		[entry._name, entry._extension] = entry.name.split(".");
 	}
@@ -251,7 +297,7 @@ function toggle_menu(state) {
 		$("container-menu").style.opacity = 1;
 	}
 
-	Cookies.set("left_bar", state);
+	ENV.cookies.set("left_bar", state);
 }
 
 function generate_preview(img_element) {
@@ -278,8 +324,8 @@ function destroy_preview() {
 }
 
 async function read_banner() {
-	const response = await DB.read("banner.txt");
-	const banner_text = await fetch(response.download_url, { cache: "no-cache" })
+	const download_url = ENV.db.read("banner.txt");
+	const banner_text = await fetch(download_url, { cache: "no-cache" })
 		.then((data) => data.text())
 		.then((text) => text.trim());
 	if (banner_text) {
