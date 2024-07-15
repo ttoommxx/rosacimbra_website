@@ -392,11 +392,12 @@ async function download_sale_items() {
 }
 
 function toggle_menu(state) {
+	const position = $("container-left").style.left || "0px";
 	if (state == "on") {
 		$("container-left").style.left = "0px";
 		$("container-right").style.opacity = 0.5;
 		$("container-menu").style.opacity = 0.5;
-	} else if (state == "off") {
+	} else if (state == "off" && position == "0px") {
 		$("container-left").style.left = "-100%";
 		$("container-right").style.opacity = 1;
 		$("container-menu").style.opacity = 1;
