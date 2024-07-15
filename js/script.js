@@ -4,6 +4,8 @@ function $(name) {
 	return document.getElementById(name);
 }
 
+const parser = new DOMParser();
+
 // cookies and global variables
 
 const GitHubDB = async function (user, repo, root_db) {
@@ -77,6 +79,17 @@ const GitHubDB = async function (user, repo, root_db) {
 				);
 			}
 			return array;
+		};
+
+		this.exist = function (path) {
+			let temp_map = this._map;
+			for (const folder of path.split("/")) {
+				if (!(folder in temp_map)) {
+					return false;
+				}
+				temp_map = temp_map[folder];
+			}
+			return true;
 		};
 	})();
 
@@ -169,7 +182,9 @@ function cart_item() {
 	};
 
 	this.reg = function (elem, num) {
-		const alt_text = elem.parentElement.getElementsByTagName("img")[0].alt;
+		const alt_text = elem.parentElement
+			.getElementsByTagName("div")[0]
+			.getElementsByTagName("img")[0].alt;
 		this._map.set(alt_text, (this._map.get(alt_text) ?? 0) + num);
 		if (this._map.get(alt_text) <= 0) {
 			this._map.delete(alt_text);
@@ -191,9 +206,10 @@ const ENV = {
 
 async function async_onload() {
 	ENV.db = await GitHubDB("ttoommxxDB", "rosacimbra_website", "db");
+	read_banner();
 	download_slideshow();
 	download_mydolls();
-	read_banner();
+	download_sale_items();
 }
 
 window.onload = function () {
@@ -261,28 +277,126 @@ async function download_mydolls() {
 	}
 
 	for (const entry of list_mydolls.filter((elem) => elem._extension == "jpg")) {
-		const doll_div = document.createElement("div");
-		doll_div.classList.add("dolls_img");
+		const doll_div = parser.parseFromString(
+			`
+            <div class="dolls_img">
+                <img src=${entry.download_url} alt=${entry._name}>
+                <pre>${text_map.get(entry._name)}</pre>
+            </div>
+            `,
+			"text/html"
+		).body.firstChild;
 		$("mydolls").appendChild(doll_div);
+	}
+}
 
-		const new_image = document.createElement("img");
-		new_image.src = entry.download_url;
-		new_image.alt = entry._name;
-		doll_div.appendChild(new_image);
+async function download_sale_items() {
+	for (const section of ["clothes", "accessories"].filter((section) =>
+		ENV.db.exist(section)
+	)) {
+		// select section
+		for (const subsection of ENV.db
+			.ls({ path: section, type: "folder" })
+			.map((folder) => folder.name)) {
+			// select subsection
+			const Subsection = subsection[0].toUpperCase() + subsection.slice(1);
 
-		const new_caption = document.createElement("pre");
-		new_caption.innerHTML = text_map.get(entry._name);
-		doll_div.appendChild(new_caption);
+			[src_stock1, src_stock2, src_stock3] = ENV.db.ls({
+				path: `${section}/${subsection}/stock`,
+				type: "file",
+			});
+
+			const section_element_temp = parser.parseFromString(
+				`
+                <input id="${section}-${subsection}" class="toggle" type="checkbox" />
+                <label for="${section}-${subsection}" class="sale-container clickable">
+                    <span class="label-name">${Subsection}</span>
+                    <span class="sale-thumbnails">
+                        <img src=${src_stock1.download_url} alt=${
+					src_stock1.name.split(".")[0]
+				} />
+                        <img src=${src_stock2.download_url} alt=${
+					src_stock2.name.split(".")[0]
+				} />
+                        <img src=${src_stock3.download_url} alt=${
+					src_stock3.name.split(".")[0]
+				} />
+                    </span>
+                </label>
+                `,
+				"text/html"
+			).body;
+
+			const section_element = document.createElement("div");
+			section_element.innerHTML = section_element_temp.innerHTML;
+
+			const text_map = new Map();
+			for (const file of ENV.db
+				.ls({
+					path: `${section}/${subsection}/onsale`,
+					type: "file",
+				})
+				.filter((file) => file.name.endsWith(".txt"))) {
+				const text = await fetch(file.download_url)
+					.then((data) => data.text())
+					.then((text) => text.trim());
+				text_map.set(file.name.split(".")[0], text);
+			}
+
+			const sale_items_div = document.createElement("div");
+			sale_items_div.classList.add("sale-items");
+
+			for (const item of ENV.db
+				.ls({
+					path: `${section}/${subsection}/onsale`,
+					type: "file",
+				})
+				.filter((file) => file.name.endsWith(".jpg"))) {
+				const item_name = item.name.split(".")[0];
+				const sale_item = parser.parseFromString(
+					`
+                    <div class="sale-item">
+                        <div class="sale-picture clickable">
+                            <div class="counter">0</div>
+                            <img
+                                src=${item.download_url}
+                                alt=${item_name}
+                                onclick="generate_preview(this)"
+                            />
+                        </div>
+                        <p>${text_map.get(item_name)}</p>
+                        <img
+                            src="img/icon/minus.svg"
+                            alt="Minus"
+                            class="buy_icon clickable"
+                            onclick="ENV.cart.reg(this, -1)"
+                        />
+                        <img
+                            src="img/icon/plus.svg"
+                            alt="Plus"
+                            class="buy_icon clickable"
+                            onclick="ENV.cart.reg(this, 1)"
+                        />
+                    </div>
+                    `,
+					"text/html"
+				).body.firstChild;
+				sale_items_div.appendChild(sale_item);
+			}
+
+			section_element.appendChild(sale_items_div);
+
+			$(section).appendChild(section_element);
+		}
 	}
 }
 
 function toggle_menu(state) {
-	const position = $("container-left").style.left || "-100%";
-	if (state == "on" && position == "-100%") {
+	if (state == "on") {
 		$("container-left").style.left = "0px";
 		$("container-right").style.opacity = 0.5;
 		$("container-menu").style.opacity = 0.5;
-	} else if (state == "off" && position == "0px") {
+	} else if (state == "off") {
 		$("container-left").style.left = "-100%";
 		$("container-right").style.opacity = 1;
 		$("container-menu").style.opacity = 1;

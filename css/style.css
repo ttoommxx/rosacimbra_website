@@ -64,7 +64,7 @@ ul {
 .clickable:active {
 	transform: translate(0px, 0px);
 	box-shadow: 0px 0px;
-	transition: all 0.05s ease-in-out;
+	transition: all 0.04s ease-in-out;
 }
 
 /* CONTAINER PREVIEW */
@@ -433,14 +433,19 @@ main {
 
 .sale-picture {
 	max-height: max(17.5vw, 17.5vh);
+	overflow: hidden;
+}
+
+.sale-picture img {
+	max-height: max(17.5vw, 17.5vh);
 	aspect-ratio: 1;
 	object-fit: cover;
 }
 
 .sale-item p {
+	max-height: max(17.5vw, 17.5vh);
 	margin: 5px;
 	flex: 1;
-	max-height: max(17.5vw, 17.5vh);
 	overflow: auto;
 }
 

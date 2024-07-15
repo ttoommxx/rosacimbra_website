@@ -1,5 +1,7 @@
 # FRONT END
 
+- create div so that the number stays up when you hover in sale-item
+
 - template:
 
   - about (done)
