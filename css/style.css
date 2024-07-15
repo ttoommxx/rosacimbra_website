@@ -490,6 +490,7 @@ ul {
 #cart {
 	display: none;
 	flex-direction: row;
+	justify-content: center;
 }
 
 /* FOOTER */
