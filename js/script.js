@@ -132,27 +132,27 @@ function cookies_util() {
 function cart_item() {
 	this._map = new Map();
 
-	this.read_cookies = function () {
-		if (ENV.cookies.get("cart")) {
-			for (const [key, val] of JSON.parse(ENV.cookies.get("cart"))) {
-				this._map.set(key, val);
-			}
-		}
+	// this.read_cookies = function () {
+	// 	if (ENV.cookies.get("cart")) {
+	// 		for (const [key, val] of JSON.parse(ENV.cookies.get("cart"))) {
+	// 			this._map.set(key, val);
+	// 		}
+	// 	}
 
-		this.update_cart_menu();
+	// 	this.update_cart_menu();
 
-		const sale_items = document.getElementsByClassName("sale-item");
-		for (const sale_item of sale_items) {
-			const alt_text = sale_item.getElementsByTagName("img")[0].alt;
-			if (this._map.has(alt_text)) {
-				this.update_counter_div(sale_item);
-			}
-		}
-	};
+	// 	const sale_items = document.getElementsByClassName("sale-item");
+	// 	for (const sale_item of sale_items) {
+	// 		const alt_text = sale_item.getElementsByTagName("img")[0].alt;
+	// 		if (this._map.has(alt_text)) {
+	// 			this.update_counter_div(sale_item);
+	// 		}
+	// 	}
+	// };
 
-	this.update_cookies = function () {
-		ENV.cookies.set("cart", JSON.stringify(Array.from(this._map.entries())));
-	};
+	// this.update_cookies = function () {
+	// 	ENV.cookies.set("cart", JSON.stringify(Array.from(this._map.entries())));
+	// };
 
 	this.update_counter_div = function (elem) {
 		const alt_item = elem.getElementsByTagName("img")[0].alt;
@@ -192,7 +192,7 @@ function cart_item() {
 
 		this.update_counter_div(elem.parentElement);
 		this.update_cart_menu();
-		this.update_cookies();
+		// this.update_cookies();
 	};
 }
 
@@ -226,7 +226,7 @@ window.onload = function () {
 	toggle_menu(ENV.cookies.get("left_bar") || "off");
 
 	// load previous cart
-	ENV.cart.read_cookies(); // TODO: when automating the selling section, remember to wait for that promise to finish before running this one
+	// ENV.cart.read_cookies(); // TODO: when automating the selling section, remember to wait for that promise to finish before running this one
 };
 
 // functions
