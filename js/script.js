@@ -21,39 +21,31 @@ const GitHubDB = async function (user, repo, root_db) {
 
 	// generate the db object to return
 	const DB = new (function () {
-		this._map = {};
+		this._map = new Map();
 
 		this.read = function (path) {
 			let temp_map = this._map;
 			for (const p of path.split("/")) {
-				temp_map = temp_map[p];
+				temp_map = temp_map.get(p);
 			}
 			return temp_map;
 		};
 
+		// config is a dictionary with {path: string, type: string, sort: string}
 		this.ls = function (config) {
 			let temp_map = this._map;
 			for (const p of config.path.split("/")) {
-				temp_map = temp_map[p];
+				temp_map = temp_map.get(p);
 			}
-			let array = []; // folder
-			for (const [key, val] of Object.entries(temp_map)) {
-				if (typeof val == "string") {
-					array.push({
-						name: key,
-						type: "file",
-						download_url: val,
-					});
-				} else {
-					array.push({
-						name: key,
-						type: "folder",
-					});
-				}
-			}
+			let array = temp_map.entries().map(([key, val]) => ({
+				name: key,
+				type: typeof val == "string" ? "file" : "folder",
+				download_url: typeof val == "string" ? val : undefined,
+			}));
 			if (config.type) {
 				array = array.filter((elem) => elem.type == config.type);
 			}
+			array = Array.from(array);
 			if (config.sort) {
 				array.sort(
 					(() => {
@@ -84,10 +76,10 @@ const GitHubDB = async function (user, repo, root_db) {
 		this.exist = function (path) {
 			let temp_map = this._map;
 			for (const folder of path.split("/")) {
-				if (!(folder in temp_map)) {
+				if (!temp_map.has(folder)) {
 					return false;
 				}
-				temp_map = temp_map[folder];
+				temp_map = temp_map.get(folder);
 			}
 			return true;
 		};
@@ -98,12 +90,12 @@ const GitHubDB = async function (user, repo, root_db) {
 
 		let temp_map = DB._map;
 		for (const path of full_path.slice(0, -1)) {
-			if (!temp_map[path]) {
-				temp_map[path] = {};
+			if (!temp_map.has(path)) {
+				temp_map.set(path, new Map());
 			}
-			temp_map = temp_map[path];
+			temp_map = temp_map.get(path);
 		}
-		temp_map[full_path.at(-1)] = entry.download_url;
+		temp_map.set(full_path.at(-1), entry.download_url);
 	}
 
 	return DB;
@@ -154,29 +146,29 @@ function cart_item() {
 	// 	ENV.cookies.set("cart", JSON.stringify(Array.from(this._map.entries())));
 	// };
 
-	this.update_counter_div = function (elem) {
+	this.update_counter_div = async function (elem) {
 		const alt_item = elem.getElementsByTagName("img")[0].alt;
 		const counter = elem.getElementsByClassName("counter")[0];
 		const num = this._map.get(alt_item);
 		if (num === undefined) {
-			counter.style.setProperty("visibility", "hidden");
+			counter.style.visibility = "hidden";
 		} else {
 			counter.innerHTML = num;
-			counter.style.setProperty("visibility", "visible");
+			counter.style.visibility = "visible";
 		}
 	};
 
-	this.update_cart_menu = function () {
+	this.update_cart_menu = async function () {
 		const total_count = this._map
 			.entries()
-			.reduce((acc, curr) => acc + curr[1], 0);
+			.reduce((acc, [key, val]) => acc + val, 0);
 		const cart_div = $("cart_menu");
-		let right = cart_div.style.getPropertyValue("right") || "-100%";
+		let right = cart_div.style.right || "-100%";
 
 		if (right == "4px" && total_count == 0) {
-			cart_div.style.setProperty("right", "-100%");
+			cart_div.style.right = "-100%";
 		} else if (right == "-100%" && total_count > 0) {
-			cart_div.style.setProperty("right", "4px");
+			cart_div.style.right = "4px";
 		}
 		$("counter_menu").innerHTML = total_count;
 	};
@@ -233,14 +225,14 @@ window.onload = function () {
 
 function open_page(page) {
 	let page_element = $("container-main");
-	page_element.style.setProperty("opacity", "0");
-	page_element.style.setProperty("left", "-100%");
+	page_element.style.opacity = "0";
+	page_element.style.left = "-100%";
 	setTimeout(() => {
-		$(ENV.cookies.get("page")).style.setProperty("display", "none");
+		$(ENV.cookies.get("page")).style.display = "none";
 		ENV.cookies.set("page", page);
-		$(page).style.setProperty("display", "flex");
-		page_element.style.setProperty("opacity", "1");
-		page_element.style.setProperty("left", "0");
+		$(page).style.display = "flex";
+		page_element.style.opacity = "1";
+		page_element.style.left = "0";
 	}, 650);
 }
 
@@ -414,12 +406,12 @@ function generate_preview(img_element) {
 	preview_img.src = img_element.src;
 	preview_img.alt = img_element.alt;
 	setTimeout(() => {
-		preview_img.style.setProperty("max-width", "90%");
+		preview_img.style.maxWidth = "90%";
 	}, 1);
 }
 
 function destroy_preview() {
-	$("img-preview").style.setProperty("max-width", "0%");
+	$("img-preview").style.maxWidth = "0%";
 	$("container-left").style.opacity = 1;
 	$("container-menu").style.opacity = 1;
 	$("container-right").style.opacity = 1;

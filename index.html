@@ -31,23 +31,19 @@
 				<ul>
 					<li>
 						<div onclick="open_page('about')" class="menu-class clickable">
-							<img
-								src="img/icon/woman_with_heart.svg"
-								alt="About"
-								class="menu-icon"
-							/>
+							<img src="img/icon/woman_with_heart.svg" alt="About" />
 							<p>About</p>
 						</div>
 					</li>
 					<li>
 						<div onclick="open_page('mydolls')" class="menu-class clickable">
-							<img src="img/icon/doll.svg" alt="Doll" class="menu-icon" />
+							<img src="img/icon/doll.svg" alt="Doll" />
 							<p>My Dolls</p>
 						</div>
 					</li>
 					<li>
 						<div onclick="open_page('clothes')" class="menu-class clickable">
-							<img src="img/icon/dress.svg" alt="Clothes" class="menu-icon" />
+							<img src="img/icon/dress.svg" alt="Clothes" />
 							<p>Clothes</p>
 						</div>
 					</li>
@@ -56,11 +52,7 @@
 							onclick="open_page('accessories')"
 							class="menu-class clickable"
 						>
-							<img
-								src="img/icon/teddy.svg"
-								alt="Accessories"
-								class="menu-icon"
-							/>
+							<img src="img/icon/teddy.svg" alt="Accessories" />
 							<p>Accessories</p>
 						</div>
 					</li>
@@ -71,7 +63,7 @@
 							class="menu-class clickable"
 						>
 							<div id="counter_menu">0</div>
-							<img src="img/icon/luggage.svg" alt="Cart" class="menu-icon" />
+							<img src="img/icon/luggage.svg" alt="Cart" />
 							<p>Enquire items</p>
 						</div>
 					</li>
@@ -82,7 +74,6 @@
 			<img
 				src="img/icon/menu.svg"
 				alt="Menu icon"
-				id="open-menu"
 				onclick="toggle_menu('on')"
 				class="clickable"
 			/>
@@ -90,7 +81,6 @@
 		<div id="container-right" onclick="toggle_menu('off')">
 			<div id="container-title">
 				<img
-					id="title_icon"
 					src="img/flower.png"
 					alt="Welcome to RosaCimbra Shop webpage!"
 					title="A beautiful flower from RosaCimbra!"
@@ -119,7 +109,11 @@
 					<div id="clothes"></div>
 					<div id="accessories"></div>
 					<div id="cart">
-						<p>cart</p>
+						<form action="/action_page.php">
+							<label for="name_user" required>First and last name:</label>
+							<input type="text" id="name_user" name="name_user" /><br /><br />
+							<button>Submit</button>
+						</form>
 					</div>
 				</main>
 			</div>
