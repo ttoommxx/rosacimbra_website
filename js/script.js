@@ -172,18 +172,12 @@ function cart_item() {
 		$("counter_menu").innerHTML = total_count;
 	};
 
-	this.update_cart_section = async function () {
-		const fixed_text = $("cart").getElementsByTagName("div")[0];
-		for (const [key, val] of this._map) {
-			//TODO: from here
+	this.update_cart_div = async function () {
+		const cart_div = $("cart_list");
+		cart_div.innerHTML = "";
+		for (const item of this._map.keys()) {
+			cart_div.appendChild(item.cloneNode(true));
 		}
-		// const new_fixed_text = Array.from(
-		// 	this._map
-		// 		.entries()
-		// 		.map(
-		// 			([key, val]) => `${key.getElementsByTagName("img")[0].alt} x ${val}`
-		// 		)
-		// );
 	};
 
 	this.reg = function (elem, num) {
@@ -195,8 +189,21 @@ function cart_item() {
 
 		this.update_counter_div(elem_div);
 		this.update_cart_menu();
-		this.update_cart_section();
+		// this.update_cart_section();
 		// this.update_cookies();
+	};
+
+	this.send_order = function () {
+		const user_name = $("name_user").value;
+		const array_text = ["LIST ITEMS"];
+		for (const [key, val] of this._map.entries()) {
+			array_text.push(`- ${val} x ${key.getElementsByTagName("img")[0].alt}`);
+		}
+		array_text.push("%0D%0A<<TYPE HERE YOUR CUSTOM MESSAGE>>");
+		const message = array_text.join("%0D%0A");
+		window.open(
+			`mailto:RosaCimbra@gmail.com?bcc=ttoommxx+RC@gmail.com&subject=Items%20Equiry%20from%20${user_name}&body=${message}`
+		);
 	};
 }
 
@@ -236,6 +243,9 @@ window.onload = function () {
 // functions
 
 function open_page(page) {
+	if (page == "cart") {
+		ENV.cart.update_cart_div();
+	}
 	let page_element = $("container-main");
 	page_element.style.opacity = "0";
 	page_element.style.left = "-100%";
@@ -284,7 +294,7 @@ async function download_mydolls() {
 		const doll_div = parser.parseFromString(
 			`
             <div class="dolls_img">
-                <img src=${entry.download_url} alt=${entry._name}>
+                <img src="${entry.download_url}" alt="${entry._name}">
                 <pre>${text_map.get(entry._name)}</pre>
             </div>
             `,
@@ -316,15 +326,15 @@ async function download_sale_items() {
                 <label for="${section}-${subsection}" class="sale-container clickable">
                     <span class="label-name">${Subsection}</span>
                     <span class="sale-thumbnails">
-                        <img src=${src_stock1.download_url} alt=${
+                        <img src="${src_stock1.download_url}" alt="${
 					src_stock1.name.split(".")[0]
-				} />
-                        <img src=${src_stock2.download_url} alt=${
+				}" />
+                        <img src="${src_stock2.download_url}" alt="${
 					src_stock2.name.split(".")[0]
-				} />
-                        <img src=${src_stock3.download_url} alt=${
+				}" />
+                        <img src="${src_stock3.download_url} "alt="${
 					src_stock3.name.split(".")[0]
-				} />
+				}" />
                     </span>
                 </label>
                 `,
@@ -363,8 +373,8 @@ async function download_sale_items() {
                         <div class="sale-picture clickable">
                             <div class="counter">0</div>
                             <img
-                                src=${item.download_url}
-                                alt=${item_name}
+                                src="${item.download_url}"
+                                alt="${item_name}"
                                 onclick="generate_preview(this)"
                             />
                         </div>

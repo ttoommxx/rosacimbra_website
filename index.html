@@ -109,19 +109,15 @@
 					<div id="clothes"></div>
 					<div id="accessories"></div>
 					<div id="cart">
-						<form action="/action_page.php">
+						<form>
 							<label for="name_user" required>First and last name:</label>
+							<input type="text" id="name_user" name="name_user" />
 							<br />
-							<input
-								type="text"
-								id="name_user"
-								name="name_user"
-								placeholder="Rosa Cimbra"
-							/><br /><br />
-							<label for="custom_message">Custom message for Rosa Cimbra</label>
+							<div id="cart_list"></div>
 							<br />
-							<div></div>
-							<button>Submit</button>
+							<div class="clickable" onclick="ENV.cart.send_order()">
+								Submit
+							</div>
 						</form>
 					</div>
 				</main>

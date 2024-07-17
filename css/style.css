@@ -438,30 +438,31 @@ ul {
 			width: 40px;
 			flex: none;
 		}
-		& .sale-picture {
-			& {
-				max-height: max(17.5vw, 17.5vh);
-				overflow: hidden;
-			}
-			& img {
-				max-height: max(17.5vw, 17.5vh);
-				aspect-ratio: 1;
-				object-fit: cover;
-			}
-			& .counter {
-				visibility: hidden;
-				position: absolute;
-				font-size: 20pt;
-				font-family: "CooperBlack";
-				background-color: rgb(236, 201, 207, 0.8);
-				overflow: hidden;
-				border: 0px black solid;
-				max-height: 0;
-				margin: 0;
-				padding: 0;
-				transition: all 1s;
-			}
-		}
+	}
+}
+
+.sale-picture {
+	& {
+		max-height: max(17.5vw, 17.5vh);
+		overflow: hidden;
+	}
+	& img {
+		max-height: max(17.5vw, 17.5vh);
+		aspect-ratio: 1;
+		object-fit: cover;
+	}
+	& .counter {
+		visibility: hidden;
+		position: absolute;
+		font-size: 20pt;
+		font-family: "CooperBlack";
+		background-color: rgb(236, 201, 207, 0.8);
+		overflow: hidden;
+		border: 0px black solid;
+		max-height: 0;
+		margin: 0;
+		padding: 0;
+		transition: all 1s;
 	}
 }
 
@@ -488,9 +489,48 @@ ul {
 /* CART */
 
 #cart {
-	display: none;
-	flex-direction: row;
-	justify-content: center;
+	& {
+		display: none;
+		flex-direction: column;
+		justify-content: center;
+	}
+	& form {
+		& {
+			flex-direction: column;
+			display: flex;
+			text-align: center;
+			align-items: center;
+			font-family: "LittleLordFontleroy";
+			font-size: 30pt;
+		}
+		& input {
+			& {
+				width: 30%;
+				display: inline-block;
+				text-align: center;
+				background-color: transparent;
+				transition: all 0.5s;
+			}
+		}
+		& #cart_list {
+			& {
+				display: flex;
+				justify-content: center;
+				gap: 10px;
+				flex-wrap: wrap;
+			}
+			& .counter {
+				max-height: 200px;
+				padding: 3px;
+				margin: 5px;
+				border: 3px black solid;
+				font-size: 15pt;
+			}
+			& img {
+				max-height: max(12.5vw, 12.5vh);
+			}
+		}
+	}
 }
 
 /* FOOTER */

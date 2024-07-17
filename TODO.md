@@ -1,9 +1,8 @@
 # FRONT END
 
-- after selecting element, fill in a form to send to your private email
+- check cart on the phone
 
-- for example
-  window.open('mailto:1_1?bcc=2_2&subject=3_3&body=4_4');
+- restore cart after reload (use the cookies approach), but remember to improve it in case the cart changes.
 
 - add flush option in cart
 
