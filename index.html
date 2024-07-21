@@ -109,6 +109,17 @@
 					<div id="clothes"></div>
 					<div id="accessories"></div>
 					<div id="cart">
+						<div id="flush_cart">
+							<img
+								src="img/icon/broom.svg"
+								alt="broom icon"
+								height="60"
+								width="60"
+								class="clickable"
+								onclick="ENV.cart.flush()"
+							/>
+							<p>Flush me!</p>
+						</div>
 						<form>
 							<label for="name_user" required>First and last name:</label>
 							<input type="text" id="name_user" name="name_user" />

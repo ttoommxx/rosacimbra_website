@@ -127,7 +127,11 @@ function cart_item() {
 	// this.read_cookies = function () {
 	// 	if (ENV.cookies.get("cart")) {
 	// 		for (const [key, val] of JSON.parse(ENV.cookies.get("cart"))) {
-	// 			this._map.set(key, val);
+	// 			// check if the item is still there
+	// 			console.log("check in the DB:" + val);
+	// 			if (true) {
+	// 				this._map.set(key, val);
+	// 			}
 	// 		}
 	// 	}
 
@@ -143,6 +147,7 @@ function cart_item() {
 	// };
 
 	// this.update_cookies = function () {
+	// TODO: the issue is that now I am saving everyting as an object, so need to find a way to save it properly
 	// 	ENV.cookies.set("cart", JSON.stringify(Array.from(this._map.entries())));
 	// };
 
@@ -189,14 +194,13 @@ function cart_item() {
 
 		this.update_counter_div(elem_div);
 		this.update_cart_menu();
-		// this.update_cart_section();
 		// this.update_cookies();
 	};
 
 	this.send_order = function () {
 		const user_name = $("name_user").value;
 		const array_text = ["LIST ITEMS"];
-		for (const [key, val] of this._map.entries()) {
+		for (const [key, val] of this._map) {
 			array_text.push(`- ${val} x ${key.getElementsByTagName("img")[0].alt}`);
 		}
 		array_text.push("%0D%0A<<TYPE HERE YOUR CUSTOM MESSAGE>>");
@@ -204,6 +208,19 @@ function cart_item() {
 		window.open(
 			`mailto:RosaCimbra@gmail.com?bcc=ttoommxx+RC@gmail.com&subject=Items%20Equiry%20from%20${user_name}&body=${message}`
 		);
+	};
+
+	this.flush = function () {
+		open_page("about");
+		setTimeout(() => {
+			for (const [key, val] of this._map) {
+				this._map.delete(key);
+				this.update_counter_div(key);
+			}
+			$("name_user").value = "";
+			this.update_cart_menu();
+			this.update_cart_div();
+		}, 300);
 	};
 }
 
@@ -235,9 +252,6 @@ window.onload = function () {
 
 	// load previous sidebar state
 	toggle_menu(ENV.cookies.get("left_bar") || "off");
-
-	// load previous cart
-	// ENV.cart.read_cookies(); // TODO: when automating the selling section, remember to wait for that promise to finish before running this one
 };
 
 // functions
@@ -403,6 +417,9 @@ async function download_sale_items() {
 			$(section).appendChild(section_element);
 		}
 	}
+
+	// load previous cart
+	// ENV.cart.read_cookies();
 }
 
 function toggle_menu(state) {
