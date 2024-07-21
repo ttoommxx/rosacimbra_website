@@ -513,14 +513,12 @@ ul {
 			align-items: center;
 			font-size: 30pt;
 		}
-		& input {
-			& {
-				width: 30%;
-				display: inline-block;
-				text-align: center;
-				background-color: transparent;
-				transition: all 0.5s;
-			}
+		& #name_user {
+			width: 30%;
+			display: inline-block;
+			text-align: center;
+			background-color: transparent;
+			transition: all 0.8s;
 		}
 		& #cart_list {
 			& {

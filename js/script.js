@@ -199,15 +199,26 @@ function cart_item() {
 
 	this.send_order = function () {
 		const user_name = $("name_user").value;
-		const array_text = ["LIST ITEMS"];
-		for (const [key, val] of this._map) {
-			array_text.push(`- ${val} x ${key.getElementsByTagName("img")[0].alt}`);
+		if (user_name) {
+			const array_text = ["LIST ITEMS"];
+			for (const [key, val] of this._map) {
+				array_text.push(`- ${val} x ${key.getElementsByTagName("img")[0].alt}`);
+			}
+			array_text.push(
+				"%0D%0A<<TYPE HERE YOUR CUSTOM MESSAGE>>%0D%0A<<SCRIVI IL TUO MESSAGGIO PERSONALIZZATO QUA>>%0D%0A%0D%0A%0D%0A"
+			);
+			const message = array_text.join("%0D%0A");
+			window.open(
+				`mailto:RosaCimbra@gmail.com?bcc=ttoommxx+RC@gmail.com&subject=RosaCimbra:%20Equiry%20from%20${user_name}&body=${message}`
+			);
+			this.flush();
+		} else {
+			$("name_user").style.backgroundColor = "red";
+			setTimeout(
+				() => ($("name_user").style.backgroundColor = "transparent"),
+				400
+			);
 		}
-		array_text.push("%0D%0A<<TYPE HERE YOUR CUSTOM MESSAGE>>");
-		const message = array_text.join("%0D%0A");
-		window.open(
-			`mailto:RosaCimbra@gmail.com?bcc=ttoommxx+RC@gmail.com&subject=Items%20Equiry%20from%20${user_name}&body=${message}`
-		);
 	};
 
 	this.flush = function () {
