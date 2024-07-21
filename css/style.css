@@ -514,10 +514,11 @@ ul {
 			font-size: 30pt;
 		}
 		& #name_user {
-			width: 30%;
+			width: min(300px, 90%);
 			display: inline-block;
 			text-align: center;
-			background-color: transparent;
+			border: none;
+			background-color: rgba(163, 124, 136, 0.9);
 			transition: all 0.8s;
 		}
 		& #cart_list {
