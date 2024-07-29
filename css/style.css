@@ -2,22 +2,22 @@
 
 @font-face {
 	font-family: "Eglantine";
-	src: url("../font/eglantine.ttf");
+	src: url("../font/eglantine.ttf") format("truetype");
 }
 
 @font-face {
 	font-family: "LittleLordFontleroy";
-	src: url("../font/LittleLordFontleroy.ttf");
+	src: url("../font/LittleLordFontleroy.ttf") format("truetype");
 }
 
 @font-face {
 	font-family: "CooperBlack";
-	src: url("../font/CooperBlack.ttf");
+	src: url("../font/CooperBlack.ttf") format("truetype");
 }
 
 @font-face {
 	font-family: "Kaylani";
-	src: url("../font/Kaylani.ttf");
+	src: url("../font/Kaylani.ttf") format("truetype");
 }
 
 * {
