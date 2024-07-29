@@ -4,8 +4,6 @@ function $(name) {
 	return document.getElementById(name);
 }
 
-const parser = new DOMParser();
-
 // cookies and global variables
 
 const GitHubDB = async function (user, repo, root_db) {
@@ -47,28 +45,27 @@ const GitHubDB = async function (user, repo, root_db) {
 			}
 			array = Array.from(array);
 			if (config.sort) {
-				array.sort(
-					(() => {
-						if (config.sort == "name") {
-							return (a, b) => a.name.localeCompare(b.name);
-						} else if (config.sort == "type") {
-							return (a, b) => {
-								if (a.type != b.type) {
-									return a.type.localeCompare(b.type);
-								}
-								let [name_a, format_a] = a.name.split(".");
-								let [name_b, format_b] = b.name.split(".");
-								format_a = format_a.toLowerCase();
-								format_b = format_b.toLowerCase();
-								if (format_a != format_b) {
-									return format_a.localeCompare(format_b);
-								} else {
-									return name_a.localeCompare(name_b);
-								}
-							};
+				let sort_function = () => {
+					throw new Error(`sorting type ${config.sort} not accepted`);
+				};
+				if (config.sort == "name") {
+					sort_function = (a, b) => a.name.localeCompare(b.name);
+				} else if (config.sort == "type") {
+					sort_funciton = (a, b) => {
+						if (a.type != b.type) {
+							return a.type.localeCompare(b.type);
 						}
-					})()
-				);
+						let [name_a, format_a] = a.name.split(".");
+						let [name_b, format_b] = b.name.split(".");
+						format_a = format_a.toLowerCase();
+						format_b = format_b.toLowerCase();
+						if (format_a != format_b) {
+							return format_a.localeCompare(format_b);
+						}
+						return name_a.localeCompare(name_b);
+					};
+				}
+				array.sort(sort_function);
 			}
 			return array;
 		};
@@ -76,7 +73,7 @@ const GitHubDB = async function (user, repo, root_db) {
 		this.exist = function (path) {
 			let temp_map = this._map;
 			for (const folder of path.split("/")) {
-				if (!temp_map.has(folder)) {
+				if (!(temp_map instanceof Map) || !temp_map.has(folder)) {
 					return false;
 				}
 				temp_map = temp_map.get(folder);
@@ -205,7 +202,7 @@ function cart_item() {
 				array_text.push(`- ${val} x ${key.getElementsByTagName("img")[0].alt}`);
 			}
 			array_text.push(
-				"%0D%0A<<TYPE HERE YOUR CUSTOM MESSAGE>>%0D%0A<<SCRIVI IL TUO MESSAGGIO PERSONALIZZATO QUA>>%0D%0A%0D%0A%0D%0A"
+				"%0D%0A<<TYPE YOUR CUSTOM MESSAGE HERE>>%0D%0A<<SCRIVI QUA IL TUO MESSAGGIO PERSONALIZZATO>>%0D%0A%0D%0A%0D%0A"
 			);
 			const message = array_text.join("%0D%0A");
 			window.open(
@@ -316,15 +313,12 @@ async function download_mydolls() {
 	}
 
 	for (const entry of list_mydolls.filter((elem) => elem._extension == "jpg")) {
-		const doll_div = parser.parseFromString(
-			`
-            <div class="dolls_img">
-                <img src="${entry.download_url}" alt="${entry._name}">
-                <pre>${text_map.get(entry._name)}</pre>
-            </div>
-            `,
-			"text/html"
-		).body.firstChild;
+		const doll_div = document.createElement("div");
+		doll_div.classList.add("dolls_img");
+		doll_div.innerHTML = `
+            <img src="${entry.download_url}" alt="${entry._name}">
+            <pre>${text_map.get(entry._name)}</pre>
+        `;
 		$("mydolls").appendChild(doll_div);
 	}
 }
@@ -344,30 +338,18 @@ async function download_sale_items() {
 				path: `${section}/${subsection}/stock`,
 				type: "file",
 			});
-
-			const section_element_temp = parser.parseFromString(
-				`
-                <input id="${section}-${subsection}" class="toggle" type="checkbox" />
-                <label for="${section}-${subsection}" class="sale-container clickable">
-                    <span class="label-name">${Subsection}</span>
-                    <span class="sale-thumbnails">
-                        <img src="${src_stock1.download_url}" alt="${
-					src_stock1.name.split(".")[0]
-				}" />
-                        <img src="${src_stock2.download_url}" alt="${
-					src_stock2.name.split(".")[0]
-				}" />
-                        <img src="${src_stock3.download_url} "alt="${
-					src_stock3.name.split(".")[0]
-				}" />
-                    </span>
-                </label>
-                `,
-				"text/html"
-			).body;
-
 			const section_element = document.createElement("div");
-			section_element.innerHTML = section_element_temp.innerHTML;
+			section_element.innerHTML = `
+				<input id="${section}-${subsection}" class="toggle" type="checkbox" />
+				<label for="${section}-${subsection}" class="sale-container clickable">
+					<span class="label-name">${Subsection}</span>
+					<span class="sale-thumbnails">
+						<img src="${src_stock1.download_url}" alt="${src_stock1.name.split(".")[0]}" />
+						<img src="${src_stock2.download_url}" alt="${src_stock2.name.split(".")[0]}" />
+						<img src="${src_stock3.download_url} "alt="${src_stock3.name.split(".")[0]}" />
+					</span>
+				</label>
+			`;
 
 			const text_map = new Map();
 			for (const file of ENV.db
@@ -392,34 +374,31 @@ async function download_sale_items() {
 				})
 				.filter((file) => file.name.endsWith(".jpg"))) {
 				const item_name = item.name.split(".")[0];
-				const sale_item = parser.parseFromString(
-					`
-                    <div class="sale-item">
-                        <div class="sale-picture clickable">
-                            <div class="counter">0</div>
-                            <img
-                                src="${item.download_url}"
-                                alt="${item_name}"
-                                onclick="generate_preview(this)"
-                            />
-                        </div>
-                        <p>${text_map.get(item_name)}</p>
-                        <img
-                            src="img/icon/minus.svg"
-                            alt="Minus"
-                            class="buy_icon clickable"
-                            onclick="ENV.cart.reg(this, -1)"
-                        />
-                        <img
-                            src="img/icon/plus.svg"
-                            alt="Plus"
-                            class="buy_icon clickable"
-                            onclick="ENV.cart.reg(this, 1)"
-                        />
-                    </div>
-                    `,
-					"text/html"
-				).body.firstChild;
+				const sale_item = document.createElement("div");
+				sale_item.classList.add("sale-item");
+				sale_item.innerHTML = `
+					<div class="sale-picture clickable">
+						<div class="counter">0</div>
+						<img
+							src="${item.download_url}"
+							alt="${item_name}"
+							onclick="generate_preview(this)"
+						/>
+					</div>
+					<p>${text_map.get(item_name)}</p>
+					<img
+						src="img/icon/minus.svg"
+						alt="Minus"
+						class="buy_icon clickable"
+						onclick="ENV.cart.reg(this, -1)"
+					/>
+					<img
+						src="img/icon/plus.svg"
+						alt="Plus"
+						class="buy_icon clickable"
+						onclick="ENV.cart.reg(this, 1)"
+					/>
+				`;
 				sale_items_div.appendChild(sale_item);
 			}
 
@@ -481,6 +460,6 @@ async function read_banner() {
 			/@\{\s*(.*?)\s*\}\{\s*(.*?)\s*\}/g,
 			'<a href="$2" target="_blank">$1</a>'
 		);
-		$("container-banner").innerHTML = "<pre>" + banner_anchor + "</pre>";
+		$("container-banner").firstChild.innerHTML = banner_anchor;
 	}
 }
