@@ -201,19 +201,19 @@ ul {
 		position: sticky;
 		justify-content: center;
 		animation: pulse 3.5s infinite;
+		margin: 0;
 		top: 0;
 		width: 100%;
 		z-index: 2;
 		display: flex;
 		flex: none;
-		padding: 5px;
 	}
 
 	& pre {
 		font-family: "CooperBlack";
 		font-size: max(2vw, 13pt);
 		color: rgb(42, 28, 30);
-		margin: 0px;
+		margin: 5px;
 		text-wrap: wrap;
 	}
 }

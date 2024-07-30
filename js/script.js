@@ -238,6 +238,13 @@ const ENV = {
 	db: null,
 };
 
+// window attributes
+
+window.addEventListener("popstate", () => {
+	const page = window.location.hash.substring(1); // Remove the "#" symbol
+	open_page(page, "pop");
+});
+
 window.onload = async function () {
 	// async loading
 	ENV.db = await GitHubDB("ttoommxxDB", "rosacimbra_website", "db");
@@ -249,10 +256,12 @@ window.onload = async function () {
 	]);
 
 	// open previous page
-	if (ENV.cookies.get("page") == "" || ENV.cookies.get("page") == "cart") {
-		ENV.cookies.set("page", "about");
+	let page = ENV.cookies.get("page");
+	if (page == "" || page == "cart") {
+		page = "about";
+		ENV.cookies.set("page", page);
 	}
-	open_page(ENV.cookies.get("page"));
+	open_page(page);
 
 	// load previous sidebar state
 	toggle_menu(ENV.cookies.get("left_bar") || "off");
@@ -270,7 +279,12 @@ window.onload = async function () {
 
 // functions
 
-function open_page(page) {
+function open_page(page, call_type) {
+	if (call_type == "pop") {
+		history.replaceState({ page: page }, page, `#${page}`);
+	} else {
+		history.pushState({ page: page }, page, `#${page}`);
+	}
 	if (page == "cart") {
 		ENV.cart.update_cart_div();
 	}
