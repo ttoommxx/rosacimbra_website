@@ -239,6 +239,9 @@ const ENV = {
 };
 
 window.onload = async function () {
+	$("container-menu").style.opacity = 0.2;
+	$("container-right").style.opacity = 0.2;
+
 	// async loading
 	ENV.db = await GitHubDB("ttoommxxDB", "rosacimbra_website", "db");
 	await Promise.all([
@@ -259,10 +262,12 @@ window.onload = async function () {
 
 	// delete loading page and reset preview
 	setTimeout(() => {
-		destroy_preview();
-		$("container-preview").onclick = destroy_preview;
-		$("img-preview").classList.add("clickable");
+		$("container-loading").getElementsByTagName("img")[0].style.maxWidth = 0;
+		$("container-loading").getElementsByTagName("p")[0].style.opacity = 0;
+		$("container-menu").style.opacity = 1;
+		$("container-right").style.opacity = 1;
 	}, 500);
+	setTimeout(() => ($("container-loading").style.visibility = "hidden"), 1500);
 };
 
 // functions
@@ -437,7 +442,7 @@ function generate_preview(img_element) {
 	const preview_img = $("img-preview");
 	preview_img.src = img_element.src;
 	preview_img.alt = img_element.alt;
-	$("p-preview").innerHTML = img_element.alt.split("_").join(" ");
+	$("p-text").innerHTML = img_element.alt.split("_").join(" ");
 	setTimeout(() => {
 		preview_img.style.maxWidth = "90%";
 	}, 100);

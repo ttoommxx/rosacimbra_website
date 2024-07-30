@@ -43,7 +43,7 @@ ul {
 	& {
 		cursor: pointer;
 		-webkit-tap-highlight-color: transparent;
-		transition: all 0.2s ease-in-out;
+		transition: all 0.25s ease-in-out;
 	}
 	&:hover {
 		box-shadow: 3px 3px;
@@ -57,11 +57,40 @@ ul {
 	}
 }
 
+/* LOADING */
+
+#container-loading {
+	& {
+		display: flex;
+		position: fixed;
+		flex-direction: column;
+		top: 0;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 100%;
+		z-index: 3;
+	}
+	& img {
+		max-width: 40%;
+		max-height: 40%;
+		object-fit: contain;
+		transition: all 0.75s ease-in-out;
+	}
+
+	& p {
+		margin-top: 0;
+		font-family: "LittleLordFontleroy";
+		font-size: 40pt;
+		transition: all 0.75s ease-in-out;
+	}
+}
+
 /* CONTAINER PREVIEW */
 
 #container-preview {
 	& {
-		visibility: visible;
+		visibility: hidden;
 		display: flex;
 		position: fixed;
 		flex-direction: column;
@@ -73,12 +102,12 @@ ul {
 		z-index: 3;
 	}
 	& #img-preview {
-		max-width: 90%;
+		max-width: 0%;
 		max-height: 90%;
 		object-fit: contain;
 	}
 
-	& #p-preview {
+	& #p-text {
 		font-family: "LittleLordFontleroy";
 		font-size: 40pt;
 	}
@@ -147,7 +176,6 @@ ul {
 		margin-left: 3vw;
 		height: calc(12vw + 15px);
 		z-index: 1;
-		opacity: 0.2;
 		align-items: center;
 		transition: opacity 0.5s;
 	}
@@ -164,7 +192,6 @@ ul {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	opacity: 0.2;
 	min-height: 100%;
 	transition: opacity 0.5s;
 }
