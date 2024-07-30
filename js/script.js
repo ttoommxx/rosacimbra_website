@@ -340,14 +340,20 @@ async function download_slideshow() {
 	console.log(offset);
 	document.body.removeChild(temp_clone);
 	$("slideshow").style.animation = `move_linear ${
-		(window.innerHeight * offset) / (50 * window.innerWidth)
+		(window.innerHeight * offset) / 25000
 	}s linear infinite`;
-	const root = document.documentElement;
-	root.style.setProperty(
-		"--keyframe-transform",
-		`translateX(${-offset - 10 * $("slideshow").childElementCount}px)`
-	);
-	console.log(`translateX(${-offset}px)`);
+
+	const style = document.createElement("style");
+	style.textContent = `
+		@keyframes move_linear {
+			0%, 100% {
+				transform: translateX(0);
+			}
+			50% {
+				transform: translateX(${-offset - 10 * $("slideshow").childElementCount}px);
+			}
+	`;
+	document.head.appendChild(style);
 }
 
 async function download_mydolls() {
