@@ -18,7 +18,7 @@
 	</head>
 
 	<body>
-		<div id="container-preview" onclick="destroy_preview()">
+		<div id="container-preview" onclick="destroy_preview(); toggle_menu('off')">
 			<img id="img-preview" src="img/loading_duck.gif" alt="loading_duck" />
 			<p id="p-text">Loading..</p>
 		</div>
@@ -70,11 +70,11 @@
 			<img
 				src="img/icon/menu.svg"
 				alt="Menu icon"
-				onclick="toggle_menu('on')"
+				onclick="toggle_menu('on'); generate_preview()"
 				class="clickable"
 			/>
 		</div>
-		<div id="container-right" onclick="toggle_menu('off')">
+		<div id="container-right">
 			<div id="container-title">
 				<img
 					src="img/flower.png"

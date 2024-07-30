@@ -274,6 +274,7 @@ function open_page(page) {
 	if (page == "cart") {
 		ENV.cart.update_cart_div();
 	}
+
 	let page_element = $("container-main");
 	page_element.style.opacity = "0";
 	page_element.style.left = "-100%";
@@ -283,6 +284,9 @@ function open_page(page) {
 		$(page).style.display = "flex";
 		page_element.style.opacity = "1";
 		page_element.style.left = "0";
+
+		toggle_menu("off");
+		destroy_preview();
 	}, 650);
 }
 
@@ -422,12 +426,8 @@ function toggle_menu(state) {
 	const position = $("container-left").style.left || "0px";
 	if (state == "on") {
 		$("container-left").style.left = "0px";
-		$("container-right").style.opacity = 0.5;
-		$("container-menu").style.opacity = 0.5;
 	} else if (state == "off" && position == "0px") {
 		$("container-left").style.left = "-100%";
-		$("container-right").style.opacity = 1;
-		$("container-menu").style.opacity = 1;
 	}
 
 	ENV.cookies.set("left_bar", state);
@@ -437,14 +437,16 @@ function generate_preview(img_element) {
 	$("container-menu").style.opacity = 0.2;
 	$("container-right").style.opacity = 0.2;
 	$("container-preview").style.visibility = "visible";
-	$("img-preview").src = img_element.src;
-	$("img-preview").alt = img_element.alt;
-	$("p-text").innerHTML = img_element.alt;
-	setTimeout(() => {
-		$("img-preview").style.maxWidth = "90%";
-		$("img-preview").style.maxHeight = "90%";
-		$("p-text").style.opacity = 1;
-	}, 100);
+	if (img_element) {
+		$("img-preview").src = img_element.src;
+		$("img-preview").alt = img_element.alt;
+		$("p-text").innerHTML = img_element.alt;
+		setTimeout(() => {
+			$("img-preview").style.maxWidth = "90%";
+			$("img-preview").style.maxHeight = "90%";
+			$("p-text").style.opacity = 1;
+		}, 100);
+	}
 }
 
 function destroy_preview() {

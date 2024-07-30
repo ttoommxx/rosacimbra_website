@@ -147,8 +147,8 @@ ul {
 		opacity: 0.2;
 		position: absolute;
 		display: flex;
-		margin-left: 3vw;
-		height: calc(12vw + 15px);
+		margin-left: 2vw;
+		height: calc(max(12.5vw, 9vh) + 15px);
 		z-index: 1;
 		align-items: center;
 		transition: opacity 0.5s;
@@ -177,19 +177,20 @@ ul {
 	& {
 		display: flex;
 		justify-content: center;
+		align-items: center;
 		background-color: rgb(240, 248, 255, 0.5);
 		flex: none;
+		padding: 5px;
 	}
 	& img {
-		height: 12.5vw;
-		margin: 5px;
+		height: max(12.5vw, 9vh);
+		margin: 0;
 	}
 	& h1 {
 		font-family: "Eglantine";
 		font-weight: 100;
-		margin-top: 0px;
-		font-size: 7vw;
-		margin: 5px;
+		font-size: max(7vw, 4.5vh);
+		margin: 0;
 	}
 }
 
@@ -200,19 +201,19 @@ ul {
 		position: sticky;
 		justify-content: center;
 		animation: pulse 3.5s infinite;
-		margin: 0;
 		top: 0;
 		width: 100%;
 		z-index: 2;
 		display: flex;
 		flex: none;
+		padding: 5px;
 	}
 
 	& pre {
 		font-family: "CooperBlack";
-		font-size: max(1.8vw, 15pt);
+		font-size: max(2vw, 13pt);
 		color: rgb(42, 28, 30);
-		margin: 10px;
+		margin: 0px;
 		text-wrap: wrap;
 	}
 }
@@ -260,6 +261,7 @@ ul {
 		}
 		& .slideshow-image {
 			height: min(50vh, 80vw);
+			display: inline;
 		}
 	}
 	& blockquote {
@@ -309,7 +311,7 @@ ul {
 		&:hover {
 			& img {
 				transform: scale(0.8);
-				opacity: 0.15;
+				opacity: 0.3;
 			}
 			& pre {
 				opacity: 1;
