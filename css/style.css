@@ -20,6 +20,10 @@
 	src: url("../font/Kaylani.ttf") format("truetype");
 }
 
+:root {
+	--keyframe-transform: none;
+}
+
 * {
 	scrollbar-color: rgba(27, 17, 29, 0.5) transparent;
 }
@@ -251,17 +255,17 @@ ul {
 	& {
 		display: none;
 		flex-direction: column;
+		overflow-x: hidden;
 	}
 	& #slideshow {
 		& {
 			display: flex;
-			overflow-x: scroll;
 			margin-bottom: 20px;
 			gap: 10px;
+			animation: none;
 		}
 		& .slideshow-image {
 			height: min(50vh, 80vw);
-			display: inline;
 		}
 	}
 	& blockquote {
@@ -270,6 +274,16 @@ ul {
 		font-size: clamp(10pt, 3vw, 16pt);
 		line-height: clamp(16pt, 4vw, 28pt);
 		margin: 0;
+	}
+}
+
+@keyframes move_linear {
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+	50% {
+		transform: var(--keyframe-transform);
 	}
 }
 

@@ -1,9 +1,5 @@
 # FRONT END
 
-- APP SU CELLULARE
-
-  .1. non si capisce che le immagini su about possano scorrere perché quella presente riempie tutta la pagina... come si potrebbe fare? aggiungere una piccola freccia?
-
 - create language switch:
   with cookies, save the preferred language (defaulted to english)
   everywhere, text is access via a json file, for example:

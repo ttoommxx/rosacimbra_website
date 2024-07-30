@@ -4,6 +4,10 @@ function $(name) {
 	return document.getElementById(name);
 }
 
+function sleep(ms) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 // cookies and global variables
 
 const GitHubDB = async function (user, repo, root_db) {
@@ -236,14 +240,12 @@ const ENV = {
 	cookies: null,
 	cart: null,
 	db: null,
-	lang: null,
 };
 
 generate_ENV = async function () {
 	ENV.cookies = new cookies_util();
 	ENV.cart = new cart_item();
 	ENV.db = await GitHubDB("ttoommxxDB", "rosacimbra_website", "db");
-	ENV.lang = ENV.cookies.get("lang") || "en";
 };
 
 // window attributes
@@ -308,6 +310,12 @@ async function download_slideshow() {
 		path: "slideshow",
 		type: "file",
 	});
+
+	if (list_slideshow.length == 0) {
+		console.log("Slideshow is empty!");
+		return;
+	}
+
 	for (const entry of list_slideshow.filter((elem) =>
 		elem.name.endsWith(".jpg")
 	)) {
@@ -317,6 +325,29 @@ async function download_slideshow() {
 		new_image.alt = entry.name.split(".")[0];
 		$("slideshow").appendChild(new_image);
 	}
+
+	// calculate real width
+	const temp_clone = $("slideshow").cloneNode(true);
+	temp_clone.style.visibility = "hidden";
+	temp_clone.style.position = "absolute";
+	document.body.appendChild(temp_clone);
+	let offset = 0;
+	// ensure the browser has finished rendering
+	while (offset == 0) {
+		await sleep(100);
+		offset = temp_clone.offsetWidth;
+	}
+	console.log(offset);
+	document.body.removeChild(temp_clone);
+	$("slideshow").style.animation = `move_linear ${
+		(window.innerHeight * offset) / (50 * window.innerWidth)
+	}s linear infinite`;
+	const root = document.documentElement;
+	root.style.setProperty(
+		"--keyframe-transform",
+		`translateX(${-offset - 10 * $("slideshow").childElementCount}px)`
+	);
+	console.log(`translateX(${-offset}px)`);
 }
 
 async function download_mydolls() {
