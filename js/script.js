@@ -239,9 +239,6 @@ const ENV = {
 };
 
 window.onload = async function () {
-	$("container-menu").style.opacity = 0.2;
-	$("container-right").style.opacity = 0.2;
-
 	// async loading
 	ENV.db = await GitHubDB("ttoommxxDB", "rosacimbra_website", "db");
 	await Promise.all([
@@ -262,12 +259,13 @@ window.onload = async function () {
 
 	// delete loading page and reset preview
 	setTimeout(() => {
-		$("container-loading").getElementsByTagName("img")[0].style.maxWidth = 0;
-		$("container-loading").getElementsByTagName("p")[0].style.opacity = 0;
+		$("p-text").style.opacity = 0;
+		$("img-preview").style.maxWidth = "0%";
+		$("img-preview").style.maxHeight = "0%";
 		$("container-menu").style.opacity = 1;
 		$("container-right").style.opacity = 1;
-	}, 500);
-	setTimeout(() => ($("container-loading").style.visibility = "hidden"), 1500);
+	}, 700);
+	setTimeout(() => ($("container-preview").style.visibility = "hidden"), 1200);
 };
 
 // functions
@@ -439,17 +437,20 @@ function generate_preview(img_element) {
 	$("container-menu").style.opacity = 0.2;
 	$("container-right").style.opacity = 0.2;
 	$("container-preview").style.visibility = "visible";
-	const preview_img = $("img-preview");
-	preview_img.src = img_element.src;
-	preview_img.alt = img_element.alt;
-	$("p-text").innerHTML = img_element.alt.split("_").join(" ");
+	$("img-preview").src = img_element.src;
+	$("img-preview").alt = img_element.alt;
+	$("p-text").innerHTML = img_element.alt;
 	setTimeout(() => {
-		preview_img.style.maxWidth = "90%";
+		$("img-preview").style.maxWidth = "90%";
+		$("img-preview").style.maxHeight = "90%";
+		$("p-text").style.opacity = 1;
 	}, 100);
 }
 
 function destroy_preview() {
 	$("img-preview").style.maxWidth = "0%";
+	$("img-preview").style.maxHeight = "0%";
+	$("p-text").style.opacity = 0;
 	$("container-left").style.opacity = 1;
 	$("container-menu").style.opacity = 1;
 	$("container-right").style.opacity = 1;
