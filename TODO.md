@@ -3,7 +3,6 @@
 - APP SU CELLULARE
 
   .1. non si capisce che le immagini su about possano scorrere perché quella presente riempie tutta la pagina... come si potrebbe fare? aggiungere una piccola freccia?
-  .2. stringerei i caratteri della poesia, e sotto il testo in inglese
 
 - create language switch:
   with cookies, save the preferred language (defaulted to english)

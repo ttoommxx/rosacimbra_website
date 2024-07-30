@@ -71,14 +71,14 @@ ul {
 		height: 100%;
 		z-index: 3;
 	}
-	& #img-preview {
+	& img {
 		max-width: 40%;
 		max-height: 40%;
 		object-fit: contain;
 		transition: all 0.3s ease-in-out;
 	}
 
-	& #p-text {
+	& p {
 		margin: 0;
 		font-family: "LittleLordFontleroy";
 		font-size: 40pt;
@@ -267,8 +267,8 @@ ul {
 	& blockquote {
 		text-align: center;
 		font-family: "Kaylani";
-		font-size: clamp(12pt, 2vw, 18pt);
-		line-height: clamp(24pt, 4vw, 36pt);
+		font-size: clamp(10pt, 3vw, 16pt);
+		line-height: clamp(16pt, 4vw, 28pt);
 		margin: 0;
 	}
 }
