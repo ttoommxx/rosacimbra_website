@@ -238,19 +238,15 @@ const ENV = {
 	db: null,
 };
 
-// operations at runtime
-
-async function async_onload() {
-	ENV.db = await GitHubDB("ttoommxxDB", "rosacimbra_website", "db");
-	read_banner();
-	download_slideshow();
-	download_mydolls();
-	download_sale_items();
-}
-
-window.onload = function () {
+window.onload = async function () {
 	// async loading
-	async_onload();
+	ENV.db = await GitHubDB("ttoommxxDB", "rosacimbra_website", "db");
+	await Promise.all([
+		read_banner(),
+		download_slideshow(),
+		download_mydolls(),
+		download_sale_items(),
+	]);
 
 	// open previous page
 	if (ENV.cookies.get("page") == "" || ENV.cookies.get("page") == "cart") {
@@ -260,6 +256,13 @@ window.onload = function () {
 
 	// load previous sidebar state
 	toggle_menu(ENV.cookies.get("left_bar") || "off");
+
+	// delete loading page and reset preview
+	setTimeout(() => {
+		destroy_preview();
+		$("container-preview").onclick = destroy_preview;
+		$("img-preview").classList.add("clickable");
+	}, 500);
 };
 
 // functions
@@ -434,9 +437,10 @@ function generate_preview(img_element) {
 	const preview_img = $("img-preview");
 	preview_img.src = img_element.src;
 	preview_img.alt = img_element.alt;
+	$("p-preview").innerHTML = img_element.alt.split("_").join(" ");
 	setTimeout(() => {
 		preview_img.style.maxWidth = "90%";
-	}, 1);
+	}, 100);
 }
 
 function destroy_preview() {

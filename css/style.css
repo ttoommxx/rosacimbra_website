@@ -61,9 +61,10 @@ ul {
 
 #container-preview {
 	& {
-		visibility: hidden;
+		visibility: visible;
 		display: flex;
 		position: fixed;
+		flex-direction: column;
 		top: 0;
 		justify-content: center;
 		align-items: center;
@@ -72,9 +73,14 @@ ul {
 		z-index: 3;
 	}
 	& #img-preview {
-		max-width: 0%;
+		max-width: 90%;
 		max-height: 90%;
 		object-fit: contain;
+	}
+
+	& #p-preview {
+		font-family: "LittleLordFontleroy";
+		font-size: 40pt;
 	}
 }
 
@@ -141,6 +147,7 @@ ul {
 		margin-left: 3vw;
 		height: calc(12vw + 15px);
 		z-index: 1;
+		opacity: 0.2;
 		align-items: center;
 		transition: opacity 0.5s;
 	}
@@ -157,6 +164,7 @@ ul {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+	opacity: 0.2;
 	min-height: 100%;
 	transition: opacity 0.5s;
 }
