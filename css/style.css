@@ -513,14 +513,15 @@ ul {
 			display: flex;
 			text-align: center;
 			align-items: center;
-			font-size: 30pt;
+			font-size: 35pt;
 		}
 		& #name_user {
 			width: min(300px, 90%);
+			font-size: large;
 			display: inline-block;
 			text-align: center;
 			border: none;
-			background-color: rgba(163, 124, 136, 0.9);
+			background-color: rgba(163, 124, 136, 0.6);
 			transition: all 0.8s;
 		}
 		& #cart_list {
