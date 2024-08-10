@@ -337,7 +337,6 @@ async function download_slideshow() {
 		await sleep(100);
 		offset = temp_clone.offsetWidth;
 	}
-	console.log(offset);
 	document.body.removeChild(temp_clone);
 	$("slideshow").style.animation = `move_linear ${
 		(window.innerHeight * offset) / 25000
@@ -519,7 +518,7 @@ function destroy_preview() {
 }
 
 async function read_banner() {
-	const download_url = ENV.db.read("banner.txt");
+	const download_url = ENV.db.read("about/banner.txt");
 	const banner_text = await fetch(download_url, { cache: "no-cache" })
 		.then((data) => data.text())
 		.then((text) => text.trim());
