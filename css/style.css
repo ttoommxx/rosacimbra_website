@@ -552,18 +552,15 @@ ul {
 		text-align: center;
 		justify-content: center;
 		flex: none;
+		margin-bottom: 10px;
 	}
-	& footer li {
-		display: inline;
-		margin: 10px;
+	& footer {
+		& ul {
+			margin-bottom: 10px;
+		}
+		& li {
+			display: inline;
+			margin: 5px;
+		}
 	}
 }
-
-/* DARK THEME */
-/* 
-@media (prefers-color-scheme: dark) {
-	body {
-		background-image: url("../img/dark_pink_background.jpg");
-		color: white;
-	}
-} */
