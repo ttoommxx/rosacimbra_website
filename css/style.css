@@ -554,13 +554,8 @@ ul {
 		flex: none;
 		margin-bottom: 10px;
 	}
-	& footer {
-		& ul {
-			margin-bottom: 10px;
-		}
-		& li {
-			display: inline;
-			margin: 5px;
-		}
+	& footer li {
+		display: inline;
+		margin: 5px;
 	}
 }
