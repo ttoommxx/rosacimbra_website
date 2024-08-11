@@ -10,7 +10,7 @@ function sleep(ms) {
 
 // cookies and global variables
 
-const GitHubDB = async function (user, repo, root_db) {
+async function GitHubDB(user, repo, root_db) {
 	const db_url = `https://api.github.com/repos/${user}/${repo}/contents/${
 		root_db === undefined ? "" : root_db + "/"
 	}`;
@@ -39,7 +39,7 @@ const GitHubDB = async function (user, repo, root_db) {
 			for (const p of config.path.split("/")) {
 				temp_map = temp_map.get(p);
 			}
-			let array = temp_map.entries().map(([key, val]) => ({
+			let array = Array.from(temp_map).map(([key, val]) => ({
 				name: key,
 				type: typeof val == "string" ? "file" : "folder",
 				download_url: typeof val == "string" ? val : undefined,
@@ -100,7 +100,7 @@ const GitHubDB = async function (user, repo, root_db) {
 	}
 
 	return DB;
-};
+}
 
 function cookies_util() {
 	this._map = new Map();
@@ -149,7 +149,7 @@ function cart_item() {
 
 	// this.update_cookies = function () {
 	// TODO: the issue is that now I am saving everyting as an object, so need to find a way to save it properly
-	// 	ENV.cookies.set("cart", JSON.stringify(Array.from(this._map.entries())));
+	// 	ENV.cookies.set("cart", JSON.stringify(Array.from(this._map)));
 	// };
 
 	this.update_counter_div = async function (elem_div) {
@@ -164,9 +164,10 @@ function cart_item() {
 	};
 
 	this.update_cart_menu = async function () {
-		const total_count = this._map
-			.entries()
-			.reduce((acc, [key, val]) => acc + val, 0);
+		const total_count = Array.from(this._map).reduce(
+			(acc, [key, val]) => acc + val,
+			0
+		);
 		const cart_div = $("cart_menu");
 		const right = cart_div.style.right || "-100%";
 
