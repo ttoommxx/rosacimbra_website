@@ -342,7 +342,7 @@ ul {
 .toggle {
 	display: none;
 }
-.toggle:checked ~ label .toggle:checked ~ label .sale-thumbnails img {
+.toggle:checked ~ label .sale-thumbnails img {
 	height: max(9vh, 8vw);
 	animation: pulse2 1s forwards;
 }
