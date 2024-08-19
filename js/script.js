@@ -87,7 +87,6 @@ async function GitHubDB(user, repo, root_db) {
 	})();
 
 	for (const entry of folder) {
-		console.log(entry.name);
 		const full_path = entry.name.split("__");
 
 		let temp_map = DB._map;
@@ -125,33 +124,6 @@ function cookies_util() {
 
 function cart_item() {
 	this._map = new Map();
-
-	// this.read_cookies = function () {
-	// 	if (ENV.cookies.get("cart")) {
-	// 		for (const [key, val] of JSON.parse(ENV.cookies.get("cart"))) {
-	// 			// check if the item is still there
-	// 			console.log("check in the DB:" + val);
-	// 			if (true) {
-	// 				this._map.set(key, val);
-	// 			}
-	// 		}
-	// 	}
-
-	// 	this.update_cart_menu();
-
-	// 	const sale_items = document.getElementsByClassName("sale-item");
-	// 	for (const sale_item of sale_items) {
-	// 		const alt_text = sale_item.getElementsByTagName("img")[0].alt;
-	// 		if (this._map.has(alt_text)) {
-	// 			this.update_counter_div(sale_item);
-	// 		}
-	// 	}
-	// };
-
-	// this.update_cookies = function () {
-	// TODO: the issue is that now I am saving everyting as an object, so need to find a way to save it properly
-	// 	ENV.cookies.set("cart", JSON.stringify(Array.from(this._map)));
-	// };
 
 	this.update_counter_div = async function (elem_div) {
 		const counter = elem_div.firstElementChild;
