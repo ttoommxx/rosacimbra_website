@@ -87,7 +87,8 @@ async function GitHubDB(user, repo, root_db) {
 	})();
 
 	for (const entry of folder) {
-		const full_path = entry.name.split("..");
+		console.log(entry.name);
+		const full_path = entry.name.split("__");
 
 		let temp_map = DB._map;
 		for (const path of full_path.slice(0, -1)) {
