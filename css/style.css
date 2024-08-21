@@ -254,8 +254,9 @@ ul {
 	width: 100%;
 }
 #mydolls .dolls_img {
-	margin: 4%;
-	flex-basis: 40%;
+	margin: 3%;
+	width: 40vw;
+	max-width: 40vh;
 	align-items: center;
 	justify-content: center;
 	display: flex;
