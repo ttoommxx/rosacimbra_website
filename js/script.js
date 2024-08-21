@@ -44,10 +44,10 @@ async function GitHubDB(user, repo, root_db) {
 				type: typeof val == "string" ? "file" : "folder",
 				download_url: typeof val == "string" ? val : undefined,
 			}));
+			array = Array.from(array.filter((elem) => elem.name));
 			if (config.type) {
-				array = array.filter((elem) => elem.type == config.type);
+				array = Array.from(array.filter((elem) => elem.type == config.type));
 			}
-			array = Array.from(array);
 			if (config.sort) {
 				let sort_function = () => {
 					throw new Error(`sorting type ${config.sort} not accepted`);
