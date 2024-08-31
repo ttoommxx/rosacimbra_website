@@ -17,7 +17,7 @@ async function GitHubDB(user, repo, root_db) {
 	const lambda_api =
 		"https://73p5suv6mmzz2ksflzrxtipdpi0iqygf.lambda-url.eu-north-1.on.aws/";
 	const lambda_url = `${lambda_api}?url=${db_url}&token_type=GITHUB`;
-	const folder = await fetch(db_url, { cache: "no-cache" })
+	const folder = await fetch(db_url)
 		.then((response) => {
 			if (response.ok) {
 				console.log("Using local IP");
@@ -28,7 +28,7 @@ async function GitHubDB(user, repo, root_db) {
 		})
 		.catch(async (error) => {
 			console.log(error);
-			return await fetch(lambda_url, { cache: "no-cache" }).then((response) => {
+			return await fetch(lambda_url).then((response) => {
 				if (response.ok) {
 					return response;
 				} else {
@@ -371,7 +371,7 @@ async function download_mydolls() {
 
 	const text_map = new Map();
 	for (const entry of list_mydolls.filter((elem) => elem._extension == "txt")) {
-		await fetch(entry.download_url, { cache: "no-cache" })
+		await fetch(entry.download_url)
 			.then((data) => data.text())
 			.then((text) => text_map.set(entry._name, text));
 	}
