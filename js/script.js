@@ -17,9 +17,26 @@ async function GitHubDB(user, repo, root_db) {
 	const lambda_api =
 		"https://73p5suv6mmzz2ksflzrxtipdpi0iqygf.lambda-url.eu-north-1.on.aws/";
 	const lambda_url = `${lambda_api}?url=${db_url}&token_type=GITHUB`;
-	const folder = await fetch(lambda_url, { cache: "no-cache" })
-		.then((res) => res.json())
-		.catch((err) => console.log(err));
+	const folder = await fetch(db_url, { cache: "no-cache" })
+		.then((response) => {
+			if (response.ok) {
+				console.log("Using local IP");
+				return response;
+			} else {
+				throw new Error("Local IP address has reached its limit, using lambda");
+			}
+		})
+		.catch(async (error) => {
+			console.log(error);
+			return await fetch(lambda_url, { cache: "no-cache" }).then((response) => {
+				if (response.ok) {
+					return response;
+				} else {
+					throw new Error("Access using hidden key failed");
+				}
+			});
+		})
+		.then((response) => response.json());
 
 	// generate the db object to return
 	const DB = new (function () {
@@ -231,7 +248,19 @@ window.addEventListener("popstate", () => {
 
 window.onload = async function () {
 	// generate env_function
-	await generate_ENV();
+	try {
+		await generate_ENV();
+	} catch (error) {
+		console.log(error);
+		console.log("cannot connect to github db");
+		$("container-preview").onclick = "";
+		const img = $("container-preview").getElementsByTagName("img")[0];
+		img.src = "img/duck_butt.gif";
+		img.alt = "duck butt";
+		$("container-preview").getElementsByTagName("p")[0].innerHTML =
+			"A duck is blocking the road,<br>try again later!";
+		return;
+	}
 
 	// load of media
 	await Promise.all([
@@ -254,7 +283,7 @@ window.onload = async function () {
 
 // functions
 
-function open_page(page, call_type) {
+async function open_page(page, call_type) {
 	if (page == "cart") {
 		ENV.cart.update_cart_div();
 	}
@@ -267,16 +296,18 @@ function open_page(page, call_type) {
 	let page_element = $("container-main");
 	page_element.style.opacity = "0";
 	page_element.style.left = "-100%";
-	setTimeout(() => {
-		$(ENV.cookies.get("page")).style.display = "none";
-		ENV.cookies.set("page", page);
-		$(page).style.display = "flex";
-		page_element.style.opacity = "1";
-		page_element.style.left = "0";
 
-		toggle_menu("off");
-		destroy_preview();
-	}, 650);
+	await sleep(650);
+
+	toggle_menu("off");
+
+	$(ENV.cookies.get("page")).style.display = "none";
+	ENV.cookies.set("page", page);
+	$(page).style.display = "flex";
+	page_element.style.opacity = "1";
+	page_element.style.left = "0";
+
+	destroy_preview();
 }
 
 async function download_slideshow() {

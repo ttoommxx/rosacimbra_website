@@ -73,6 +73,7 @@ ul {
 	transition: all 0.3s ease-in-out;
 }
 #container-preview p {
+	text-align: center;
 	margin: 0;
 	font-family: "LittleLordFontleroy";
 	font-size: 40pt;
