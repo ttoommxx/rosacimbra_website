@@ -14,9 +14,7 @@ async function GitHubDB(user, repo, root_db) {
 	const db_url = `https://api.github.com/repos/${user}/${repo}/contents/${
 		root_db === undefined ? "" : root_db + "/"
 	}`;
-	const lambda_api =
-		"https://73p5suv6mmzz2ksflzrxtipdpi0iqygf.lambda-url.eu-north-1.on.aws/";
-	const lambda_url = `${lambda_api}?url=${db_url}&token_type=GITHUB`;
+	const lambda_url = `https://73p5suv6mmzz2ksflzrxtipdpi0iqygf.lambda-url.eu-north-1.on.aws/?url=${db_url}&token_type=GITHUB`;
 	const folder = await fetch(db_url)
 		.then((response) => {
 			if (response.ok) {
@@ -264,7 +262,7 @@ window.onload = async function () {
 
 	// load of media
 	await Promise.all([
-		read_banner(),
+		download_texts(),
 		download_slideshow(),
 		download_mydolls(),
 		download_sale_items(),
@@ -395,18 +393,16 @@ async function download_sale_items() {
 		for (const subsection of ENV.db
 			.ls({ path: section, type: "folder" })
 			.map((folder) => folder.name)) {
-			// select subsection
-			const Subsection = subsection[0].toUpperCase() + subsection.slice(1);
-
-			[src_stock1, src_stock2, src_stock3] = ENV.db.ls({
-				path: `${section}/${subsection}/stock`,
-				type: "file",
-			});
-			const section_element = document.createElement("div");
-			section_element.innerHTML = `
+			try {
+				[src_stock1, src_stock2, src_stock3] = ENV.db.ls({
+					path: `${section}/${subsection}/stock`,
+					type: "file",
+				});
+				const section_element = document.createElement("div");
+				section_element.innerHTML = `
 				<input id="${section}-${subsection}" class="toggle" type="checkbox" />
 				<label for="${section}-${subsection}" class="sale-container clickable">
-					<span class="label-name">${Subsection}</span>
+					<span class="label-name">${subsection}</span>
 					<span class="sale-thumbnails">
 						<img src="${src_stock1.download_url}" alt="${src_stock1.name.split(".")[0]}" />
 						<img src="${src_stock2.download_url}" alt="${src_stock2.name.split(".")[0]}" />
@@ -415,32 +411,32 @@ async function download_sale_items() {
 				</label>
 			`;
 
-			const text_map = new Map();
-			for (const file of ENV.db
-				.ls({
-					path: `${section}/${subsection}/onsale`,
-					type: "file",
-				})
-				.filter((file) => file.name.endsWith(".txt"))) {
-				const text = await fetch(file.download_url)
-					.then((data) => data.text())
-					.then((text) => text.trim());
-				text_map.set(file.name.split(".")[0], text);
-			}
+				const text_map = new Map();
+				for (const file of ENV.db
+					.ls({
+						path: `${section}/${subsection}/onsale`,
+						type: "file",
+					})
+					.filter((file) => file.name.endsWith(".txt"))) {
+					const text = await fetch(file.download_url)
+						.then((data) => data.text())
+						.then((text) => text.trim());
+					text_map.set(file.name.split(".")[0], text);
+				}
 
-			const sale_items_div = document.createElement("div");
-			sale_items_div.classList.add("sale-items");
+				const sale_items_div = document.createElement("div");
+				sale_items_div.classList.add("sale-items");
 
-			for (const item of ENV.db
-				.ls({
-					path: `${section}/${subsection}/onsale`,
-					type: "file",
-				})
-				.filter((file) => file.name.endsWith(".jpg"))) {
-				const item_name = item.name.split(".")[0];
-				const sale_item = document.createElement("div");
-				sale_item.classList.add("sale-item");
-				sale_item.innerHTML = `
+				for (const item of ENV.db
+					.ls({
+						path: `${section}/${subsection}/onsale`,
+						type: "file",
+					})
+					.filter((file) => file.name.endsWith(".jpg"))) {
+					const item_name = item.name.split(".")[0];
+					const sale_item = document.createElement("div");
+					sale_item.classList.add("sale-item");
+					sale_item.innerHTML = `
 					<div class="sale-picture clickable">
 						<div class="counter">0</div>
 						<img
@@ -463,12 +459,15 @@ async function download_sale_items() {
 						onclick="ENV.cart.reg(this, 1)"
 					/>
 				`;
-				sale_items_div.appendChild(sale_item);
+					sale_items_div.appendChild(sale_item);
+				}
+
+				section_element.appendChild(sale_items_div);
+
+				$(section).appendChild(section_element);
+			} catch (error) {
+				console.log("Error in constructing " + section + "/" + subsection);
 			}
-
-			section_element.appendChild(sale_items_div);
-
-			$(section).appendChild(section_element);
 		}
 	}
 
@@ -522,17 +521,47 @@ function destroy_preview() {
 	}, 250);
 }
 
-async function read_banner() {
-	const download_url = ENV.db.read("about/banner.txt");
-	const banner_text = await fetch(download_url, { cache: "no-cache" })
+async function download_texts() {
+	// can also parallelize via Promise.all
+
+	const download_url_banner = ENV.db.read("texts/banner.txt");
+	await fetch(download_url_banner, { cache: "no-cache" })
 		.then((data) => data.text())
-		.then((text) => text.trim());
-	if (banner_text) {
-		const banner_anchor = banner_text.replaceAll(
-			/@\{\s*(.*?)\s*\}\{\s*(.*?)\s*\}/g,
-			'<a href="$2" target="_blank">$1</a>'
+		.then((raw_text) =>
+			raw_text
+				.trim()
+				.replaceAll(
+					/@\{\s*(.*?)\s*\}\{\s*(.*?)\s*\}/g,
+					'<a href="$2" target="_blank">$1</a>'
+				)
+		)
+		.then(
+			(clean_text) =>
+				($("container-banner").getElementsByTagName("pre")[0].innerHTML =
+					clean_text ?? "")
 		);
-		const banner_pre = $("container-banner").getElementsByTagName("pre")[0];
-		banner_pre.innerHTML = banner_anchor;
+
+	for (const language of ["en", "it"]) {
+		const download_url_poem = ENV.db.read(`texts/poem_${language}.txt`);
+		await fetch(download_url_poem, { cache: "no-cache" })
+			.then((data) => data.text())
+			.then((raw_text) => raw_text.trim())
+			.then(
+				(clean_text) => ($(`poem-${language}`).innerHTML = clean_text ?? "")
+			);
 	}
+
+	const download_url_info = ENV.db.read("texts/info.txt");
+	await fetch(download_url_info, { cache: "no-cache" })
+		.then((data) => data.text())
+		.then((raw_text) =>
+			raw_text
+				.trim()
+				.replaceAll(
+					/@\{\s*(.*?)\s*\}\{\s*(.*?)\s*\}/g,
+					'<a href="$2" target="_blank">$1</a>'
+				)
+				.replaceAll(/\*_(.*?)_\*/g, "<b>$1</b>")
+		)
+		.then((clean_text) => ($("various-info").innerHTML = clean_text ?? ""));
 }

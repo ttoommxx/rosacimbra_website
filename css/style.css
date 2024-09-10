@@ -237,11 +237,21 @@ ul {
 #about #slideshow .slideshow-image {
 	height: min(50vh, 80vw);
 }
-#about blockquote {
+#about #poem-div {
+	display: flex;
+	flex-wrap: wrap;
+	row-gap: 25px;
+	gap: 25px;
+	flex-direction: row;
+}
+#about #poem-div pre {
+	flex-grow: 1;
+	flex-basis: 200px;
+	flex-shrink: 0;
 	text-align: center;
 	font-family: "Kaylani";
-	font-size: clamp(10pt, 3vw, 16pt);
-	line-height: clamp(16pt, 4vw, 28pt);
+	font-size: clamp(10pt, 3vw, 15pt);
+	line-height: clamp(15pt, 4.5vw, 22.5pt);
 	margin: 0;
 }
 
