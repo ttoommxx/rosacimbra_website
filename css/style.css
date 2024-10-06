@@ -372,6 +372,9 @@ pre {
 .toggle:checked ~ label .sale-thumbnails {
 	opacity: 0;
 }
+.toggle:checked ~ .sale-items {
+	gap: 10px;
+}
 .toggle:checked ~ .sale-items .sale-item {
 	max-height: 100vh;
 	margin-top: 10px;
@@ -390,7 +393,6 @@ pre {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	gap: 10px;
 }
 .sale-items .sale-item {
 	flex: 1;
