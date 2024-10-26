@@ -302,11 +302,11 @@ pre {
 }
 #mydolls .dolls_img:hover img {
 	transform: scale(0.8);
-	opacity: 0.3;
+	opacity: 0.25;
 }
 #mydolls .dolls_img:hover pre {
 	opacity: 1;
-	font-size: clamp(12pt, 4vw, 20pt);
+	font-size: clamp(11pt, 3.5vw, 20pt);
 }
 
 /* CLOTHES */
@@ -373,12 +373,19 @@ pre {
 	opacity: 0;
 }
 .toggle:checked ~ .sale-items {
-	gap: 10px;
+	gap: 20px;
 }
 .toggle:checked ~ .sale-items .sale-item {
-	max-height: 100vh;
+	grid-template-rows: min(12vh, 40vw) min(12vh, 40vw) min(6vh, 20vw);
+	grid-template-columns: min(12vh, 24vw) min(12vh, 24vw) min(6vh, 12vw) min(
+			10vh,
+			20vw
+		) min(10vh, 20vw);
 	margin-top: 10px;
 	margin-bottom: 10px;
+}
+.toggle:checked ~ .sale-items .sale-item .item-price {
+	overflow: unset;
 }
 .toggle:checked ~ .sale-items .sale-item .counter {
 	max-height: 200px;
@@ -392,36 +399,57 @@ pre {
 .sale-items {
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
 	flex-wrap: wrap;
 }
 .sale-items .sale-item {
-	flex: 1;
+	display: grid;
+	grid-template-rows: 0 0 0;
+	grid-template-columns: 0 0 0 0 0;
 	position: relative;
-	max-height: 0;
-	display: flex;
 	transition: all 1s;
 }
 .sale-items .sale-item:hover {
 	box-shadow: 1.5px 1.5px;
 	background-color: rgba(21, 15, 17, 0.1);
 }
-.sale-items .sale-item p {
-	max-height: max(17.5vw, 17.5vh);
-	margin: 5px;
-	flex: 1;
+.sale-items .sale-item .item-text {
+	grid-row-start: 1;
+	grid-row-end: 3;
+	grid-column-start: 4;
+	grid-column-end: 6;
+	margin: 3px;
+	overflow: auto;
+}
+.sale-items .sale-item .item-price {
+	grid-row-start: 3;
+	grid-row-end: 4;
+	grid-column-start: 4;
+	grid-column-end: 5;
+	text-align: center;
 	overflow: auto;
 }
 .sale-items .sale-item .buy_icon {
-	width: 40px;
+	max-height: 100%;
+	max-width: 100%;
 	flex: none;
+	grid-row-start: 3;
+	grid-row-end: 4;
+	grid-column-start: 5;
+	grid-column-end: 6;
 }
 
 .sale-picture {
-	max-height: max(17.5vw, 17.5vh);
+	grid-row-start: 1;
+	grid-row-end: 4;
+	grid-column-start: 1;
+	grid-column-end: 4;
 	overflow: hidden;
+	position: relative;
 }
 .sale-picture img {
-	max-height: max(17.5vw, 17.5vh);
+	max-width: 100%;
+	max-height: 100%;
 	aspect-ratio: 1;
 	object-fit: cover;
 }

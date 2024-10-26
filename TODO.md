@@ -19,24 +19,11 @@
   and so with the switched, just set
   Cookies.set("lang", "it") and reload the webpage and it's done!
 
-"""
-Sometimes it takes very little
-To make the world a beautiful place to be
-A smile, a hug, a phone call
-Or an object, created by you, with your hands
-A small gift of beauty
-Where creativity meets passion
-Here, this is my world!
-My happy island, my precious refuge
-From which come dresses, bags, socks, overalls...
-And where my dolls have a home and a name!
-"""
+- put a chart instead of a + and -
 
-- restore cart after reload (use the cookies approach), but remember to improve it in case the cart changes, aka remove mismatched entries
-
-- add ads via Google AdSense
-
-# SERVER SIDE
-
-- UI interface to upload and resize + make images lighter
-  can use Python and Django or Flashis
+`<img
+				src="img/icon/minus.svg"
+				alt="Minus"
+				class="buy_icon_general clickable"
+				onclick="ENV.cart.reg(this, -1)"
+			/>`

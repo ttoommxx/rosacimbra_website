@@ -190,13 +190,11 @@ function cart_item() {
 	this.send_order = function () {
 		const user_name = $("name_user").value;
 		if (user_name) {
-			const array_text = ["LIST ITEMS"];
+			const array_text = ["<<<<<"];
 			for (const [key, val] of this._map) {
 				array_text.push(`- ${val} x ${key.getElementsByTagName("img")[0].alt}`);
 			}
-			array_text.push(
-				"%0D%0A<<TYPE YOUR CUSTOM MESSAGE HERE>>%0D%0A<<SCRIVI QUA IL TUO MESSAGGIO PERSONALIZZATO>>%0D%0A%0D%0A%0D%0A"
-			);
+			array_text.push(">>>>>%0D%0A");
 			const message = array_text.join("%0D%0A");
 			window.open(
 				`mailto:RosaCimbra@gmail.com?bcc=ttoommxx+RC@gmail.com&subject=RosaCimbra:%20Equiry%20from%20${user_name}&body=${message}`
@@ -412,16 +410,25 @@ async function download_sale_items() {
 			`;
 
 				const text_map = new Map();
+				const price_map = new Map();
 				for (const file of ENV.db
 					.ls({
 						path: `${section}/${subsection}/onsale`,
 						type: "file",
 					})
 					.filter((file) => file.name.endsWith(".txt"))) {
-					const text = await fetch(file.download_url)
+					const text_list = await fetch(file.download_url)
 						.then((data) => data.text())
-						.then((text) => text.trim());
-					text_map.set(file.name.split(".")[0], text);
+						.then((text) => text.trim().split("\n"));
+					let price = "?";
+					if (/\s*price\s*=.*/.test(text_list.at(-1))) {
+						price = text_list.pop().split("=").at(-1).trim();
+					}
+					const text = text_list.join("\n");
+
+					const key_name = file.name.split(".")[0];
+					text_map.set(key_name, text);
+					price_map.set(key_name, price);
 				}
 
 				const sale_items_div = document.createElement("div");
@@ -445,15 +452,10 @@ async function download_sale_items() {
 							onclick="generate_preview(this)"
 						/>
 					</div>
-					<p>${text_map.get(item_name)}</p>
+					<p class="item-text">${text_map.get(item_name)}</p>
+					<p class="item-price">${price_map.get(item_name)}</p>
 					<img
-						src="img/icon/minus.svg"
-						alt="Minus"
-						class="buy_icon clickable"
-						onclick="ENV.cart.reg(this, -1)"
-					/>
-					<img
-						src="img/icon/plus.svg"
+						src="img/icon/add_cart.svg"
 						alt="Plus"
 						class="buy_icon clickable"
 						onclick="ENV.cart.reg(this, 1)"
