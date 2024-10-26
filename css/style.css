@@ -376,11 +376,11 @@ pre {
 	gap: 20px;
 }
 .toggle:checked ~ .sale-items .sale-item {
-	grid-template-rows: min(12vh, 40vw) min(12vh, 40vw) min(6vh, 20vw);
-	grid-template-columns: min(12vh, 24vw) min(12vh, 24vw) min(6vh, 12vw) min(
-			10vh,
-			20vw
-		) min(10vh, 20vw);
+	grid-template-rows: repeat(2, min(12vh, 40vw)) min(6vh, 20vw);
+	grid-template-columns: repeat(2, min(12vh, 24vw)) min(6vh, 12vw) repeat(
+			2,
+			min(10vh, 20vw)
+		);
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
@@ -404,8 +404,8 @@ pre {
 }
 .sale-items .sale-item {
 	display: grid;
-	grid-template-rows: 0 0 0;
-	grid-template-columns: 0 0 0 0 0;
+	grid-template-rows: repeat(3, 0);
+	grid-template-columns: repeat(5, 0);
 	position: relative;
 	transition: all 1s;
 }
@@ -414,18 +414,12 @@ pre {
 	background-color: rgba(21, 15, 17, 0.1);
 }
 .sale-items .sale-item .item-text {
-	grid-row-start: 1;
-	grid-row-end: 3;
-	grid-column-start: 4;
-	grid-column-end: 6;
+	grid-area: 1 / 4 / 3 / 6;
 	margin: 3px;
 	overflow: auto;
 }
 .sale-items .sale-item .item-price {
-	grid-row-start: 3;
-	grid-row-end: 4;
-	grid-column-start: 4;
-	grid-column-end: 5;
+	grid-area: 3 / 4 / 4 / 5;
 	text-align: center;
 	overflow: auto;
 }
@@ -433,17 +427,11 @@ pre {
 	max-height: 100%;
 	max-width: 100%;
 	flex: none;
-	grid-row-start: 3;
-	grid-row-end: 4;
-	grid-column-start: 5;
-	grid-column-end: 6;
+	grid-area: 3 / 5 / 4 / 6;
 }
 
 .sale-picture {
-	grid-row-start: 1;
-	grid-row-end: 4;
-	grid-column-start: 1;
-	grid-column-end: 4;
+	grid-area: 1 / 1 / 4 / 4;
 	overflow: hidden;
 	position: relative;
 }
