@@ -378,11 +378,11 @@ pre {
 .toggle:checked ~ .sale-items .sale-item {
 	grid-template-rows: min(24vh, 80vw) min(6vh, 20vw);
 	grid-template-columns: min(30vh, 60vw) min(10vh, 20vw) min(10vh, 20vw);
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin: 10px;
 }
 .toggle:checked ~ .sale-items .sale-item .item-price {
 	overflow: unset;
+	align-self: center;
 }
 .toggle:checked ~ .sale-items .sale-item .counter {
 	max-height: 200px;
@@ -402,7 +402,7 @@ pre {
 .sale-items .sale-item {
 	display: grid;
 	grid-template-rows: 0 0;
-	grid-template-columns: 0 0 0;
+	grid-template-columns: min(30vh, 60vw) min(10vh, 20vw) min(10vh, 20vw);
 	transition: all 1s;
 }
 .sale-items .sale-item:hover {
@@ -415,7 +415,6 @@ pre {
 	overflow: auto;
 }
 .sale-items .sale-item .item-price {
-	align-self: center;
 	margin: 5px;
 	grid-area: 2 / 2 / 3 / 3;
 	overflow: auto;
