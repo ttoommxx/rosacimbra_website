@@ -405,6 +405,17 @@ pre {
 	grid-template-columns: min(30vh, 60vw) min(10vh, 20vw) min(10vh, 20vw);
 	transition: all 1s;
 }
+.sale-items .soldout-item {
+	cursor: none;
+	pointer-events: none;
+	opacity: 0.5;
+	position: relative;
+}
+.sale-items .soldout-item .soldout-image {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
 .sale-items .sale-item:hover {
 	box-shadow: 1.5px 1.5px;
 	background-color: rgba(21, 15, 17, 0.1);

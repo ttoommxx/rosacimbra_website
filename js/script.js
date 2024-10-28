@@ -409,58 +409,75 @@ async function download_sale_items() {
 				</label>
 			`;
 
-				const text_map = new Map();
-				const price_map = new Map();
-				for (const file of ENV.db
-					.ls({
-						path: `${section}/${subsection}/onsale`,
-						type: "file",
-					})
-					.filter((file) => file.name.endsWith(".txt"))) {
-					const text_list = await fetch(file.download_url)
-						.then((data) => data.text())
-						.then((text) => text.trim().split("\n"));
-					let price = "?";
-					if (/\s*price\s*=.*/.test(text_list.at(-1))) {
-						price = text_list.pop().split("=").at(-1).trim();
-					}
-					const text = text_list.join("\n");
-
+				const metadata = {};
+				for (const file of ENV.db.ls({
+					path: `${section}/${subsection}/onsale`,
+					type: "file",
+				})) {
 					const key_name = file.name.split(".")[0];
-					text_map.set(key_name, text);
-					price_map.set(key_name, price);
+					if (!(key_name in metadata)) {
+						metadata[key_name] = {
+							text: "",
+							price: "?",
+							soldout: false,
+							img_url: "",
+						};
+					}
+					// create dictionary if does not exist
+					if (file.name.endsWith(".txt")) {
+						let text_list = await fetch(file.download_url)
+							.then((data) => data.text())
+							.then((text) => text.trim().split("\n"));
+
+						if (/\s*SOLD ?OUT\s*/.test(text_list[0])) {
+							metadata[key_name].soldout = true;
+							text_list = text_list.slice(1);
+						}
+						if (/\s*price\s*=.*/.test(text_list.at(-1))) {
+							metadata[key_name].price = text_list
+								.pop()
+								.split("=")
+								.at(-1)
+								.trim();
+						}
+						metadata[key_name].text = text_list.join("\n");
+					} else if (file.name.endsWith(".jpg")) {
+						metadata[key_name].img_url = file.download_url;
+					}
 				}
 
 				const sale_items_div = document.createElement("div");
 				sale_items_div.classList.add("sale-items");
 
-				for (const item of ENV.db
-					.ls({
-						path: `${section}/${subsection}/onsale`,
-						type: "file",
-					})
-					.filter((file) => file.name.endsWith(".jpg"))) {
-					const item_name = item.name.split(".")[0];
+				for (const [item_name, data] of Object.entries(metadata).sort(
+					(a, b) => a[1].soldout - b[1].soldout
+				)) {
 					const sale_item = document.createElement("div");
 					sale_item.classList.add("sale-item");
 					sale_item.innerHTML = `
-					<div class="sale-picture clickable">
-						<div class="counter">0</div>
+						<div class="sale-picture clickable">
+							<div class="counter">0</div>
+							<img
+								src="${data.img_url}"
+								alt="${item_name}"
+								onclick="generate_preview(this)"
+							/>
+						</div>
+						<p class="item-text">${data.text}</p>
+						<p class="item-price">${data.price}</p>
 						<img
-							src="${item.download_url}"
-							alt="${item_name}"
-							onclick="generate_preview(this)"
+							src="img/icon/add_cart.svg"
+							alt="Plus"
+							class="buy_icon clickable"
+							onclick="ENV.cart.reg(this, 1)"
 						/>
-					</div>
-					<p class="item-text">${text_map.get(item_name)}</p>
-					<p class="item-price">${price_map.get(item_name)}</p>
-					<img
-						src="img/icon/add_cart.svg"
-						alt="Plus"
-						class="buy_icon clickable"
-						onclick="ENV.cart.reg(this, 1)"
-					/>
-				`;
+					`;
+					if (data.soldout) {
+						sale_item.classList.add("soldout-item");
+						sale_item.getElementsByTagName("div")[0].innerHTML += `
+							<img src="img/soldout.png" alt="soldout" class="soldout-image"/>
+						`;
+					}
 					sale_items_div.appendChild(sale_item);
 				}
 
