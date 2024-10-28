@@ -171,7 +171,9 @@ function cart_item() {
 		const cart_div = $("cart_list");
 		cart_div.innerHTML = "";
 		for (const item of this._map.keys()) {
-			cart_div.appendChild(item.cloneNode(true));
+			const clone_node = item.cloneNode(true);
+			clone_node.style.aspectRatio = 1;
+			cart_div.appendChild(clone_node);
 		}
 	};
 
